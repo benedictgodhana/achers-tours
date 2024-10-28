@@ -1,16 +1,22 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-200 shadow-sm">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-200 shadow-sm fixed top-0 left-0 right-0 z-10">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
             <!-- Left Section: Logo and Links -->
             <div class="flex items-center">
                 <!-- Logo -->
-
-
+                
             </div>
 
-            <!-- Right Section: Settings Dropdown -->
+            <!-- Right Section: Settings Dropdown and Notifications -->
             <div class="hidden sm:flex items-center space-x-4">
+                <!-- Notifications Button -->
+                <button class="relative inline-flex items-center p-2 text-gray-700 hover:text-gray-900">
+                    <span class="fa fa-bell"></span>
+                    <!-- Notification Count -->
+                    <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-600"></span>
+                </button>
+
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:text-gray-900 hover:bg-gray-100 transition">

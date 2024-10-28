@@ -1,6 +1,5 @@
 <x-app-layout>
     <div class="p-6">
-        <h2 class="text-2xl font-semibold mb-4">Create a New Blog</h2>
 
         @if (session('success'))
             <div id="success-message" class="bg-green-500 text-white p-4 rounded mb-4">
@@ -9,6 +8,8 @@
         @endif
 
         <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-2xl font-semibold mb-4">Create a New Blog</h2>
+
             <form action="{{ route('blogs.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-4">

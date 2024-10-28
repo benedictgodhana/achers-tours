@@ -113,30 +113,35 @@
         <div class="row">
             <div class="col-md-12 text-center description-text" style="margin-top:33px;text-transform:uppercase">
                 <strong style="font-size: 30px; color: #003399;">
-                    Explore the breathtaking destinations across Africa!.
+                    Explore the breathtaking Tours across {{$destination->name}}!.
                 </strong>
             </div>
         </div>
     </div>
 </div>
-
 <!-- Destinations Section -->
 <section class="container">
     <div class="card-grid">
-        @foreach ($destinations as $destination)
-        <a class="card" href="/tour/{{ $destination->id }}">
-            <div class="background" style="background-image: url('{{ asset('storage/' . $destination->image) }}');"></div>
+        @foreach ($tours as $tour)
+        <a class="card" href="/package/{{ $tour->id }}">
+            <div class="background" style="background-image: url('{{ asset('storage/' . $tour->image) }}');"></div>
             <div class="content">
-                <p class="category">{{ $destination->country }}</p>
-                <h3 class="heading">{{ $destination->name }}</h3>
-                <p class="location-info"><i class="ion-ios-location"></i> {{ $destination->location }}</p>
+                <p class="category">{{ $tour->destination->name }}</p>
+                <h3 class="heading">{{ $tour->name }}</h3>
 
-                <button class="btn btn-primary" style="border-radius: 30px; margin-top:223px">Explore Our Tours</button>
+                <!-- Display the start and end dates -->
+                <p class="dates" style="color:orange">
+                    <strong>Start Date:</strong> {{ \Carbon\Carbon::parse($tour->start_date)->format('F j, Y') }} <br>
+                    <strong>End Date:</strong> {{ \Carbon\Carbon::parse($tour->end_date)->format('F j, Y') }}
+                </p>
+
+                <button class="btn btn-primary" style="border-radius: 30px; margin-top: 93px">Explore Our Packages</button>
             </div>
         </a>
         @endforeach
     </div>
 </section>
+
 <br>
 
 <!-- Footer Section -->

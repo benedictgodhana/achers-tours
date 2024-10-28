@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Archer's Tours and Travel</title>
+    <title>Archer's Tours and Travel - Packages</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -74,14 +74,14 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background:orange">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <img src="images/logo_medium_3-removebg-preview.png" alt="Archer's Tours Logo" style="height: 50px;">
+            <img src="/images/logo_medium_3-removebg-preview.png" alt="Archer's Tours Logo" style="height: 50px;">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
@@ -90,8 +90,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/destination">Destinations</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Tours</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Packages</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
@@ -113,30 +113,37 @@
         <div class="row">
             <div class="col-md-12 text-center description-text" style="margin-top:33px;text-transform:uppercase">
                 <strong style="font-size: 30px; color: #003399;">
-                    Explore the breathtaking destinations across Africa!.
+                    Explore our amazing packages for trips across {{$tours->name}}!
                 </strong>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Destinations Section -->
+<!-- Packages Section -->
 <section class="container">
     <div class="card-grid">
-        @foreach ($destinations as $destination)
-        <a class="card" href="/tour/{{ $destination->id }}">
-            <div class="background" style="background-image: url('{{ asset('storage/' . $destination->image) }}');"></div>
+        @foreach ($packages as $package)
+        <a class="card" href="/package/{{ $package->id }}">
+            <div class="background" style="background-image: url('{{ asset('storage/' . $package->image) }}');"></div>
             <div class="content">
-                <p class="category">{{ $destination->country }}</p>
-                <h3 class="heading">{{ $destination->name }}</h3>
-                <p class="location-info"><i class="ion-ios-location"></i> {{ $destination->location }}</p>
+                <p class="category">{{ $package->tour->name }}</p>
+                <h3 class="heading">{{ $package->name }}</h3>
 
-                <button class="btn btn-primary" style="border-radius: 30px; margin-top:223px">Explore Our Tours</button>
+                <!-- Display the start and end dates -->
+                <p class="dates" style="color:orange">
+                    <strong>Start Date:</strong> {{ \Carbon\Carbon::parse($package->start_date)->format('F j, Y') }} <br>
+                    <strong>End Date:</strong> {{ \Carbon\Carbon::parse($package->end_date)->format('F j, Y') }} <br>
+                    <strong>Duration:</strong> {{ $package->duration }} days
+                </p>
+
+                <button class="btn btn-secondary" style="border-radius: 30px; margin-top: 20px">Inquire More</button>
             </div>
         </a>
         @endforeach
     </div>
 </section>
+
 <br>
 
 <!-- Footer Section -->
@@ -145,7 +152,7 @@
         <div class="row">
             <!-- Logo and Description -->
             <div class="col-md-4">
-                <img src="images/logo_medium_3-removebg-preview.png" alt="Archer's Tours Logo" style="height: 50px;">
+                <img src="/images/logo_medium_3-removebg-preview.png" alt="Archer's Tours Logo" style="height: 50px;">
                 <p class="mt-3">Archer's Tours and Travel offers the best travel experiences across Africa, where your adventure begins!</p>
             </div>
 
@@ -156,7 +163,7 @@
                     <li><a href="/" class="text-light">Home</a></li>
                     <li><a href="/about.html" class="text-light">About</a></li>
                     <li><a href="/destination" class="text-light">Destinations</a></li>
-                    <li><a href="#" class="text-light">Tours</a></li>
+                    <li><a href="#" class="text-light">Packages</a></li>
                     <li><a href="#" class="text-light">Contact</a></li>
                 </ul>
             </div>

@@ -71,7 +71,7 @@
             <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
                 <div class="col-md-12 ftco-animate">
                     <div class="text w-100 text-center">
-                        <h2>Best Place to Travel</h2>
+                        <h2>Discover the World, One Adventure at a Time!</h2>
                         <h1 class="mb-3">Tanzania</h1>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
             <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
                 <div class="col-md-12 ftco-animate">
                     <div class="text w-100 text-center">
-                        <h2>Best Place to Travel</h2>
+                        <h2>Your Dream Destination Awaits – Let&#39;s Make it Happen!</h2>
                         <h1 class="mb-3">Kenya</h1>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
             <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
                 <div class="col-md-12 ftco-animate">
                     <div class="text w-100 text-center">
-                        <h2>Best Place to Travel</h2>
+                        <h2>From Cityscapes to Seascapes – Travel Beyond Boundaries!</h2>
                         <h1 class="mb-3">RWANDA</h1>
                     </div>
                 </div>

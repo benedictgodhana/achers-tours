@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\UsersExport; // Create this export class for Excel
-use Barryvdh\DomPDF\PDF as DomPDFPDF;
-use PDF; // Import the PDF facade
-
+use Barryvdh\DomPDF\Facade as PDF; // Import the PDF facade
 
 class UserController extends Controller
 {
@@ -18,7 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        // Fetch users and return the view
+        $users = User::all();
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -26,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create'); // Return a view for creating a new user
     }
 
     /**
@@ -34,7 +33,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate and store new user data
+        // Validate input data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -50,11 +49,11 @@ class UserController extends Controller
                 'added_by' => auth()->user()->name, // Capture the authenticated user's name
             ]);
 
-            // Redirect back with success message
-            return redirect()->back()->with('success', 'User added successfully!');
+            // Redirect to users index with success message
+            return redirect()->route('users.index')->with('success', 'User created successfully!');
         } catch (\Exception $e) {
-            // Log the error message for debugging (optional)
-            \Log::error($e->getMessage());
+            // Log the error message for debugging
+            \Log::error('User Creation Error: ' . $e->getMessage());
 
             // Redirect back with error message
             return redirect()->back()->with('error', 'Failed to add user: ' . $e->getMessage());
@@ -64,9 +63,9 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        //
+        return view('users.show', compact('user')); // Return a view for showing user details
     }
 
     /**
@@ -81,42 +80,33 @@ class UserController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-{
-    try {
-        // Find the user by ID or fail
-        $user = User::findOrFail($id);
+    {
+        try {
+            $user = User::findOrFail($id);
 
-        // Validate the input data
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $id, // Exclude current user's email from uniqueness check
-            'password' => 'nullable|string|min:8', // Password is optional
-        ]);
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+                'password' => 'nullable|string|min:8',
+            ]);
 
-        // Prepare the data for update
-        $updateData = [
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-        ];
+            $updateData = [
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+            ];
 
-        // Only hash the password if it’s provided
-        if (!empty($validatedData['password'])) {
-            $updateData['password'] = bcrypt($validatedData['password']);
+            if (!empty($validatedData['password'])) {
+                $updateData['password'] = bcrypt($validatedData['password']);
+            }
+
+            $user->update($updateData);
+
+            return redirect()->route('users.index')->with('success', 'User Updated successfully!');
+        } catch (\Exception $e) {
+            \Log::error('User Update Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Failed to update user: ' . $e->getMessage());
         }
-
-        // Update the user
-        $user->update($updateData);
-
-        // Redirect with success message
-        return redirect()->back()->with('success', 'User updated successfully!');
-    } catch (\Exception $e) {
-        // Log the error for easier debugging (optional)
-        \Log::error('User Update Error: ' . $e->getMessage());
-
-        // Redirect with an error message
-        return redirect()->back()->with('error', 'Failed to update user: ' . $e->getMessage());
     }
-}
 
     /**
      * Remove the specified resource from storage.
@@ -124,21 +114,29 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return back()->with('success', 'User deleted successfully.');
+        return redirect()->route('users.index')->with('success', 'User deleted successfully!');
     }
 
-
-
+    /**
+     * Export users to an Excel file.
+     */
     public function exportExcel()
     {
         return Excel::download(new UsersExport, 'users.xlsx');
     }
 
+    /**
+     * Generate a PDF of the users.
+     */
     public function printPdf()
     {
-        $users = User::all(); // Fetch all users
+        $users = User::all();
 
-        $pdf = PDF::loadView('users.pdf', compact('users')); // Create a view for the PDF
-        return $pdf->download('users.pdf'); // Download the generated PDF
+        if ($users->isEmpty()) {
+            return redirect()->back()->with('error', 'No users to export.');
+        }
+
+        $pdf = PDF::loadView('users.pdf', compact('users'));
+        return $pdf->download('users.pdf');
     }
 }

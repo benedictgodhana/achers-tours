@@ -6,6 +6,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Models\Blog;
+use App\Http\Controllers\DestinationController;
+use App\Http\Controllers\TourController;
+use App\Http\Controllers\PackageController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Models\Destination;
+use App\Models\Package;
+use App\Models\Tour;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +24,21 @@ use App\Models\Blog;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+
+
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+Route::resource('packages', PackageController::class)->middleware('auth');
+
+
+// Tour routes
+Route::resource('tours', TourController::class)->middleware('auth');
+
+
+Route::resource('destinations', DestinationController::class)->middleware('auth');
 
 
 Route::resource('users', UserController::class)->middleware(['auth', 'verified']);
@@ -53,8 +75,26 @@ Route::get('/about', function () {
 
 
 Route::get('/destination', function () {
-    return view('Destination');
+    $destinations = Destination::all();
+    return view('Destination', compact('destinations'));
 });
+
+Route::get('/tour/{id}', function ($id) {
+    $destination = Destination::findOrFail($id); // Ensure you get the destination
+    $tours = Tour::where('destination_id', $id)->get();
+
+    return view('tour', compact('destination', 'tours'));
+});
+
+
+
+Route::get('/package/{id}', function ($id) {
+    $tours = Tour::findOrFail($id); // Ensure you get the destination
+    $packages = Package::where('tour_id', $id)->get();
+
+    return view('package', compact('tours', 'packages'));
+});
+
 
 
 Route::get('/users/export-excel', [UserController::class, 'exportExcel'])->name('users.export');
