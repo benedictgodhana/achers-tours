@@ -11,11 +11,21 @@ class DestinationController extends Controller
     /**
      * Display a listing of destinations.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $destinations = Destination::all();
-        return view('destinations.index', compact('destinations'));
+        // Get the search query from the request, if any
+        $search = $request->input('search');
+
+        // Query the destinations, applying a search filter if present
+        $destinations = Destination::when($search, function ($query) use ($search) {
+            return $query->where('name', 'like', '%' . $search . '%')
+                         ->orWhere('description', 'like', '%' . $search . '%');
+        })->paginate(5  ); // Adjust the number to 5 for pagination
+
+        // Return the view with the paginated results and the search query
+        return view('destinations.index', compact('destinations', 'search'));
     }
+
 
     /**
      * Show the form for creating a new destination.

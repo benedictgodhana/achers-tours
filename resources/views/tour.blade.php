@@ -106,6 +106,42 @@
         </div>
     </div>
 </nav>
+<!-- Tour Banner Carousel -->
+<div id="tourCarousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        @foreach ($tours as $index => $tour)
+        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}" style="position: relative;">
+            <img src="{{ asset('storage/' . $tour->image) }}"
+                 class="d-block w-100"
+                 alt="{{ $tour->name }}"
+                 style="height: 600px; object-fit: cover;">
+            <div class="carousel-caption d-none d-md-block" style="
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                text-align: center;
+                font-size: 36px;
+                font-weight: bold;
+                text-transform:uppercase;
+                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);">
+            </div>
+        </div>
+        @endforeach
+    </div>
+
+    <!-- Carousel Controls -->
+    <a class="carousel-control-prev" href="#tourCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#tourCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
 
 <!-- Description Section -->
 <div>

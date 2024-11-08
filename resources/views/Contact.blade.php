@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Archer's Tours and Travel</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Font Poppins -->
+
+    <!-- Other Stylesheets -->
+    <!-- Font Poppins -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <!-- Other Stylesheets -->
+    <link rel="stylesheet" href="{{ asset('Template/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('Template/css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('Template/css/style.css') }}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+
+    <style>
+        .partners-marquee {
+            overflow: hidden;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+
+        title {
+            font-size: 2.5rem;
+            font-family: system-ui;
+            line-height: 1.1;
+            font-weight: 300;
+            color: #fff;
+            margin: 4rem auto 1rem;
+            width: 85%;
+            max-width: 1280px;
+        }
+
+        .slider {
+            width: 85%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .slider__content {
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+            display: flex;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            scrollbar-color: var(--scrollcolor) var(--scrollbackground);
+        }
+
+        .slider__content::-webkit-scrollbar {
+            height: 0.5rem;
+            width: 0.8rem;
+            border-radius: 1rem;
+            background: var(--scrollbackground);
+        }
+
+        .slider__content::-webkit-scrollbar-thumb {
+            border-radius: 1rem;
+            background: var(--scrollcolor);
+        }
+
+        .slider__content::-webkit-scrollbar-track {
+            border-radius: 1rem;
+            background: var(--scrollbackground);
+        }
+
+        .slider__item {
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            min-width: 100%;
+            width: 100%;
+            border-radius: 1.25rem;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 1;
+        }
+
+        @media (min-width: 460px) {
+            .slider__item {
+                aspect-ratio: 0.6666666667;
+                min-width: calc((100% / 2) - 2rem);
+            }
+        }
+
+        @media (min-width: 940px) {
+            .slider__item {
+                min-width: calc((100% / 3) - 4rem);
+            }
+        }
+
+        .slider__image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .slider__info {
+            position: relative;
+            padding: 4rem 2rem 2rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(32, 50, 57, 0));
+        }
+
+        .slider__info h2 {
+            color: #fff;
+            font-family: system-ui;
+            line-height: 1.1;
+            font-weight: 300;
+            font-size: 1.75rem;
+            margin: 0;
+        }
+
+        .slider__nav {
+            margin: 1rem 0 4rem;
+            width: 100%;
+            padding: 0;
+            display: flex;
+            justify-content: flex-start;
+            gap: 1rem;
+            align-content: center;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        @media (min-width: 460px) {
+            .slider__nav {
+                justify-content: flex-end;
+            }
+        }
+
+        .slider__nav__button {
+            margin: 0;
+            appearance: none;
+            border: 0;
+            border-radius: 2rem;
+            background: #fff;
+            color: #203239;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            line-height: 1;
+            pointer-events: none;
+            transition: 0.2s ease-out;
+            opacity: 0.25;
+        }
+
+        .slider__nav__button--active {
+            opacity: 1;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+
+        .marquee-content {
+            display: inline-flex;
+            animation: scroll 20s linear infinite;
+        }
+
+        .partner-logo {
+            height: 60px;
+            margin: 0 30px;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .social-icons a {
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #f4a261;
+            /* Change to the desired hover color */
+        }
+
+        .testimonial-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .testimonial {
+            flex: 1 1 30%;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            max-width: 320px;
+        }
+
+        .testimonial .quote {
+            font-size: 2rem;
+            color: #f4a261;
+        }
+
+        .testimonial .open {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .testimonial .close {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .testimonial .image {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+        }
+
+        .testimonial .image img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .testimonial p {
+            font-size: 14px;
+            color: #333;
+        }
+
+
+        @media (max-width: 768px) {
+            .testimonial-row {
+                flex-direction: column;
+            }
+
+            .testimonial {
+                max-width: 100%;
+            }
+        }
+
+
+        .testimonial {
+            width: 500px;
+            display: flex;
+            max-width: 100%;
+            background: orange;
+            padding: 4em 3em;
+            display: flex;
+            align-items: flex-end;
+            position: relative;
+            box-shadow: 0 2px 2px hsl(0deg 0% 0%/.075), 0 3px 3px hsl(0deg 0% 0%/.075), 0 5px 5px hsl(0deg 0% 0%/.075), 0 9px 9px hsl(0deg 0% 0%/.075), 0 17px 17px hsl(0deg 0% 0%/.075);
+            position: relative;
+
+            &:after {
+                content: "";
+                border: 8px solid navy;
+                border-radius: 50px;
+                width: 85%;
+                height: 120%;
+                position: absolute;
+                z-index: -1;
+                left: 1.5em;
+                top: -2em;
+            }
+
+            &:before {
+                content: "";
+                position: absolute;
+                bottom: -6.2em;
+                left: 5em;
+                z-index: 1;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 70px 100px 0 0;
+                border-color: navy transparent transparent transparent;
+            }
+
+            .quote {
+                position: absolute;
+                font-size: 3em;
+                width: 40px;
+                height: 40px;
+                background: navy;
+                color: #fff;
+                text-align: center;
+                line-height: 1.25;
+
+                &.open {
+                    top: 0;
+                    left: 0;
+                }
+
+                &.close {
+                    bottom: 0;
+                    right: 0;
+                }
+            }
+
+            p {
+                width: 60%;
+                display: inline-block;
+                font-weight: bold;
+                font-size: 1.25em;
+            }
+
+            .source {
+                width: 40%;
+                height: 100%;
+                position: relative;
+
+                span {
+                    display: inline-block;
+                    font-weight: bold;
+                    font-size: 1.15em;
+                    position: relative;
+                    margin-left: 1rem;
+                    text-align: right;
+
+                    &:before {
+                        content: "\2014";
+                        display: inline;
+                        margin-right: 5px;
+                    }
+                }
+            }
+
+            .image {
+                transform: rotate(-5deg);
+                position: absolute;
+                top: 0.5em;
+                right: 1.5em;
+
+                img {
+                    border: 10px solid #fff;
+                    margin: 0;
+                    padding: 0;
+                }
+
+                .clip {
+                    border: 2px solid #222;
+                    border-right: none;
+                    height: 75px;
+                    width: 20px;
+                    position: absolute;
+                    right: 30%;
+                    top: -15%;
+                    border-radius: 25px;
+
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        top: -1px;
+                        right: 0;
+                        height: 10px;
+                        width: 16px;
+                        border: 2px solid #222;
+                        border-bottom: none;
+                        border-top-left-radius: 25px;
+                        border-top-right-radius: 25px;
+                        z-index: 99;
+                    }
+
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        bottom: -1px;
+                        right: 0;
+                        height: 40px;
+                        width: 16px;
+                        border: 2px solid #222;
+                        border-top: none;
+                        border-bottom-left-radius: 25px;
+                        border-bottom-right-radius: 25px;
+                        z-index: 99;
+                    }
+                }
+            }
+        }
+
+
+        .introduction-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 50px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.intro-content {
+    flex: 1 1 100%;
+    padding: 20px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.intro-content h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeInUp 1s forwards;
+}
+
+.intro-content p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.5;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    animation: fadeInUp 1.5s forwards;
+    animation-delay: 0.5s;
+}
+
+.learn-more-btn {
+    text-decoration: none;
+    color: #fff;
+    background-color: #5a67d8;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    opacity: 0;
+    animation: fadeInUp 2s forwards;
+    animation-delay: 1s;
+}
+
+.learn-more-btn:hover {
+    background-color: #4c51bf;
+}
+
+.images-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 40px;
+}
+
+.intro-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.intro-image:hover {
+    transform: scale(1.1) rotate(2deg);
+}
+
+/* Fade-in animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.container{
+    max-width: 1500px   ;
+    width:100%;
+}
+
+    </style>
+</head>
+
+<body>
+
+<nav class=" w-full  navbar px-4    shadow-md rounded-md lg:px-8 lg:py-3 mt-1" style="background:orange">
+  <div class="container flex flex-wrap items-center justify-between mx-auto text-slate-800">
+    <a href="#" class="mr-4 block cursor-pointer py-1.5 text-base text-slate-800 font-semibold">
+    <img src="images/logo_medium_3-removebg-preview.png" alt="Archer's Tours Logo" style="height: 50px;">
+
+    </a>
+
+    <div class="hidden lg:block">
+      <ul class="flex flex-col gap-2 mt-2 mb-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+        <li class="flex items-center p-1 text-sm gap-x-2 text-slate-600">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-slate-500">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
+          </svg>
+
+          <a href="#" class="flex items-center">
+            Pages
+          </a>
+        </li>
+
+        </li>
+        <li class="flex items-center p-1 text-sm gap-x-2 text-slate-600">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-slate-500">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 0 1-1.125-1.125v-3.75ZM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-8.25ZM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-2.25Z" />
+          </svg>
+
+          <a href="#" class="flex items-center">
+            Blocks
+          </a>
+        </li>
+        <li
+        class="flex items-center p-1 text-sm gap-x-2 text-slate-600">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-slate-500">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
+          </svg>
+
+          <a href="#" class="flex items-center">
+            Docs
+          </a>
+        </li>
+        <li class="flex items-center p-1 text-sm gap-x-2 text-slate-600">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-slate-500">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+          </svg>
+
+          <a href="/login" class="flex items-center">
+            Account
+          </a>
+      </ul>
+    </div>
+    <button class="relative ml-auto h-6 max-h-[40px] w-6 max-w-[40px] select-none rounded-lg text-center align-middle text-xs font-medium uppercase text-inherit transition-all hover:bg-transparent focus:bg-transparent active:bg-transparent disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:hidden" type="button">
+      <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </span>
+    </button>
+  </div>
+</nav>
+
+
+
+<!-- Contact Us Description -->
+<div class="container mt-4 text-center">
+    <h1 class="text-4xl font-bold text-main">Get in Touch with Us!</h1>
+    <p class="mt-3 text-gray-600 text-lg">We're here to help you plan your adventure. Reach out to us with any questions, booking requests, or inquiries about our services.</p>
+</div>
+
+<section class="container mt-5">
+    <div class="row">
+    <div class="col-md-6">
+            <!-- Embedded Google Map -->
+            <iframe style="border-radius:30px" height="100%" width="100%" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.859280149586!2d36.80263!3d-1.2562849999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f17690ae55bb1%3A0x4aa33405dde53f97!2sArchers%20Tours%20%26%20Travel%20Ltd!5e0!3m2!1sen!2ske!4v1730990006839!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="col-md-6">
+        <div class="relative flex w-full max-w-[44rem] flex-col  bg-white border border-slate-200 shadow-sm" style="border-radius:30px">
+  <div class="relative m-2.5 items-center flex flex-col justify-center text-white h-32 rounded-md bg-slate-800" style="border-radius: 30px 0  30px 0">
+    <div class="mb-4 text-white">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        aria-hidden="true"
+        class="h-10 w-10 text-white"
+      >
+        <path d="M12 1.5a10.5 10.5 0 00-7.44 17.94 1.5 1.5 0 002.12-2.12 7.5 7.5 0 1110.64 0 1.5 1.5 0 002.12 2.12A10.5 10.5 0 0012 1.5z"></path>
+      </svg>
+    </div>
+    <h5 class="text-white text-xl">
+      Contact Us
+    </h5>
+  </div>
+  <div class="p-6">
+    <div class="block overflow-visible">
+      <form class="mt-4 flex flex-col">
+        <!-- Name Field -->
+        <div class="w-full ">
+          <label class="block mb-2 text-sm text-slate-600">
+            Name
+          </label>
+          <input type="text" class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow" placeholder="Your Name" />
+        </div>
+
+        <!-- Email Field -->
+        <div class="w-full  mt-4">
+          <label class="block mb-2 text-sm text-slate-600">
+            Email
+          </label>
+          <input type="email" class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow" placeholder="Your Email" />
+        </div>
+
+        <!-- Subject Field -->
+        <div class="w-full  mt-4">
+          <label class="block mb-2 text-sm text-slate-600">
+            Subject
+          </label>
+          <input type="text" class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow" placeholder="Subject" />
+        </div>
+
+        <!-- Message Field -->
+        <label class="block mb-2 text-sm text-slate-600 mt-4">
+          Message
+        </label>
+        <textarea
+          class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+          rows="4"
+          placeholder="Your Message"
+        ></textarea>
+
+        <!-- Submit Button -->
+        <button class="w-full mt-6 rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+          Send Message
+        </button>
+        <p class="mt-4 flex items-center justify-center gap-2 text-sm text-slate-500 font-light">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+            class="-mt-0.5 h-4 w-4"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M12 1.5a10.5 10.5 0 00-10.5 10.5A10.5 10.5 0 0012 22.5a10.5 10.5 0 000-21z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          Your information is secure
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+
+        </div>
+
+
+    </div>
+</section>
+
+
+    <br>
+    <br>
+
+    <section class="container">
+
+<!-- Accordion Item 1 -->
+<div class="border-b border-slate-200">
+  <button onclick="toggleAccordion(1)" class="w-full flex justify-between items-center py-3 text-slate-800">
+    <span>About Archer's Tours & Travels</span>
+    <span id="icon-1" class="text-slate-800 transition-transform duration-300">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+        <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+      </svg>
+    </span>
+  </button>
+  <div id="content-1" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+    <div class="pb-5 text-sm text-slate-500">
+    Archer’s Tours & Travels Ltd. is a leading Kenyan company based in Nairobi with over 70 years of experience.
+        We specialize in business missions, leisure travels, and vacation organization, offering tailor-made services to meet our clients' needs.
+
+    </div>
+  </div>
+</div>
+
+<!-- Accordion Item 2 -->
+<div class="border-b border-slate-200">
+  <button onclick="toggleAccordion(2)" class="w-full flex justify-between items-center py-3 text-slate-800">
+    <span>What Services Does Archer's Tours & Travels Offer?</span>
+    <span id="icon-2" class="text-slate-800 transition-transform duration-300">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+        <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+      </svg>
+    </span>
+  </button>
+  <div id="content-2" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+    <div class="pb-5 text-sm text-slate-500">
+    We offer comprehensive travel services, including organizing leisure vacations, business trips, corporate missions, and customized tours. Our team ensures that every client receives professional, efficient, and tailored services.    </div>
+  </div>
+</div>
+
+<!-- Accordion Item 3 -->
+<div class="border-b border-slate-200">
+  <button onclick="toggleAccordion(3)" class="w-full flex justify-between items-center py-3 text-slate-800">
+    <span>Why Choose Archer's Tours & Travels?</span>
+    <span id="icon-3" class="text-slate-800 transition-transform duration-300">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+        <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+      </svg>
+    </span>
+  </button>
+  <div id="content-3" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+    <div class="pb-5 text-sm text-slate-500">
+    With over 70 years of experience, Archer's Tours & Travels is known for its professionalism, integrity, and commitment to excellence. We provide accurate, efficient, and respectful service to all our clients, ensuring a seamless travel experience.
+    </div>
+  </div>
+</div>
+
+  <div class="border-b border-slate-200">
+  <button onclick="toggleAccordion(4)" class="w-full flex justify-between items-center py-3 text-slate-800">
+    <span>What are Archer's Core Values?</span>
+    <span id="icon-3" class="text-slate-800 transition-transform duration-300">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+        <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+      </svg>
+    </span>
+  </button>
+  <div id="content-3" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+    <div class="pb-5 text-sm text-slate-500">
+    The core values of Archer’s Tours & Travels are Professionalism, Integrity, Accuracy, Efficiency, Commitment, Respect, and Accountability. These values are at the heart of every service we provide, ensuring the highest level of customer satisfaction.
+    </div>
+  </div>
+</div>
+
+    </section>
+    <br>
+    <br>
+
+    <!-- Partners Section -->
+    <section class="partners bg-light py-5">
+        <div class="container text-center">
+            <strong>
+                <p class="mb-4" style="font-size:18px">MEMBER OF </p>
+            </strong>
+            <div class="partners-marquee">
+                <div class="marquee-content">
+                    <img src="/images/png-transparent-iata-hd-logo.png" alt="Partner 1" class="partner-logo">
+                    <img src="/images/Untitled.jpeg" alt="Partner 2" class="partner-logo">
+                    <img src="/images/logo_kata.png" alt="Partner 3" class="partner-logo">
+                    <img src="/images/imag4.png" alt="Partner 4" class="partner-logo">
+                    <img src="/images/unnamed-1-768x244.jpg" alt="Partner 5" class="partner-logo">
+                    <!-- Add more partner logos as needed -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class=" text-light py-5" style="background:navy">
+        <div class="container">
+            <div class="row">
+                <!-- Logo and Description -->
+                <div class="col-md-4">
+                    <img src="images/logo_medium_3-removebg-preview.png" alt="Archer's Tours Logo" style="height: 50px;">
+                    <p class="mt-3">Archer's Tours and Travel offers the best travel experiences across Africa, where your adventure begins!</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-md-4">
+                    <strong><p class="" style="color:orange">Quick Links</p></strong>
+                    <ul class="list-unstyled">
+                        <li><a href="/" class="text-light">Home</a></li>
+                        <li><a href="/about.html" class="text-light">About</a></li>
+                        <li><a href="#" class="text-light">Destinations</a></li>
+                        <li><a href="#" class="text-light">Tours</a></li>
+                        <li><a href="#" class="text-light">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact and Location -->
+                <div class="col-md-4">
+                <strong><p class="" style="color:orange">Location and Contact</p></strong>
+                    <p>123 Safari Drive, Nairobi, Kenya</p>
+                    <p>Email: info@archerstours.com</p>
+                    <p>Phone: +254 712 345 678</p>
+
+                    <!-- Social Media Icons -->
+                    <div class="social-icons ">
+                        <a href="https://facebook.com" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com" class="text-light me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="https://linkedin.com" class="text-light"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-12 text-center">
+                    <p>&copy; 2024 Archer's Tours and Travel. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Other sections like footer or additional content go here -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('Template/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('Template/js/main.js') }}"></script>
+
+    <script>
+        // Show description section with animation
+        window.onload = function() {
+            const descriptionSection = document.getElementById('description');
+            descriptionSection.classList.add('show');
+        };
+    </script>
+
+    <script>
+        // Function to change the navbar background on scroll
+        window.addEventListener('scroll', function() {
+            var navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) { // If scrolled 50px from the top
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function() {
+            // Show the modal after 2 seconds
+            setTimeout(function() {
+                $('#welcomeModal').modal('show');
+            }, 2000);
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.10.2/cdn.js"></script>
+
+
+
+<script>
+  function toggleAccordion(index) {
+    const content = document.getElementById(`content-${index}`);
+    const icon = document.getElementById(`icon-${index}`);
+
+    // SVG for Minus icon
+    const minusSVG = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+        <path d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Z" />
+      </svg>
+    `;
+
+    // SVG for Plus icon
+    const plusSVG = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+        <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+      </svg>
+    `;
+
+    // Toggle the content's max-height for smooth opening and closing
+    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+      content.style.maxHeight = '0';
+      icon.innerHTML = plusSVG;
+    } else {
+      content.style.maxHeight = content.scrollHeight + 'px';
+      icon.innerHTML = minusSVG;
+    }
+  }
+</script>
+</body>
+
+</html>

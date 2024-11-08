@@ -10,11 +10,22 @@ use Illuminate\Support\Facades\Storage;
 
 class PackageController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $packages = Package::with(['tour', 'user'])->get();
+        // Get the search query from the request
+        $search = $request->input('search');
+
+        // Fetch packages with related tours and users, applying search if provided
+        $packages = Package::with(['tour', 'user'])
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%')
+                             ->orWhere('description', 'like', '%' . $search . '%');
+            })
+            ->paginate(10); // Adjust the number of items per page as needed
+
         return view('packages.index', compact('packages'));
     }
+
 
     public function create()
     {

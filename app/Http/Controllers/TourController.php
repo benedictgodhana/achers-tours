@@ -11,11 +11,22 @@ class TourController extends Controller
 
 {
     // Display a listing of the tours
-    public function index()
-    {
-        $tours = Tour::with('destination', 'user')->get(); // Fetch all tours with related destinations and users
-        return view('tours.index', compact('tours'));
-    }
+    public function index(Request $request)
+{
+    // Get the search query from the request
+    $search = $request->input('search');
+
+    // Fetch tours with related destinations and users, applying search if provided
+    $tours = Tour::with('destination', 'user')
+        ->when($search, function ($query) use ($search) {
+            return $query->where('name', 'like', '%' . $search . '%')
+                         ->orWhere('description', 'like', '%' . $search . '%');
+        })
+        ->paginate(5); // You can adjust the number of items per page
+
+    return view('tours.index', compact('tours'));
+}
+
 
     // Show the form for creating a new tour
     public function create()

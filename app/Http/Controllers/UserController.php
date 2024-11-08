@@ -13,12 +13,24 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Fetch users and return the view
-        $users = User::all();
-        return view('users.index', compact('users'));
+        // Retrieve the search query from the request
+        $search = $request->input('search');
+
+        // Fetch users based on the search query or fetch all users if no query is provided
+        if ($search) {
+            $users = User::where('name', 'LIKE', '%' . $search . '%')
+                         ->orWhere('email', 'LIKE', '%' . $search . '%')
+                        
+                         ->paginate(5); // Paginate results with 5 users per page
+        } else {
+            $users = User::paginate(5); // Paginate all users with 5 users per page
+        }
+
+        return view('users.index', compact('users', 'search'));
     }
+
 
     /**
      * Show the form for creating a new resource.

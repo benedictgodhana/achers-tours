@@ -47,7 +47,9 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-    Route::resource('blogs', BlogController::class);
+    Route::middleware(['auth'])->group(function () {
+        Route::resource('blogs', BlogController::class);
+    });
 
     Route::get('/', function () {
         // Fetch all blogs from the database
@@ -70,6 +72,12 @@ Route::get('/blog', function () {
 
 Route::get('/about', function () {
     return view('About');
+});
+
+
+
+Route::get('/contact', function () {
+    return view('Contact');
 });
 
 
