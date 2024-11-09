@@ -922,7 +922,6 @@
         </div>
     </section>
 
-    <!--
     <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="welcomeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:800px; width:100;border-radius:30px">
         <div class="modal-content">
@@ -945,19 +944,19 @@
         </div>
         </div>
     </div>
-    </div> -->
+    </div>
     <!-- Footer Section -->
     <footer class=" text-light py-5" style="background:navy">
         <div class="container">
             <div class="row">
                 <!-- Logo and Description -->
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <img src="images/logo_medium_3-removebg-preview.png" alt="Archer's Tours Logo" style="height: 50px;">
                     <p class="mt-3">Archer's Tours and Travel offers the best travel experiences across Africa, where your adventure begins!</p>
                 </div>
 
                 <!-- Quick Links -->
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <strong><p class="" style="color:orange">Quick Links</p></strong>
                     <ul class="list-unstyled">
                         <li><a href="/" class="text-light">Home</a></li>
@@ -968,12 +967,27 @@
                     </ul>
                 </div>
 
+                <div class="col-md-2">
+                    <strong><p class="" style="color:orange">Tours</p></strong>
+                    <p>Direct: +254-722-394892</p>
+                    <p>Mobile : +254-722-394892</p>
+                    <p>Email: stephen@archersafrica.com</p>
+                </div>
+
+                <div class="col-md-2">
+                    <strong><p class="" style="color:orange">Travel</p></strong>
+                    <p>Direct: +254-733-964994</p>
+                    <p>Mobile: +254-720-865455 +254-733-964994</p>
+                    <p>Email: archers@archersafrica.com</p>
+                </div>
+
                 <!-- Contact and Location -->
-                <div class="col-md-4">
+                <div class="col-md-3">
                 <strong><p class="" style="color:orange">Location and Contact</p></strong>
-                    <p>123 Safari Drive, Nairobi, Kenya</p>
-                    <p>Email: info@archerstours.com</p>
-                    <p>Phone: +254 712 345 678</p>
+                    <p>Peponi Plaza, Peponi Road - Westlands</p>
+                    <p>P.O. Box 437, 00606 Nairobi - Kenya - East Africa</p>
+                    <p>Email: archers@archersafrica.com</p>
+                    <p>Phone: +254-720-865455 +254-733-964994</p>
 
                     <!-- Social Media Icons -->
                     <div class="social-icons ">
@@ -983,6 +997,7 @@
                         <a href="https://linkedin.com" class="text-light"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
+
             </div>
 
             <div class="row mt-4">

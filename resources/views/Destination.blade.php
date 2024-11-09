@@ -666,6 +666,18 @@ a {
     flex-basis: calc(25% - 18px);
   }
 }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
 
 
     </style>
@@ -688,7 +700,7 @@ a {
     <path stroke-linecap="round" stroke-linejoin="round" d="M3 9.75L12 3l9 6.75M12 3v18m-7.5-8.25v6.75a.75.75 0 00.75.75h3a.75.75 0 00.75-.75V13.5m6 0v6.75a.75.75 0 00.75.75h3a.75.75 0 00.75-.75V13.5"/>
   </svg>
 
-  <a href="#" class="flex items-center">
+  <a href="/" class="flex items-center">
     Home
   </a>
 </li>
@@ -780,11 +792,11 @@ a {
 
  </section>
 
-    <section class="container">
+    <section class="container mt-4">
 
     <div class="wrap">
     @foreach ($destinations as $destination)
-  <div class="box" >
+  <div class="box transition duration-500 ease-in-out hover:scale-105 hover:shadow-lg opacity-0 animate-fade-in" >
     <div class="box-top" >
       <img class="box-image" src="{{ asset('storage/' . $destination->image) }}" alt="Girl Eating Pizza" style="border-radius:30px">
       <div class="title-flex">
@@ -818,19 +830,17 @@ a {
         </div>
     </section>
 
-
-    <!-- Footer Section -->
     <footer class=" text-light py-5" style="background:navy">
         <div class="container">
             <div class="row">
                 <!-- Logo and Description -->
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <img src="images/logo_medium_3-removebg-preview.png" alt="Archer's Tours Logo" style="height: 50px;">
                     <p class="mt-3">Archer's Tours and Travel offers the best travel experiences across Africa, where your adventure begins!</p>
                 </div>
 
                 <!-- Quick Links -->
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <strong><p class="" style="color:orange">Quick Links</p></strong>
                     <ul class="list-unstyled">
                         <li><a href="/" class="text-light">Home</a></li>
@@ -841,12 +851,27 @@ a {
                     </ul>
                 </div>
 
+                <div class="col-md-2">
+                    <strong><p class="" style="color:orange">Tours</p></strong>
+                    <p>Direct: +254-722-394892</p>
+                    <p>Mobile : +254-722-394892</p>
+                    <p>Email: stephen@archersafrica.com</p>
+                </div>
+
+                <div class="col-md-2">
+                    <strong><p class="" style="color:orange">Travel</p></strong>
+                    <p>Direct: +254-733-964994</p>
+                    <p>Mobile: +254-720-865455 +254-733-964994</p>
+                    <p>Email: archers@archersafrica.com</p>
+                </div>
+
                 <!-- Contact and Location -->
-                <div class="col-md-4">
+                <div class="col-md-3">
                 <strong><p class="" style="color:orange">Location and Contact</p></strong>
-                    <p>123 Safari Drive, Nairobi, Kenya</p>
-                    <p>Email: info@archerstours.com</p>
-                    <p>Phone: +254 712 345 678</p>
+                    <p>Peponi Plaza, Peponi Road - Westlands</p>
+                    <p>P.O. Box 437, 00606 Nairobi - Kenya - East Africa</p>
+                    <p>Email: archers@archersafrica.com</p>
+                    <p>Phone: +254-720-865455 +254-733-964994</p>
 
                     <!-- Social Media Icons -->
                     <div class="social-icons ">
@@ -856,6 +881,7 @@ a {
                         <a href="https://linkedin.com" class="text-light"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
+
             </div>
 
             <div class="row mt-4">
@@ -865,6 +891,7 @@ a {
             </div>
         </div>
     </footer>
+
 
 
     <!-- Other sections like footer or additional content go here -->

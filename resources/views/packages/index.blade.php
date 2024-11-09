@@ -39,7 +39,7 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">{{ $package->name }}</td>
-                                <td class="px-6 py-4">{{ \Illuminate\Support\Str::limit($package->description, 50) }}</td>
+                                <td class="px-6 py-4">{!! \Illuminate\Support\Str::limit($package->description, 50) !!}</td>
                                 <td class="px-6 py-4">{{ $package->tour->name ?? 'Unknown' }}</td> <!-- Display the associated tour name -->
                                 <td class="px-6 py-4">
                                     <a href="{{ route('packages.show', $package->id) }}"

@@ -30,15 +30,20 @@
                         @enderror
                     </div>
 
-                    <div>
-                        <label for="description" class="block text-sm font-semibold mb-2">Description:</label>
-                        <textarea id="description" name="description" rows="4" class="border rounded-md w-full p-2" required>{{ old('description', $package->description) }}</textarea>
-                        @error('description')
+                   
+
+
+                <div class="mb-4">
+                    <label for="content" class="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea name="description" id="editor"
+                              class="mt-1 p-2 w-full border rounded-md focus:ring-2 focus:ring-blue-400"
+                              rows="10">{{ old('description', $package->description) }}</textarea>
+
+                              @error('description')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
-                    </div>
+                </div>
 
-                    
 
                     <div>
                         <label for="tour_id" class="block text-sm font-semibold mb-2">Tour:</label>
@@ -76,4 +81,23 @@
             </form>
         </div>
     </div>
+
+
+
+    <script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('editor');
+
+        // Hide the success message after 4 seconds
+        setTimeout(() => {
+            const message = document.getElementById('success-message');
+            if (message) {
+                message.style.transition = 'opacity 0.5s';
+                message.style.opacity = '0';
+
+                // Optional: Completely remove the message from the DOM after fade-out
+                setTimeout(() => message.remove(), 500);
+            }
+        }, 4000);
+    </script>
 </x-app-layout>

@@ -22,6 +22,14 @@
                 </div>
 
                 <div class="mb-4">
+                    <label for="content" class="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea name="description" id="editor"
+                              class="mt-1 p-2 w-full border rounded-md focus:ring-2 focus:ring-blue-400"
+                              rows="10"></textarea>
+                </div>
+
+
+                <div class="mb-4">
                     <h3 class="text-xl font-semibold">Duration:</h3>
                     <p class="text-gray-700">{{ $package->duration }} days</p>
                 </div>

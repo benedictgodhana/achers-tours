@@ -510,38 +510,84 @@
 
     <div class="hidden lg:block">
       <ul class="flex flex-col gap-2 mt-2 mb-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-        <li class="flex items-center p-1 text-sm gap-x-2 text-slate-600">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-slate-500">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
-          </svg>
 
-          <a href="#" class="flex items-center">
-            Pages
-          </a>
-        </li>
+      <li class="flex items-center p-1 text-sm gap-x-2 text-slate-600" style="color:black">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-slate-500" style="color:black">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M3 9.75L12 3l9 6.75M12 3v18m-7.5-8.25v6.75a.75.75 0 00.75.75h3a.75.75 0 00.75-.75V13.5m6 0v6.75a.75.75 0 00.75.75h3a.75.75 0 00.75-.75V13.5"/>
+  </svg>
 
-        </li>
-        <li class="flex items-center p-1 text-sm gap-x-2 text-slate-600">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-slate-500">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 0 1-1.125-1.125v-3.75ZM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-8.25ZM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-2.25Z" />
-          </svg>
+  <a href="/" class="flex items-center">
+    Home
+  </a>
+</li>
 
-          <a href="#" class="flex items-center">
-            Blocks
-          </a>
-        </li>
-        <li
-        class="flex items-center p-1 text-sm gap-x-2 text-slate-600">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-slate-500">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
-          </svg>
 
-          <a href="#" class="flex items-center">
-            Docs
-          </a>
-        </li>
-        <li class="flex items-center p-1 text-sm gap-x-2 text-slate-600">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-slate-500">
+        <li class="flex items-center p-1 text-sm gap-x-2 text-slate-600" style="color:black">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-slate-500" style="color:black">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2a10 10 0 110 20 10 10 0 010-20zm-.75 7.5a.75.75 0 011.5 0v4a.75.75 0 01-1.5 0v-4zm0 7.25a.75.75 0 101.5 0 .75.75 0 00-1.5 0z"/>
+  </svg>
+
+  <a href="/about" class="flex items-center">
+    About Us
+  </a>
+</li>
+
+<li class="flex items-center p-1 text-sm gap-x-2 text-slate-600" style="color:black">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-slate-500" style="color:black">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21.75c4.97 0 9-4.03 9-9 0-4.97-4.03-9-9-9s-9 4.03-9 9c0 4.97 4.03 9 9 9zm0 0s4.5-4.5 4.5-7.5c0-2.48-2.02-4.5-4.5-4.5s-4.5 2.02-4.5 4.5c0 3 4.5 7.5 4.5 7.5z" />
+  </svg>
+
+  <a href="/destination" class="flex items-center">
+    Destinations
+  </a>
+</li>
+
+<li class="flex items-center p-1 text-sm gap-x-2 text-slate-600" style="color:black">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-slate-500" style="color:black">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25c5.376 0 9.75 4.374 9.75 9.75s-4.374 9.75-9.75 9.75-9.75-4.374-9.75-9.75S6.624 2.25 12 2.25zm0 1.5a8.25 8.25 0 1 0 0 16.5 8.25 8.25 0 0 0 0-16.5zm0 3a5.25 5.25 0 0 1 5.25 5.25c0 .77-.152 1.502-.42 2.174l-3.079-1.026a3 3 0 0 0-2.252-2.252L10.5 8.07A5.245 5.245 0 0 1 12 6.75z" />
+  </svg>
+
+  <a href="#" class="flex items-center">
+    Tours
+  </a>
+</li>
+
+
+<li class="flex items-center p-1 text-sm gap-x-2 text-slate-600" style="color:black">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-slate-500" style="color:black">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9v8.25c0 1.518 1.232 2.75 2.75 2.75h11c1.518 0 2.75-1.232 2.75-2.75V9m-16.5 0h16.5M3.75 9l8.25-5.25L20.25 9M9.75 9V5.25M14.25 9V5.25M5.25 12.75h4.5m5.25 0h4.5m-14.25 3.75h15" />
+  </svg>
+
+  <a href="#" class="flex items-center">
+    Packages
+  </a>
+</li>
+
+
+
+
+<li class="flex items-center p-1 text-sm gap-x-2 text-slate-600" style="color:black">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-slate-500" style="color:black">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m9-9H3" />
+  </svg>
+
+  <a href="/blog" class="flex items-center">
+    Blogs
+  </a>
+</li>
+
+        <li class="flex items-center p-1 text-sm gap-x-2 text-slate-600" style="color:black" >
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-slate-500" style="color:black">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 5.25c0-1.242 1.008-2.25 2.25-2.25h1.59c.927 0 1.772.52 2.175 1.342l.914 1.83c.39.78.22 1.718-.42 2.31l-1.073.99a.992.992 0 0 0-.228 1.09c.918 2.15 2.842 4.073 4.992 4.992a.992.992 0 0 0 1.09-.228l.99-1.073c.592-.64 1.53-.81 2.31-.42l1.83.914c.822.403 1.342 1.248 1.342 2.175v1.59c0 1.242-1.008 2.25-2.25 2.25h-.75C9.407 21.75 2.25 14.593 2.25 6v-.75Z" />
+  </svg>
+
+  <a href="/contact" class="flex items-center">
+    Contact
+  </a>
+</li>
+
+        <li class="flex items-center p-1 text-sm gap-x-2 text-slate-600" style="color:black">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-slate-500" style="color:black">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
           </svg>
 
@@ -560,11 +606,9 @@
   </div>
 </nav>
 
-
-
 <!-- Contact Us Description -->
 <div class="container mt-4 text-center">
-    <h1 class="text-4xl font-bold text-main">Get in Touch with Us!</h1>
+    <h1 class="text-2xl font-bold text-main">Get in Touch with Us!</h1>
     <p class="mt-3 text-gray-600 text-lg">We're here to help you plan your adventure. Reach out to us with any questions, booking requests, or inquiries about our services.</p>
 </div>
 
@@ -576,7 +620,7 @@
         </div>
         <div class="col-md-6">
         <div class="relative flex w-full max-w-[44rem] flex-col  bg-white border border-slate-200 shadow-sm" style="border-radius:30px">
-  <div class="relative m-2.5 items-center flex flex-col justify-center text-white h-32 rounded-md bg-slate-800" style="border-radius: 30px 0  30px 0">
+  <div class="relative m-2.5 items-center flex flex-col justify-center text-white h-32 rounded-md bg-slate-800" style="border-radius: 30px 0  30px 0;background:orange">
     <div class="mb-4 text-white">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -630,7 +674,7 @@
         ></textarea>
 
         <!-- Submit Button -->
-        <button class="w-full mt-6 rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+        <button class="w-full mt-6 rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" style="background:navy">
           Send Message
         </button>
         <p class="mt-4 flex items-center justify-center gap-2 text-sm text-slate-500 font-light">
@@ -756,19 +800,17 @@
             </div>
         </div>
     </section>
-
-    <!-- Footer Section -->
     <footer class=" text-light py-5" style="background:navy">
         <div class="container">
             <div class="row">
                 <!-- Logo and Description -->
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <img src="images/logo_medium_3-removebg-preview.png" alt="Archer's Tours Logo" style="height: 50px;">
                     <p class="mt-3">Archer's Tours and Travel offers the best travel experiences across Africa, where your adventure begins!</p>
                 </div>
 
                 <!-- Quick Links -->
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <strong><p class="" style="color:orange">Quick Links</p></strong>
                     <ul class="list-unstyled">
                         <li><a href="/" class="text-light">Home</a></li>
@@ -779,12 +821,27 @@
                     </ul>
                 </div>
 
+                <div class="col-md-2">
+                    <strong><p class="" style="color:orange">Tours</p></strong>
+                    <p>Direct: +254-722-394892</p>
+                    <p>Mobile : +254-722-394892</p>
+                    <p>Email: stephen@archersafrica.com</p>
+                </div>
+
+                <div class="col-md-2">
+                    <strong><p class="" style="color:orange">Travel</p></strong>
+                    <p>Direct: +254-733-964994</p>
+                    <p>Mobile: +254-720-865455 +254-733-964994</p>
+                    <p>Email: archers@archersafrica.com</p>
+                </div>
+
                 <!-- Contact and Location -->
-                <div class="col-md-4">
+                <div class="col-md-3">
                 <strong><p class="" style="color:orange">Location and Contact</p></strong>
-                    <p>123 Safari Drive, Nairobi, Kenya</p>
-                    <p>Email: info@archerstours.com</p>
-                    <p>Phone: +254 712 345 678</p>
+                    <p>Peponi Plaza, Peponi Road - Westlands</p>
+                    <p>P.O. Box 437, 00606 Nairobi - Kenya - East Africa</p>
+                    <p>Email: archers@archersafrica.com</p>
+                    <p>Phone: +254-720-865455 +254-733-964994</p>
 
                     <!-- Social Media Icons -->
                     <div class="social-icons ">
@@ -794,6 +851,7 @@
                         <a href="https://linkedin.com" class="text-light"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
+
             </div>
 
             <div class="row mt-4">
@@ -803,6 +861,7 @@
             </div>
         </div>
     </footer>
+
 
 
     <!-- Other sections like footer or additional content go here -->

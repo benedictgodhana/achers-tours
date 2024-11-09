@@ -150,34 +150,31 @@
 
     <!-- Blog Cards Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        @foreach ($blogs as $blog)
-        <div class="flex flex-col md:flex-row bg-white shadow-sm border border-slate-200 rounded-lg overflow-hidden">
-            <!-- Image Section -->
-            <div class="md:w-2/5 w-full h-48 md:h-auto overflow-hidden">
-                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" class="h-full w-full object-cover rounded-t-lg md:rounded-none md:rounded-l-lg">
-            </div>
-
-            <!-- Content Section -->
-            <div class="p-4 flex flex-col justify-between">
-                <div>
-                    <div class="mb-2 inline-block bg-teal-600 py-0.5 px-2.5 rounded-full text-xs text-white">Latest</div>
-                    <h4 class="text-slate-800 text-lg font-semibold mb-2">{{ $blog->title }}</h4>
-                    <p class="text-slate-600 leading-normal text-sm md:text-base mb-4 line-clamp-3">
-                        {!! $blog->content !!}
-                    </p>
-                </div>
-                <a href="{{ route('blog.show', $blog->id) }}" class="text-orange-500 font-semibold text-sm hover:underline flex items-center">
-                    Learn More
-                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                </a>
-            </div>
+    @foreach ($blogs as $blog)
+    <div class="flex flex-col md:flex-row bg-white shadow-sm border border-slate-200 rounded-lg overflow-hidden">
+        <!-- Image Section -->
+        <div class="md:w-2/5 w-full h-48 md:h-auto overflow-hidden">
+            <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" class="h-full w-full object-cover rounded-t-lg md:rounded-none md:rounded-l-lg">
         </div>
-        @endforeach
-    </div>
-</div>
 
+        <!-- Content Section -->
+        <div class="p-4 flex flex-col justify-between">
+            <div>
+                <div class="mb-2 inline-block bg-teal-600 py-0.5 px-2.5 rounded-full text-xs text-white">Latest</div>
+                <h4 class="text-slate-800 text-lg font-semibold mb-2">{{ $blog->title }}</h4>
+
+            </div>
+            <a href="{{ route('blog.show', $blog->id) }}" class="text-orange-500 font-semibold text-sm hover:underline flex items-center">
+                Learn More
+                <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </a>
+        </div>
+    </div>
+    @endforeach
+</div>
+</div>
 
 <!-- Blog Editor Modal -->
 <div id="blogEditor" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
@@ -220,35 +217,48 @@
         </div>
     </div>
 </div>
-
-    <!-- Footer Section -->
-    <footer class=" text-light py-5" style="background:navy">
+<footer class=" text-light py-16" style="background:navy">
         <div class="container">
             <div class="row">
                 <!-- Logo and Description -->
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <img src="images/logo_medium_3-removebg-preview.png" alt="Archer's Tours Logo" style="height: 50px;">
                     <p class="mt-3">Archer's Tours and Travel offers the best travel experiences across Africa, where your adventure begins!</p>
                 </div>
 
                 <!-- Quick Links -->
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <strong><p class="" style="color:orange">Quick Links</p></strong>
                     <ul class="list-unstyled">
                         <li><a href="/" class="text-light">Home</a></li>
                         <li><a href="/about.html" class="text-light">About</a></li>
-                        <li><a href="#" class="text-light">Destinations</a></li>
-                        <li><a href="#" class="text-light">Tours</a></li>
-                        <li><a href="#" class="text-light">Contact</a></li>
+                        <li><a href="/destination" class="text-light">Destinations</a></li>
+                        <li><a href="/tour" class="text-light">Tours</a></li>
+                        <li><a href="/contact" class="text-light">Contact</a></li>
                     </ul>
                 </div>
 
+                <div class="col-md-2">
+                    <strong><p class="" style="color:orange">Tours</p></strong>
+                    <p>Direct: +254-722-394892</p>
+                    <p>Mobile : +254-722-394892</p>
+                    <p>Email: stephen@archersafrica.com</p>
+                </div>
+
+                <div class="col-md-2">
+                    <strong><p class="" style="color:orange">Travel</p></strong>
+                    <p>Direct: +254-733-964994</p>
+                    <p>Mobile: +254-720-865455 +254-733-964994</p>
+                    <p>Email: archers@archersafrica.com</p>
+                </div>
+
                 <!-- Contact and Location -->
-                <div class="col-md-4">
+                <div class="col-md-3">
                 <strong><p class="" style="color:orange">Location and Contact</p></strong>
-                    <p>123 Safari Drive, Nairobi, Kenya</p>
-                    <p>Email: info@archerstours.com</p>
-                    <p>Phone: +254 712 345 678</p>
+                    <p>Peponi Plaza, Peponi Road - Westlands</p>
+                    <p>P.O. Box 437, 00606 Nairobi - Kenya - East Africa</p>
+                    <p>Email: archers@archersafrica.com</p>
+                    <p>Phone: +254-720-865455 +254-733-964994</p>
 
                     <!-- Social Media Icons -->
                     <div class="social-icons ">
@@ -258,6 +268,7 @@
                         <a href="https://linkedin.com" class="text-light"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
+
             </div>
 
             <div class="row mt-4">
@@ -267,7 +278,6 @@
             </div>
         </div>
     </footer>
-
 
     <!-- Toggle Navbar Menu Script -->
     <script>

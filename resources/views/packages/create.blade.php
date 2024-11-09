@@ -30,10 +30,13 @@
                     </div>
                 </div>
 
+               
+
                 <div class="mb-4">
-                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                    <textarea name="description" id="description" rows="4" required
-                              class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500">{{ old('description') }}</textarea>
+                    <label for="content" class="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea name="description" id="editor"
+                              class="mt-1 p-2 w-full border rounded-md focus:ring-2 focus:ring-blue-400"
+                              rows="10"></textarea>
                 </div>
 
                 <div class="mb-4">
@@ -64,4 +67,23 @@
             </form>
         </div>
     </div>
+
+
+
+    <script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('editor');
+
+        // Hide the success message after 4 seconds
+        setTimeout(() => {
+            const message = document.getElementById('success-message');
+            if (message) {
+                message.style.transition = 'opacity 0.5s';
+                message.style.opacity = '0';
+
+                // Optional: Completely remove the message from the DOM after fade-out
+                setTimeout(() => message.remove(), 500);
+            }
+        }, 4000);
+    </script>
 </x-app-layout>
