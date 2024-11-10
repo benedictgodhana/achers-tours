@@ -10,6 +10,7 @@ use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\EnquiryController;
 use App\Models\Destination;
 use App\Models\Package;
 use App\Models\Tour;
@@ -81,10 +82,20 @@ Route::get('/contact', function () {
 });
 
 
+Route::post('/send-enquiry', [EnquiryController::class, 'sendEnquiry'])->name('send.enquiry');
+
+
 
 Route::get('/destination', function () {
     $destinations = Destination::all();
     return view('Destination', compact('destinations'));
+});
+
+
+
+Route::get('/tour', function () {
+    $tours = Tour::all();
+    return view('Tour', compact('tours'));
 });
 
 Route::get('/tour/{id}', function ($id) {
@@ -92,6 +103,15 @@ Route::get('/tour/{id}', function ($id) {
     $tours = Tour::where('destination_id', $id)->get();
 
     return view('tour', compact('destination', 'tours'));
+});
+
+
+
+Route::get('/destination/{id}', function ($id) {
+    $destination = Destination::findOrFail($id); // Ensure you get the destination
+    $tours = Tour::where('destination_id', $id)->get();
+
+    return view('Destination.show', compact('destination', 'tours'));
 });
 
 

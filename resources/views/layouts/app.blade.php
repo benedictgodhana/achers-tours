@@ -216,7 +216,7 @@
                     Copyright &copy; <script>
                         document.write(new Date().getFullYear());
                     </script>
-                    IlabAfrica. All rights reserved.
+                    Archers Tours and Travel.
                 </footer>
             </div>
         </aside>

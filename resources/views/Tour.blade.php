@@ -11,7 +11,6 @@
     <!-- Other Stylesheets -->
     <!-- Font Poppins -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Other Stylesheets -->
     <link rel="stylesheet" href="{{ asset('Template/css/owl.carousel.min.css') }}">
@@ -699,9 +698,6 @@ a {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .modal-body p {
-    margin-bottom: 1em; /* Adjust spacing as needed */
-  }
 
     </style>
 </head>
@@ -814,35 +810,35 @@ a {
 </nav>
 
  </section>
- <!-- Package List with Swiper -->
  <section class="container mt-4">
   <div class="swiper mySwiper">
     <div class="swiper-wrapper">
-      @foreach ($packages as $package)
-        <div class="swiper-slide">
-          <div class="box transition duration-500 ease-in-out hover:scale-105 hover:shadow-lg opacity-0 animate-fade-in">
-            <div class="box-top">
-              <img class="box-image" src="{{ asset('storage/' . $package->image) }}" alt="{{ $package->name }}" style="border-radius:30px">
-              <div class="title-flex">
-                <h3 class="box-title">{{ $package->name }}</h3>
-                <p class="user-follow-info">Package</p>
-              </div>
-              <p class="description">{!! Str::limit($package->description, 100, '...') !!}</p>
-
-              <!-- Read More Button linked to modal -->
-              <button class="text-orange-500 font-semibold text-sm hover:underline flex items-center" data-bs-toggle="modal" data-bs-target="#packageModal{{ $package->id }}">
-                Read More
-                <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </button>
-              <br>
-
-              <!-- Make an Enquiry Button linked to modal -->
-              <a class="button" style="color:white" data-bs-toggle="modal" data-bs-target="#enquiryModal{{ $package->id }}">Make An Enquiry</a>
+    @foreach ($tours as $tour)
+     <div class="swiper-slide">
+        <div class="box transition duration-500 ease-in-out hover:scale-105 hover:shadow-lg opacity-0 animate-fade-in">
+          <div class="box-top">
+            <img class="box-image" src="{{ asset('storage/' . $tour->image) }}" alt="{{ $tour->name }}" style="border-radius:30px">
+            <div class="title-flex">
+              <h3 class="box-title">{{ $tour->name }}</h3>
+              <p class="user-follow-info">Tour</p>
             </div>
+            <!-- Truncate the description -->
+            <p class="description">{{ Str::limit($tour->description, 100) }}</p>
+
+            <a href="/tour/{{ $tour->id }}" class="text-orange-500 font-semibold text-sm hover:underline flex items-center">
+    Read More
+    <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+    </svg>
+</a>
+
           </div>
+
+          <!-- "Read More" button -->
+          <!-- "View Tours" button -->
+          <a href="/package/{{ $tour->id }}" class="button">View Available Packages</a>
         </div>
+      </div>
       @endforeach
     </div>
     <!-- Slider navigation buttons -->
@@ -851,69 +847,6 @@ a {
   </div>
 </section>
 
-<!-- Modal Dialogs Outside the Loop -->
-@foreach ($packages as $package)
-  <!-- Modal for Full Description -->
-  <div class="modal fade" id="packageModal{{ $package->id }}" tabindex="-1" aria-labelledby="packageModalLabel{{ $package->id }}" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="packageModalLabel{{ $package->id }}">{{ $package->name }}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>{!! $package->description !!}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal for Enquiry Form -->
-  <div class="modal fade" id="enquiryModal{{ $package->id }}" tabindex="-1" aria-labelledby="enquiryModalLabel{{ $package->id }}" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="enquiryModalLabel{{ $package->id }}">Enquiry for {{ $package->name }}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-        <form action="{{ route('send.enquiry') }}" method="POST">
-    @csrf <!-- CSRF Token -->
-    <input type="hidden" name="package_id" value="{{ $package->id }}">
-
-    <div class="mb-3">
-        <label for="name{{ $package->id }}" class="form-label">Name</label>
-        <input type="text" class="form-control" id="name{{ $package->id }}" name="name" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="email{{ $package->id }}" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email{{ $package->id }}" name="email" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="subject{{ $package->id }}" class="form-label">Subject</label>
-        <input type="text" class="form-control" id="subject{{ $package->id }}" name="subject" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="message{{ $package->id }}" class="form-label">Message</label>
-        <textarea class="form-control" id="message{{ $package->id }}" name="package_details" rows="3" required></textarea>
-    </div>
-
-    <div class="mb-3">
-        <label for="phone{{ $package->id }}" class="form-label">Phone (Optional)</label>
-        <input type="tel" class="form-control" id="phone{{ $package->id }}" name="phone">
-    </div>
-
-    <button type="submit" class="btn btn-primary">Send</button>
-</form>
-
-        </div>
-      </div>
-    </div>
-  </div>
-@endforeach
 
 
     <!-- Partners Section -->
@@ -1067,14 +1000,6 @@ a {
     },
   });
 </script>
-
-<script>
-  window.addEventListener('DOMContentLoaded', (event) => {
-    var myModal = new bootstrap.Modal(document.getElementById('readMoreModal'), {});
-    myModal.show(); // This will trigger the modal to appear
-  });
-</script>
-
 
 
 </body>

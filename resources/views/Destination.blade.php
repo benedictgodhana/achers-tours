@@ -678,7 +678,26 @@ a {
 .animate-fade-in {
   animation: fadeIn 1s ease-out forwards;
 }
+.swiper {
+    width: 100%;
+    height: auto;
+  }
 
+  /* Style adjustments for the destination box */
+  .box {
+    padding: 16px;
+    border-radius: 10px;
+    background-color: #fff;
+  }
+
+  /* Responsive text truncation */
+  .description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limits to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
     </style>
 </head>
@@ -791,31 +810,49 @@ a {
 </nav>
 
  </section>
+ <section class="container mt-4">
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      @foreach ($destinations as $destination)
+      <div class="swiper-slide">
+        <div class="box transition duration-500 ease-in-out hover:scale-105 hover:shadow-lg opacity-0 animate-fade-in">
+          <div class="box-top">
+            <img class="box-image" src="{{ asset('storage/' . $destination->image) }}" alt="{{ $destination->name }}" style="border-radius:30px">
+            <div class="title-flex">
+              <h3 class="box-title">{{ $destination->name }}</h3>
+              <p class="user-follow-info">Destination</p>
+            </div>
+            <!-- Truncate the description -->
+            <p class="description">{{ Str::limit($destination->description, 100) }}</p>
 
-    <section class="container mt-4">
+          <a href="/destination/{{ $destination->id }}" class="text-orange-500 font-semibold text-sm hover:underline flex items-center">
+                Read More
+                <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </a>
+          </div>
 
-    <div class="wrap">
-    @foreach ($destinations as $destination)
-  <div class="box transition duration-500 ease-in-out hover:scale-105 hover:shadow-lg opacity-0 animate-fade-in" >
-    <div class="box-top" >
-      <img class="box-image" src="{{ asset('storage/' . $destination->image) }}" alt="Girl Eating Pizza" style="border-radius:30px">
-      <div class="title-flex">
-        <h3 class="box-title">{{ $destination->name }}</h3>
-        <p class="user-follow-info">Destination</p>
+          <!-- "Read More" button -->
+          <!-- "View Tours" button -->
+          <a href="/tour/{{ $destination->id }}" class="button">View Tours</a>
+        </div>
       </div>
-      <p class="description">{{ $destination->description }}</p>
+      @endforeach
     </div>
-    <a href="/tour/{{ $destination->id }}"s class="button">View Tours</a>
+    <!-- Slider navigation buttons -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
   </div>
-  @endforeach
-</div>
-    </section>
+</section>
+
+
 
     <!-- Partners Section -->
     <section class="partners bg-light py-5">
         <div class="container text-center">
             <strong>
-                <p class="mb-4" style="font-size:18px">MEMBER OF </p>
+                <p class="mb-4" style="font-size:18px;font-weight:bold">MEMBER OF </p>
             </strong>
             <div class="partners-marquee">
                 <div class="marquee-content">
@@ -932,6 +969,37 @@ a {
         });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.10.2/cdn.js"></script>
+    <!-- Swiper CSS -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<script>
+  const swiper = new Swiper('.mySwiper', {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 1, // Mobile devices will show 1 slide
+        spaceBetween: 20,
+      },
+      768: {
+        slidesPerView: 2, // Tablets will show 2 slides
+        spaceBetween: 30,
+      },
+      1024: {
+        slidesPerView: 3, // Larger screens will show 3 slides
+        spaceBetween: 30,
+      },
+    },
+  });
+</script>
+
 
 </body>
 

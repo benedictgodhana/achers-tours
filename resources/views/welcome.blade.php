@@ -547,7 +547,7 @@
     <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25c5.376 0 9.75 4.374 9.75 9.75s-4.374 9.75-9.75 9.75-9.75-4.374-9.75-9.75S6.624 2.25 12 2.25zm0 1.5a8.25 8.25 0 1 0 0 16.5 8.25 8.25 0 0 0 0-16.5zm0 3a5.25 5.25 0 0 1 5.25 5.25c0 .77-.152 1.502-.42 2.174l-3.079-1.026a3 3 0 0 0-2.252-2.252L10.5 8.07A5.245 5.245 0 0 1 12 6.75z" />
   </svg>
 
-  <a href="#" class="flex items-center">
+  <a href="/tour" class="flex items-center">
     Tours
   </a>
 </li>
@@ -950,13 +950,13 @@
         <div class="container">
             <div class="row">
                 <!-- Logo and Description -->
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <img src="images/logo_medium_3-removebg-preview.png" alt="Archer's Tours Logo" style="height: 50px;">
                     <p class="mt-3">Archer's Tours and Travel offers the best travel experiences across Africa, where your adventure begins!</p>
                 </div>
 
                 <!-- Quick Links -->
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <strong><p class="" style="color:orange">Quick Links</p></strong>
                     <ul class="list-unstyled">
                         <li><a href="/" class="text-light">Home</a></li>
@@ -967,22 +967,9 @@
                     </ul>
                 </div>
 
-                <div class="col-md-2">
-                    <strong><p class="" style="color:orange">Tours</p></strong>
-                    <p>Direct: +254-722-394892</p>
-                    <p>Mobile : +254-722-394892</p>
-                    <p>Email: stephen@archersafrica.com</p>
-                </div>
-
-                <div class="col-md-2">
-                    <strong><p class="" style="color:orange">Travel</p></strong>
-                    <p>Direct: +254-733-964994</p>
-                    <p>Mobile: +254-720-865455 +254-733-964994</p>
-                    <p>Email: archers@archersafrica.com</p>
-                </div>
 
                 <!-- Contact and Location -->
-                <div class="col-md-3">
+                <div class="col-md-4">
                 <strong><p class="" style="color:orange">Location and Contact</p></strong>
                     <p>Peponi Plaza, Peponi Road - Westlands</p>
                     <p>P.O. Box 437, 00606 Nairobi - Kenya - East Africa</p>
