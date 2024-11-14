@@ -11,7 +11,7 @@
 
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img class="mx-auto h-12 w-auto" src="/images/logo_medium_3-removebg-preview.png" alt="Your Company">
+       <a href="/"> <img class="mx-auto h-12 w-auto" src="/images/logo_medium_3-removebg-preview.png" alt="Your Company"></a>
         <h2 class="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900">Sign in to your account</h2>
     </div>
 
@@ -69,30 +69,9 @@
             </div>
         </form>
 
-        <!-- Divider -->
-        <div class="relative mt-6">
-            <div class="absolute inset-0 flex items-center">
-                <div class="w-full border-t border-gray-300"></div>
-            </div>
-            <div class="relative flex justify-center text-sm">
-                <span class="bg-white px-2 text-gray-500">Or continue with</span>
-            </div>
-        </div>
 
-        <!-- Social Login Buttons -->
-        <div class="mt-6 flex space-x-4">
-            <a href="#" class="flex-1 flex items-center justify-center gap-2 rounded-md bg-red-500 px-3 py-2 text-white shadow-sm hover:bg-red-400">
-                <i class="fab fa-google"></i> Google
-            </a>
-            <a href="#" class="flex-1 flex items-center justify-center gap-2 rounded-md bg-blue-600 px-3 py-2 text-white shadow-sm hover:bg-blue-500">
-                <i class="fab fa-facebook"></i> Facebook
-            </a>
-        </div>
 
-        <p class="mt-10 text-center text-sm text-gray-500">
-            Not a member?
-            <a href="/register" class="font-semibold text-indigo-600 hover:text-indigo-500">Start a 14-day free trial</a>
-        </p>
+
     </div>
 </div>
 
