@@ -17,6 +17,8 @@
 <link rel="stylesheet" href="{{ asset('pacific-main/css/jquery.timepicker.css') }}">
 <link rel="stylesheet" href="{{ asset('pacific-main/css/flaticon.css') }}">
 <link rel="stylesheet" href="{{ asset('pacific-main/css/style.css') }}">
+<script src="https://cdn.userway.org/widget.js" data-account="gER1tSTnfp"></script>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -37,6 +39,9 @@
 					<li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li>
 					<li class="nav-item nav-item active"><a href="/contact" class="nav-link">Contact</a></li>
                     <li class="nav-item"><a href="/login" class="nav-link">login</a></li>
+                    <li class="nav-item">
+               <div id="google_translate_element" class="nav-link"></div>
+            </li>
 
 				</ul>
 			</div>
@@ -247,6 +252,35 @@
 <script src="{{ asset('pacific-main/js/main.js') }}"></script>
 
 
+
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            {
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            },
+            'google_translate_element'
+        );
+    }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6739b5892480f5b4f59f415b/1icsmq95h';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
 
 
 

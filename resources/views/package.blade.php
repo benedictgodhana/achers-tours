@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('Template/css/style.css') }}">
+    <script src="https://cdn.userway.org/widget.js" data-account="gER1tSTnfp"></script>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 

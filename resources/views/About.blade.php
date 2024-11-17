@@ -18,6 +18,21 @@
 <link rel="stylesheet" href="{{ asset('pacific-main/css/jquery.timepicker.css') }}">
 <link rel="stylesheet" href="{{ asset('pacific-main/css/flaticon.css') }}">
 <link rel="stylesheet" href="{{ asset('pacific-main/css/style.css') }}">
+<script src="https://cdn.userway.org/widget.js" data-account="gER1tSTnfp"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6739b5892480f5b4f59f415b/1icsmq95h';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
 
 
 <style>
@@ -28,7 +43,6 @@
 
     .carousel-logos {
         display: flex;
-        animation: marquee 20s linear infinite;
     }
 
     .carousel-logos .item {
@@ -49,6 +63,8 @@
             transform: translateX(-100%);
         }
     }
+
+
 </style>
 
 </head>
@@ -71,6 +87,9 @@
 					<li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
                     <li class="nav-item"><a href="/login" class="nav-link">login</a></li>
+                    <li class="nav-item">
+               <div id="google_translate_element" class="nav-link"></div>
+            </li>
 
 				</ul>
      </div>
@@ -89,64 +108,78 @@
    </div>
  </div>
 </section>
+
 <section class="ftco-section services-section">
-  <div class="container">
-    <div class="row d-flex">
-      <div class="col-md-6 order-md-last heading-section pl-md-5 ftco-animate d-flex align-items-center">
-        <div class="w-100">
-          <span class="subheading" style="color:orange">Welcome to Archers Tours and Travel</span>
-          <h2 class="mb-4">Your Next Great Adventure Awaits</h2>
-          <p>Discover unforgettable experiences with Archers Tours and Travel. From breathtaking landscapes to vibrant cities, our expert guides and travel arrangements make every journey memorable.</p>
-          <p>Whether you’re dreaming of exploring the peaks of distant mountains or relaxing on pristine beaches, we’re here to help you every step of the way. Let us take you on an adventure of a lifetime!</p>
-          <p><a href="/destination" class="btn  py-3 px-4" style="background:orange;color:white">Explore Destinations</a></p>
+	<div class="container">
+		<div class="row d-flex">
+			<div class="col-md-6 order-md-last heading-section pl-md-5 ftco-animate d-flex align-items-center">
+				<div class="w-100">
+					<span class="subheading" style="color:orange">About Us</span>
+					<h2 class="mb-4">Embark on Your Next Adventure with Us</h2>
+                    <p>We are a Tours and Travel company based in Nairobi, Kenya, with over 70 years experience in
+organizing safaris, beach holidays and travel requirements for visitors from all over the world.
+Our talent is a result of an accumulation of past experience, our aim to tailor travels to individual
+requests and personas, and an ability to be both flexible and efficient in our travel programmes.
+Our team is equipped to satisfy the travel needs of visitors from all over the world.</p>
+					<p><a href="/destination" class="btn  py-3 px-4" style="background:navy;color:white;border-radius:30px">Explore Destinations</a></p>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="row" >
+                <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
+            <div class="services services-1 color-1 d-block" style="border-radius: 30px; overflow: hidden;">
+
+                <div class="media-body">
+                    <h3 class="heading mb-3">Travel Management & Advisory</h3>
+                    <ul class="text-white">
+                        <li>Business, tours, and leisure travels management and ticketing</li>
+                        <li>Personalized advisory services on travel and tours organization</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="row">
-          <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
-            <div class="services services-1 color-1 d-block img" style="background-image: url(/pacific-main/images/hotel-resto-2.jpg);">
-              <div class="icon d-flex align-items-center justify-content-center" style="background:orange"><span class="flaticon-paragliding"></span></div>
-              <div class="media-body">
-                <h3 class="heading mb-3">Exciting Activities</h3>
-                <p>From paragliding to diving, our adventures bring you closer to nature and thrill.</p>
-              </div>
+
+        <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
+            <div class="services services-1 color-2 d-block" style="border-radius: 30px; overflow: hidden;">
+
+                <div class="media-body">
+                    <h3 class="heading mb-3">Event & Tour Organization</h3>
+                    <ul class="text-white">
+                        <li>Organizing meetings and conferences</li>
+                        <li>Organizing pilgrimages and special interest groups</li>
+                    </ul>
+                </div>
             </div>
-          </div>
-          <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
-            <div class="services services-1 color-2 d-block img" style="background-image: url(/pacific-main/images/image_3.jpg);">
-              <div class="icon d-flex align-items-center justify-content-center" style="background:orange"><span class="flaticon-route"></span></div>
-              <div class="media-body">
-                <h3 class="heading mb-3">Tailored Travel Arrangements</h3>
-                <p>Customized itineraries that cater to your specific needs and destinations.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
-            <div class="services services-1 color-3 d-block img" style="background-image: url(/pacific-main/images/place-3.jpg);">
-              <div class="icon d-flex align-items-center justify-content-center" style="background:orange"><span class="flaticon-tour-guide"></span></div>
-              <div class="media-body">
-                <h3 class="heading mb-3">Expert Guides</h3>
-                <p>Experienced local guides to enhance your travel experience with insider knowledge.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
-            <div class="services services-1 color-4 d-block img" style="background-image: url(/pacific-main/images/place-1.jpg);">
-              <div class="icon d-flex align-items-center justify-content-center" style="background:orange"><span class="flaticon-map"></span></div>
-              <div class="media-body">
-                <h3 class="heading mb-3">Location Planning</h3>
-                <p>Efficient and reliable location management to make your travels seamless and stress-free.</p>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+        <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
+    <div class="services services-1 color-3 d-block" style="border-radius: 30px; overflow: hidden;">
+
+        <div class="media-body">
+            <h3 class="heading mb-3">Ground Handling & Emergency Services</h3>
+            <ul class="text-white">
+                <li>Medical evacuation/repatriation on commercial airlines and air ambulance charters</li>
+            </ul>
+        </div>
     </div>
-  </div>
+</div>
+
+        <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
+            <div class="services services-1 color-4 d-block" style="border-radius: 30px; overflow: hidden;">
+
+                <div class="media-body">
+                    <h3 class="heading mb-3">Travel Consultancy & Transport Services</h3>
+                    <ul class="text-white">
+                        <li>Travel policy consultancy and travel insurances</li>
+                        <li>Airport transfers (locally and internationally)</li>
+                        <li>Car-hire (locally and internationally)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>				</div>
+			</div>
+		</div>
+	</div>
 </section>
-
-
-
 <section class="ftco-section ftco-about img"style="background-image: url(pacific-main/images/bg_4.jpg);">
  <div class="overlay"></div>
  <div class="container py-md-5">
@@ -168,14 +201,10 @@
     <div class="col-md-6 pl-md-5 py-5">
       <div class="row justify-content-start pb-3">
         <div class="col-md-12 heading-section ftco-animate">
-         <span class="subheading" style="color:orange">About Us</span>
-         <h2 class="mb-4">Make Your Tour Memorable and Safe With Us</h2>
-         <p>Archer’s Tours & Travels Ltd. is a Kenyan company based in Nairobi, with over 70 years of experience in
-organizing business missions, leisure travels and vacations.
-
-Archer’s Tours & Travels Ltd. team provides an efficient and tailor-made service to every client, thereby
-maintaining its position of leadership in the industry.</p>
-         <p><a href="#" class="btn " style="background:orange">Book Your Destination</a></p>
+					<h2 class="mb-4">Embark on Your Next Adventure with Us</h2>
+					<p>Discover the beauty of the world with Archers Tours & Travel, where unforgettable experiences await you at every destination. Let us guide you through a journey filled with excitement and discovery.</p>
+					<p>From tranquil beach getaways to thrilling excursions, we offer tailored experiences that suit all your travel desires. Our team is dedicated to making your travel dreams a reality, ensuring comfort, safety, and unforgettable memories along the way.</p>
+					<p><a href="#" class="btn  py-3 px-4" style="background:orange;color:white;">Explore Destinations</a></p>
        </div>
      </div>
    </div>
@@ -191,15 +220,14 @@ maintaining its position of leadership in the industry.</p>
 			<div class="container">
 				<div class="row justify-content-center pb-4">
 					<div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-						<span class="subheading">Testimonial</span>
-						<h2 class="mb-4">Tourist Feedback</h2>
+						<h2 class="mb-4">Testimonials</h2>
 					</div>
 				</div>
 				<div class="row ftco-animate">
 					<div class="col-md-12">
 						<div class="carousel-testimony owl-carousel">
 							<div class="item">
-								<div class="testimony-wrap py-4">
+								<div class="testimony-wrap py-4"  style="border-radius:30px">
 									<div class="text">
 										<p class="star"style="color:orange">
 											<span  class="fa fa-star"></span>
@@ -219,7 +247,7 @@ maintaining its position of leadership in the industry.</p>
 								</div>
 							</div>
 							<div class="item">
-								<div class="testimony-wrap py-4">
+								<div class="testimony-wrap py-4"  style="border-radius:30px">
 									<div class="text">
 										<p class="star" style="color:orange">
 											<span class="fa fa-star"></span>
@@ -238,8 +266,8 @@ maintaining its position of leadership in the industry.</p>
 									</div>
 								</div>
 							</div>
-							<div class="item">
-								<div class="testimony-wrap py-4">
+							<div class="item" >
+								<div class="testimony-wrap py-4"  style="border-radius:30px">
 									<div class="text">
 										<p class="star" style="color:orange">
 											<span class="fa fa-star"></span>
@@ -278,8 +306,7 @@ to others.</p>
     <div class="container">
         <div class="row justify-content-center pb-4">
             <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-                <span class="subheading" style="color:orange">Member of</span>
-                <h2 class="mb-4" style="color:black">Companies</h2>
+                <span class="subheading" style="color:orange">In partnership with</span>
             </div>
         </div>
 
@@ -297,11 +324,11 @@ to others.</p>
                             <img src="/images/png-transparent-iata-hd-logo.png" alt="Company 2 Logo" class="logo-img">
                         </div>
                         <div class="item">
-                            <img src="/images/imag4.png" alt="Company 3 Logo" class="logo-img">
-                        </div>
-                        <div class="item">
-                            <img src="/images/unnamed-1-768x244.jpg" alt="Company 4 Logo" class="logo-img">
-                        </div>
+    <a href="https://payments.pesapal.com/archersafrica" target="_blank" rel="noopener noreferrer">
+        <img src="/images/imag4.png" alt="Company 3 Logo" class="logo-img">
+    </a>
+</div>
+
                         <div class="item">
                             <img src="/images/Untitled.jpeg" alt="Company 5 Logo" class="logo-img">
                         </div>
@@ -313,7 +340,7 @@ to others.</p>
     </div>
 </section>
 
-<footer class="ftco-footer bg-bottom ftco-no-pt" style="background-image: url(archers-tours/images/bg_3.jpg);">
+<footer class="ftco-footer bg-bottom ftco-no-pt" style="background-image: url(/pacific-main/images/bg_3.jpg);">
   <div class="container">
     <div class="row mb-5">
       <div class="col-md pt-5">
@@ -358,11 +385,11 @@ to others.</p>
        <h2 class="ftco-heading-2">Have Questions?</h2>
        <div class="block-23 mb-3">
          <ul>
-           <li><span class=" fa fa-map-marker mr-4" style="color:navy;"></span><span style="color:white" class="mr-4">Peponi Plaza, Peponi Road - Westlands</span></li>
-           <li><span class=" fa fa-map-marker mr-4" style="color:navy"></span><span style="color:white"> P.O. Box 437, 00606 Nairobi - Kenya - East Africa</span></li>
+           <li><span class=" fa fa-map-marker mr-4" style="color:orange;"></span><span style="color:black" class="mr-4">Peponi Plaza, Peponi Road - Westlands</span></li>
+           <li><span class=" fa fa-map-marker mr-4" style="color:orange"></span><span style="color:black"> P.O. Box 437, 00606 Nairobi - Kenya - East Africa</span></li>
 
-           <li><a href="#" ><span class=" fa fa-phone mr-4" style="color:navy"></span><span  style="color:white">+254-20-3752472 /3 /4</span></a></li>
-           <li><a href="#"><span class=" fa fa-paper-plane mr-4" style="color:navy"></span><span style="color:white">info@archerstours.com</span></a></li>
+           <li><a href="#" ><span class=" fa fa-phone mr-4" style="color:orange"></span><span  style="color:black">+254-20-3752472 /3 /4</span></a></li>
+           <li><a href="#"><span class=" fa fa-paper-plane mr-4" style="color:orange"></span><span style="color:black">info@archerstours.com</span></a></li>
          </ul>
        </div>
      </div>
@@ -372,12 +399,27 @@ to others.</p>
   <div class="col-md-12 text-center">
 
     <p>
-      &copy; <script>document.write(new Date().getFullYear());</script> Archers Tours & Travel | All rights reserved | Designed  by <a href="https://colorlib.com" target="_blank" style="color:white"  >DONKRAFT IT SOLUTIONS LTD</a>
+      &copy; <script>document.write(new Date().getFullYear());</script> Archers Tours & Travel | All rights reserved | Designed  by <a href="https://colorlib.com" target="_blank" style="color:black"  >DONKRAFT IT SOLUTIONS LTD</a>
     </p>
   </div>
  </div>
 </div>
 </footer>
+
+
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            {
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            },
+            'google_translate_element'
+        );
+    }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 
 <!-- loader -->

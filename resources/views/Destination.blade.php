@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="{{ asset('pacific-main/css/jquery.timepicker.css') }}">
 <link rel="stylesheet" href="{{ asset('pacific-main/css/flaticon.css') }}">
 <link rel="stylesheet" href="{{ asset('pacific-main/css/style.css') }}">
+<script src="https://cdn.userway.org/widget.js" data-account="gER1tSTnfp"></script>
+
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">

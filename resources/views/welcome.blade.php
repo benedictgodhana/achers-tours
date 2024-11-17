@@ -18,11 +18,24 @@
 <link rel="stylesheet" href="{{ asset('pacific-main/css/flaticon.css') }}">
 <link rel="stylesheet" href="{{ asset('pacific-main/css/style.css') }}">
 
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6739b5892480f5b4f59f415b/1icsmq95h';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+
+
+<!--End of Tawk.to Script-->
 
 <style>
-  .navbar-nav .nav-item {
-    padding: 0 8px; /* Adjust padding to fit items */
-  }
+
   .navbar-nav .nav-link {
     font-size: 0.9rem; /* Slightly smaller font */
   }
@@ -137,7 +150,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5); /* Adjust the color and opacity as needed */
+        background-color: rgba(0, 0, 0, 0.4); /* Adjust the color and opacity as needed */
         z-index: 1;
     }
 
@@ -147,6 +160,64 @@
         z-index: 2;
         color: white; /* Optional, makes text easier to read on dark overlay */
     }
+
+    .hero-wrap {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full height */
+    overflow: hidden;
+}
+
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the video covers the full background without distortion */
+    z-index: -1; /* Ensure the video is behind the content */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Optional dark overlay to enhance text visibility */
+    z-index: 1; /* Place the overlay above the video but below the text */
+}
+
+.container {
+    position: relative;
+    z-index: 2; /* Ensure text content is on top */
+    color: #fff; /* White text for visibility */
+}
+
+.slider-text {
+    padding: 60px 0;
+    text-align: left;
+}
+
+.subheading {
+    font-size: 34px;
+    font-weight: bold;
+}
+
+h1.mb-4 {
+    font-size: 48px; /* Customize font size for better visibility */
+    font-weight: bold;
+}
+
+.caps {
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+p{
+    color:black;
+}
+
 </style>
 
 </head>
@@ -167,7 +238,7 @@
   <li class="nav-item"><a href="/destination" class="nav-link">Destination</a></li>
   <li class="nav-item"><a href="/tours" class="nav-link">Tours</a></li>
   <li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li>
-  <li class="nav-item mr-4"><a href="/contact" class="nav-link">Contact</a></li>
+  <li class="nav-item mr-4"><a href="/contact" class="nav-link">Contact</a>
   <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle mr-4" id="informationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
       Information
@@ -179,26 +250,33 @@
     </ul>
   </li>
   <li class="nav-item mr-4"><a href="/login" class="nav-link">Login</a></li>
+  <li class="nav-item">
+               <div id="google_translate_element" class="nav-link"></div>
+            </li>
 </ul>
 			</div>
 		</div>
 	</nav>
 	<!-- END nav -->
 
-	<div class="hero-wrap js-fullheight background-image-container" style="background-image: url('/images/buhomalodge2-1.jpg');">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row no-gutters slider-text js-fullheight align-items-center" data-scrollax-parent="true">
+	<div class="hero-wrap js-fullheight">
+    <!-- Video background -->
+    <video autoplay loop muted class="hero-video">
+        <source src="/images/458134_Lion_Lions_1920x1080.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center" data-scrollax-parent="true">
             <div class="col-md-7 ftco-animate">
-				<span class="subheading" style="font-size:24px">Welcome to Archers Tours & Travel</span>
-				<h1 class="mb-4">Share the magic
-of Africa with us</h1>
-				<p class="caps">Experience seamless travel to breathtaking destinations around the globe.</p>
-			</div>
+                <span class="subheading" style="font-size:34px">Welcome to Archers Tours & Travel</span>
+                <h1 class="mb-4">Share the magic of Africa with us</h1>
+                <p class="caps" style="text-transform:none">Experience seamless travel to breathtaking destinations around the globe.</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-			</div>
-		</div>
-	</div>
 
 
 		<section class="ftco-section services-section">
@@ -208,55 +286,71 @@ of Africa with us</h1>
 				<div class="w-100">
 					<span class="subheading" style="color:orange">Welcome to Archers Tours & Travel</span>
 					<h2 class="mb-4">Embark on Your Next Adventure with Us</h2>
-					<p>Discover the beauty of the world with Archers Tours & Travel, where unforgettable experiences await you at every destination. Let us guide you through a journey filled with excitement and discovery.</p>
-					<p>From tranquil beach getaways to thrilling excursions, we offer tailored experiences that suit all your travel desires. Our team is dedicated to making your travel dreams a reality, ensuring comfort, safety, and unforgettable memories along the way.</p>
-					<p><a href="#" class="btn  py-3 px-4" style="background:orange;color:white;">Explore Destinations</a></p>
+                    <p>We are a Tours and Travel company based in Nairobi, Kenya, with over 70 years experience in
+organizing safaris, beach holidays and travel requirements for visitors from all over the world.
+Our talent is a result of an accumulation of past experience, our aim to tailor travels to individual
+requests and personas, and an ability to be both flexible and efficient in our travel programmes.
+Our team is equipped to satisfy the travel needs of visitors from all over the world.</p>
+					<p><a href="/destination" class="btn  py-3 px-4" style="background:navy;color:white;border-radius:30px">Explore Destinations</a></p>
 				</div>
 			</div>
 			<div class="col-md-6">
-				<div class="row">
-					<div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
-						<div class="services services-1 color-1 d-block img" style="background-image: url(pacific-main/images/services-1.jpg);">
-							<div class="icon d-flex align-items-center justify-content-center" style="background:orange"><span class="flaticon-paragliding"></span></div>
-							<div class="media-body">
-								<h3 class="heading mb-3">Exciting Activities</h3>
-								<p>From mountain hiking to water sports, enjoy a variety of exciting activities tailored for adventurers.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
-						<div class="services services-1 color-2 d-block img" style="background-image: url(pacific-main/images/services-2.jpg);">
-							<div class="icon d-flex align-items-center justify-content-center" style="background:orange"><span class="flaticon-route"></span></div>
-							<div class="media-body">
-								<h3 class="heading mb-3">Customized Travel Plans</h3>
-								<p>We create personalized travel itineraries to ensure a smooth and enjoyable trip.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
-						<div class="services services-1 color-3 d-block img" style="background-image: url(pacific-main/images/services-3.jpg);">
-							<div class="icon d-flex align-items-center justify-content-center" style="background:orange"><span class="flaticon-tour-guide"></span></div>
-							<div class="media-body">
-								<h3 class="heading mb-3">Expert Guides</h3>
-								<p>Our knowledgeable guides ensure you have an immersive and enriching travel experience.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
-						<div class="services services-1 color-4 d-block img" style="background-image: url(pacific-main/images/services-4.jpg);">
-							<div class="icon d-flex align-items-center justify-content-center" style="background:orange"><span class="flaticon-map"></span></div>
-							<div class="media-body">
-								<h3 class="heading mb-3">Dedicated Support</h3>
-								<p>Our location managers are here to help with all the logistics, ensuring a hassle-free experience.</p>
-							</div>
-						</div>
-					</div>
-				</div>
+				<div class="row" >
+                <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
+            <div class="services services-1 color-1 d-block" style="border-radius: 30px; overflow: hidden;">
+
+                <div class="media-body">
+                    <h3 class="heading mb-3">Travel Management & Advisory</h3>
+                    <ul class="text-white">
+                        <li>Business, tours, and leisure travels management and ticketing</li>
+                        <li>Personalized advisory services on travel and tours organization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
+            <div class="services services-1 color-2 d-block" style="border-radius: 30px; overflow: hidden;">
+
+                <div class="media-body">
+                    <h3 class="heading mb-3">Event & Tour Organization</h3>
+                    <ul class="text-white">
+                        <li>Organizing meetings and conferences</li>
+                        <li>Organizing pilgrimages and special interest groups</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
+    <div class="services services-1 color-3 d-block" style="border-radius: 30px; overflow: hidden;">
+
+        <div class="media-body">
+            <h3 class="heading mb-3">Ground Handling & Emergency Services</h3>
+            <ul class="text-white">
+                <li>Medical evacuation/repatriation on commercial airlines and air ambulance charters</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
+            <div class="services services-1 color-4 d-block" style="border-radius: 30px; overflow: hidden;">
+
+                <div class="media-body">
+                    <h3 class="heading mb-3">Travel Consultancy & Transport Services</h3>
+                    <ul class="text-white">
+                        <li>Travel policy consultancy and travel insurances</li>
+                        <li>Airport transfers (locally and internationally)</li>
+                        <li>Car-hire (locally and internationally)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>				</div>
 			</div>
 		</div>
 	</div>
 </section>
-<section class="ftco-section img ftco-select-destination" style="background-image: url(images/bg_3.jpg);">
+<section class="ftco-section img ftco-select-destination" style="background-image: url('pacific-main/images/bg_3.jpg');">
     <div class="container">
         <div class="row justify-content-center pb-4">
             <div class="col-md-12 heading-section text-center ftco-animate">
@@ -299,7 +393,7 @@ of Africa with us</h1>
         <div class="row">
             @foreach ($tours as $tour)
                 <div class="col-md-4 ftco-animate">
-                    <div class="project-wrap">
+                    <div class="project-wrap" >
                         <a href="#" class="img" style="background-image: url({{ asset('storage/' . $tour->destination->image) }});">
                         </a>
                         <div class="text p-4">
@@ -319,7 +413,7 @@ of Africa with us</h1>
     </div>
 </section>
 
-		<section class="ftco-section ftco-about img"style="background-image: url(/pacific-main/images/bg_2.jpg);">
+		<section class="ftco-section ftco-about img"style="background-image: url('/images/Property Overview.jpg');">
 			<div class="overlay"></div>
 			<div class="container py-md-5">
 				<div class="row py-md-5">
@@ -334,7 +428,7 @@ of Africa with us</h1>
 					<div class="col-md-12 about-intro">
 						<div class="row">
 							<div class="col-md-6 d-flex align-items-stretch">
-								<div class="img d-flex w-100 align-items-center justify-content-center" style="background-image:url(pacific-main/images/destination-9.jpg);">
+								<div class="img d-flex w-100 align-items-center justify-content-center" style="background-image:url('/images/crossroad-car-safari-scene.jpg');border-radius:30px">
 								</div>
 							</div>
 							<div class="col-md-6 pl-md-5 py-5">
@@ -358,15 +452,14 @@ of Africa with us</h1>
 			<div class="container">
 				<div class="row justify-content-center pb-4">
 					<div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-						<span class="subheading">Testimonial</span>
-						<h2 class="mb-4">Tourist Feedback</h2>
+						<h2 class="mb-4">Testimonials</h2>
 					</div>
 				</div>
 				<div class="row ftco-animate">
 					<div class="col-md-12">
-						<div class="carousel-testimony owl-carousel">
+						<div class="carousel-testimony owl-carousel"  >
 							<div class="item">
-								<div class="testimony-wrap py-4">
+								<div class="testimony-wrap py-4"  style="border-radius:30px">
 									<div class="text">
 										<p class="star"style="color:orange">
 											<span  class="fa fa-star"></span>
@@ -386,7 +479,7 @@ of Africa with us</h1>
 								</div>
 							</div>
 							<div class="item">
-								<div class="testimony-wrap py-4">
+								<div class="testimony-wrap py-4"  style="border-radius:30px">
 									<div class="text">
 										<p class="star" style="color:orange">
 											<span class="fa fa-star"></span>
@@ -406,7 +499,7 @@ of Africa with us</h1>
 								</div>
 							</div>
 							<div class="item">
-								<div class="testimony-wrap py-4">
+								<div class="testimony-wrap py-4"  style="border-radius:30px">
 									<div class="text">
 										<p class="star" style="color:orange">
 											<span class="fa fa-star"></span>
@@ -444,7 +537,7 @@ to others.</p>
     <div class="container">
         <div class="row justify-content-center pb-4">
             <div class="col-md-12 heading-section text-center ftco-animate">
-                <span class="subheading" style="color:orange">Our Blog</span>
+                <span class="subheading" style="color:orange">General Information</span>
                 <h2 class="mb-4">Recent Post</h2>
             </div>
         </div>
@@ -484,13 +577,17 @@ to others.</p>
                 <div class="img" style="background-image: url(pacific-main/images/bg_2.jpg);">
                     <div class="overlay"></div>
                     <h2>We Are Archers Tours & Travel</h2>
-                    <p>We can help you plan your dream safari and travel adventures in Africa, ensuring a once-in-a-lifetime experience with expert guides and personalized itineraries.</p>
+                    <p style="color:white">We can help you plan your dream safari and travel adventures in Africa, ensuring a once-in-a-lifetime experience with expert guides and personalized itineraries.</p>
                     <p class="mb-0"><a href="#" class="btn  px-4 py-3" data-toggle="modal" data-target="#quoteModal" style="background:orange;color:white">Request A Quote</a></p>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+
+
 <div class="modal fade" id="quoteModal" tabindex="-1" role="dialog" aria-labelledby="quoteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -527,7 +624,40 @@ to others.</p>
     </div>
 </div>
 
-<footer class="ftco-footer bg-bottom ftco-no-pt" style="background-image: url(archers-tours/images/bg_3.jpg);">
+
+
+
+
+<div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:800px; width:100;border-radius:30px">
+        <div class="modal-content">
+        <div class="modal-header" style="background-color:orange; color: white;">
+            <h5 class="modal-title" id="welcomeModalLabel" style="text-align:center"><strong>Welcome to Archer's Tours and Travel</strong></h5>
+            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+        <div class="text-center mt-3">
+    <img
+        src="images/logo_medium_3-removebg-preview.png"
+        alt="Archers Tours Logo"
+        class="img-fluid"
+        style="max-width: 100%; height: auto;">
+</div>
+
+            <br>
+            <p style="font-size: 18px; color:black;">Thank you for visiting! Explore the best travel destinations in Africa and beyond with Archer's Tours and Travel. We're here to make your adventures unforgettable.</p>
+
+        </div>
+        <div class="modal-footer justify-content-center">
+            <button type="button" class="btn " data-dismiss="modal" style="background-color:navy;border-radius:30px;width:100%;color:white">Start Exploring</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+<footer class="ftco-footer bg-bottom ftco-no-pt" style="background-image: url('pacific-main/images/bg_3.jpg');">
   <div class="container">
     <div class="row mb-5">
       <div class="col-md pt-5">
@@ -572,11 +702,11 @@ to others.</p>
        <h2 class="ftco-heading-2">Have Questions?</h2>
        <div class="block-23 mb-3">
          <ul>
-           <li><span class=" fa fa-map-marker mr-4" style="color:navy;"></span><span style="color:white" class="mr-4">Peponi Plaza, Peponi Road - Westlands</span></li>
-           <li><span class=" fa fa-map-marker mr-4" style="color:navy"></span><span style="color:white"> P.O. Box 437, 00606 Nairobi - Kenya - East Africa</span></li>
+           <li><span class=" fa fa-map-marker mr-4" style="color:orange;"></span><span style="color:black" class="mr-4">Peponi Plaza, Peponi Road - Westlands</span></li>
+           <li><span class=" fa fa-map-marker mr-4" style="color:orange"></span><span style="color:black"> P.O. Box 437, 00606 Nairobi - Kenya - East Africa</span></li>
 
-           <li><a href="#" ><span class=" fa fa-phone mr-4" style="color:navy"></span><span  style="color:white">+254-20-3752472 /3 /4</span></a></li>
-           <li><a href="#"><span class=" fa fa-paper-plane mr-4" style="color:navy"></span><span style="color:white">info@archerstours.com</span></a></li>
+           <li><a href="#" ><span class=" fa fa-phone mr-4" style="color:orange"></span><span  style="color:black">+254-20-3752472 /3 /4</span></a></li>
+           <li><a href="#"><span class=" fa fa-paper-plane mr-4" style="color:orange"></span><span style="color:black">info@archerstours.com</span></a></li>
          </ul>
        </div>
      </div>
@@ -586,12 +716,27 @@ to others.</p>
   <div class="col-md-12 text-center">
 
     <p>
-      &copy; <script>document.write(new Date().getFullYear());</script> Archers Tours & Travel | All rights reserved | Designed  by <a href="https://colorlib.com" target="_blank" style="color:white"  >DONKRAFT IT SOLUTIONS LTD</a>
+      &copy; <script>document.write(new Date().getFullYear());</script> Archers Tours & Travel | All rights reserved | Designed  by <a href="https://colorlib.com" target="_blank" style="color:black"  >DONKRAFT IT SOLUTIONS LTD</a>
     </p>
   </div>
  </div>
 </div>
 </footer>
+
+
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            {
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            },
+            'google_translate_element'
+        );
+    }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 
 
@@ -646,5 +791,26 @@ $('#quoteForm').on('submit', function(e) {
     });
 });
 </script>
+
+
+<script>
+    $(document).ready(function () {
+        // Check if the modal has been seen
+        if (!localStorage.getItem('welcomeModalSeen')) {
+            // Show the modal after 2 seconds
+            setTimeout(function () {
+                $('#welcomeModal').modal('show');
+            }, 2000);
+
+            // Set localStorage when the modal is shown
+            $('#welcomeModal').on('shown.bs.modal', function () {
+                localStorage.setItem('welcomeModalSeen', 'true');
+            });
+        }
+    });
+</script>
+<script src="https://cdn.userway.org/widget.js" data-account="gER1tSTnfp"></script>
+
+
 		</body>
 		</html>
