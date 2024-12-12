@@ -1,20 +1,29 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
+// Controllers
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
-use App\Models\Blog;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EnquiryController;
+use App\Http\Controllers\InformationCategoryController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\TestimonialController;
+// Models
+use App\Models\Blog;
 use App\Models\Destination;
+use App\Models\InformationCategory;
 use App\Models\Package;
+use App\Models\Testimonial;
 use App\Models\Tour;
 use Illuminate\Http\Request;
 
@@ -23,80 +32,71 @@ use Illuminate\Http\Request;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| Here is where you can register web routes for your application.
 |
 */
 
-
-
-
-
+// Authentication Routes
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-Route::resource('packages', PackageController::class)->middleware('auth');
+// Public Routes
+Route::get('/', function () {
+    $categories = InformationCategory::all(); // Fetch all categories from the categories table
+    $destinations = Destination::withCount('tours')->get();
+    $tours = Tour::with('destination')->get();
+    $blogs = Blog::latest()->take(3)->get();
+    $testimonials = Testimonial::where('is_approved', 1)->get(); // Filter approved testimonials
 
-
-// Tour routes
-Route::resource('tours', TourController::class)->middleware('auth');
-
-
-Route::resource('destinations', DestinationController::class)->middleware('auth');
-
-// In routes/web.php
-Route::post('/send-quote-request', [QuoteController::class, 'sendQuoteRequest']);
-
-Route::resource('users', UserController::class)->middleware(['auth', 'verified']);
-
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-
-    Route::middleware(['auth'])->group(function () {
-        Route::resource('blogs', BlogController::class);
-    });
-
-    Route::get('/', function () {
-        // Fetch all destinations along with their associated tours count
-        $destinations = Destination::withCount('tours')->get();
-
-        // Fetch all tours along with their associated destination
-        $tours = Tour::with('destination')->get();
-
-        $blogs = Blog::latest()->take(3)->get();
-
-        // Pass the destinations and tours to the view
-        return view('welcome', ['destinations' => $destinations, 'tours' => $tours,'blogs' => $blogs]);
-    });
-
-
-    Route::post('/send-email', [ContactController::class, 'sendEmail']);
-Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
-Route::get('/blog', function () {
-    // Paginate blog posts, 6 per page
-    $blogs = Blog::paginate(6);
-
-    return view('Blog', compact('blogs'));
+    return view('welcome', [
+        'destinations' => $destinations,
+        'tours' => $tours,
+        'blogs' => $blogs,
+        'categories' => $categories,
+        'testimonials'=>$testimonials
+    ]);
 });
-
 
 Route::get('/about', function () {
-    return view('About');
-});
+    $blogs = Blog::latest()->take(3)->get();
+    $categories = InformationCategory::all(); // Fetch all categories from the categories table
 
+
+    return view('About', compact('blogs','categories'));
+});
 
 
 Route::get('/contact', function () {
-    return view('Contact');
+    $blogs = Blog::all();
+    $categories = InformationCategory::all(); // Fetch all categories from the categories table
+
+
+    return view('Contact', compact('blogs','categories'));
 });
 
+Route::get('category/{id}', [BlogController::class, 'categoryPage'])->name('category.show');
 
+
+Route::get('/faqs', function () {
+    $blogs = Blog::latest()->take(3)->get();
+    $categories = InformationCategory::all(); // Fetch all categories from the categories table
+
+
+    return view('FAQs', compact('blogs','categories'));
+});
+
+Route::post('/send-email', [ContactController::class, 'sendEmail']);
+Route::post('/send-quote-request', [QuoteController::class, 'sendQuoteRequest']);
 Route::post('/send-enquiry', [EnquiryController::class, 'sendEnquiry'])->name('send.enquiry');
 
+Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
+Route::post('/blog/{blog}/comments', [BlogController::class, 'storeComment'])->name('blog.comments.store');
+Route::get('/blogs/category/{category}', [BlogController::class, 'category'])->name('blogs.category');
 
+// Destination Routes
 Route::get('/destination', function (Request $request) {
     $destinations = Destination::all();
+    $categories = InformationCategory::all(); // Fetch all categories from the categories table
+
     $tours = Tour::all(); // Fetch all tours initially
 
     // Check if the request is an AJAX request for filtered tours
@@ -117,23 +117,11 @@ Route::get('/destination', function (Request $request) {
         return response()->json($tours);
     }
 
+    $blogs = Blog::latest()->take(3)->get();
+
     // Load the view with all destinations and all tours initially
-    return view('Destination', compact('destinations', 'tours'));
+    return view('Destination', compact('destinations', 'tours', 'blogs','categories'));
 });
-
-Route::get('/tour', function () {
-    $tours = Tour::all();
-    return view('Tour', compact('tours'));
-});
-
-Route::get('/tour/{id}', function ($id) {
-    $destination = Destination::findOrFail($id); // Ensure you get the destination
-    $tours = Tour::where('destination_id', $id)->get();
-
-    return view('tour', compact('destination', 'tours'));
-});
-
-
 
 Route::get('/destination/{id}', function ($id) {
     $destination = Destination::findOrFail($id); // Ensure you get the destination
@@ -142,26 +130,75 @@ Route::get('/destination/{id}', function ($id) {
     return view('Destination.show', compact('destination', 'tours'));
 });
 
+// Tour Routes
+Route::get('/tour', function () {
+    $tours = Tour::all();
+    return view('tour.index', compact('tours'));
+});
+
+Route::get('/tour/{id}', function ($id) {
+    $destination = Destination::findOrFail($id); // Ensure you get the destination
+    $tours = Tour::where('destination_id', $id)->get();
+    $blogs = Blog::latest()->take(3)->get();
+
+
+    return view('tour', compact('destination', 'tours', 'blogs'));
+});
 
 
 Route::get('/package/{id}', function ($id) {
     $tours = Tour::findOrFail($id); // Ensure you get the destination
     $packages = Package::where('tour_id', $id)->get();
+    $blogs = Blog::all();
 
-    return view('package', compact('tours', 'packages'));
+
+    return view('package', compact('tours', 'packages', 'blogs'));
 });
 
+// Authenticated Routes
+Route::middleware(['auth', 'verified'])->group(function () {
 
+    Route::get('/logs', [LogController::class, 'viewLogs'])->name('logs.index');
+    Route::resource('users', UserController::class);
+    Route::get('/users/export-excel', [UserController::class, 'exportExcel'])->name('users.export');
+    Route::get('/users/print-pdf', [UserController::class, 'printPdf'])->name('users.print.pdf');
 
-Route::get('/users/export-excel', [UserController::class, 'exportExcel'])->name('users.export');
-Route::get('/users/print-pdf', [UserController::class, 'printPdf'])->name('users.print.pdf');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('packages', PackageController::class); // CRUD for packages
+    Route::resource('tours', TourController::class); // CRUD for tours
+    Route::resource('destinations', DestinationController::class); // CRUD for destinations
 
-
-Route::middleware('auth')->group(function () {
+    Route::resource('blogs', BlogController::class); // CRUD for blogs
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::put('/password-update', [UserController::class, 'updatePassword'])->name('password.change');
+    Route::resource('comments', CommentController::class);
+
+    Route::get('/information-categories', [InformationCategoryController::class, 'index'])->name('information_categories.index');
+    Route::get('/information-categories/create', [InformationCategoryController::class, 'create'])->name('categories.create');
+    Route::post('/information-categories', [InformationCategoryController::class, 'store'])->name('categories.store');
+    Route::get('/information-categories/{id}', [InformationCategoryController::class, 'show'])->name('categories.show');
+    Route::get('/information-categories/{id}/edit', [InformationCategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('/information-categories/{id}', [InformationCategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/information-categories/{id}', [InformationCategoryController::class, 'destroy'])->name('categories.destroy');
+
+    Route::group(['prefix' => 'ckeditor', 'as' => 'ckeditor.'], function () {
+        Route::get('image_browser', 'CKEditorController@imageBrowser')->name('image_browser');  // Browse images
+        Route::post('image_upload', 'CKEditorController@imageUpload')->name('image_upload');   // Upload images
+    });
+    Route::get('/testimonials/create', [TestimonialController::class, 'create'])->name('testimonials.create');
+    Route::prefix('testimonials')->group(function () {
+        Route::get('/', [TestimonialController::class, 'index'])->name('testimonials.index');        // List all testimonials
+        Route::post('/', [TestimonialController::class, 'store'])->name('testimonials.store');      // Store a new testimonial
+        Route::get('{id}', [TestimonialController::class, 'show'])->name('testimonials.show');     // Show a specific testimonial
+        Route::put('{id}', [TestimonialController::class, 'update'])->name('testimonials.update');   // Update a testimonial
+        Route::get('edit/{id}', [TestimonialController::class, 'edit'])->name('testimonials.edit');
+        Route::delete('{id}', [TestimonialController::class, 'destroy'])->name('testimonials.destroy'); // Delete a testimonial
+    });
+
 
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+

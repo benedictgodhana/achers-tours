@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Pacific - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Archers Tours and Travel</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('pacific-main/css/animate.css') }}">
 <link rel="stylesheet" href="{{ asset('pacific-main/css/owl.carousel.min.css') }}">
 <link rel="stylesheet" href="{{ asset('pacific-main/css/owl.theme.default.min.css') }}">
@@ -21,6 +20,415 @@
 <link rel="stylesheet" href="{{ asset('pacific-main/css/flaticon.css') }}">
 <link rel="stylesheet" href="{{ asset('pacific-main/css/style.css') }}">
 <script src="https://cdn.userway.org/widget.js" data-account="gER1tSTnfp"></script>
+
+
+<style>
+
+
+
+
+
+        @media (min-width: 460px) {
+            .slider__item {
+                aspect-ratio: 0.6666666667;
+                min-width: calc((100% / 2) - 2rem);
+            }
+        }
+
+        @media (min-width: 940px) {
+            .slider__item {
+                min-width: calc((100% / 3) - 4rem);
+            }
+        }
+
+        .slider__image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .slider__info {
+            position: relative;
+            padding: 4rem 2rem 2rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(32, 50, 57, 0));
+        }
+
+        .slider__info h2 {
+            color: #fff;
+            font-family: system-ui;
+            line-height: 1.1;
+            font-weight: 300;
+            font-size: 1.75rem;
+            margin: 0;
+        }
+
+        .slider__nav {
+            margin: 1rem 0 4rem;
+            width: 100%;
+            padding: 0;
+            display: flex;
+            justify-content: flex-start;
+            gap: 1rem;
+            align-content: center;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        @media (min-width: 460px) {
+            .slider__nav {
+                justify-content: flex-end;
+            }
+        }
+
+        .slider__nav__button {
+            margin: 0;
+            appearance: none;
+            border: 0;
+            border-radius: 2rem;
+            background: #fff;
+            color: #203239;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            line-height: 1;
+            pointer-events: none;
+            transition: 0.2s ease-out;
+            opacity: 0.25;
+        }
+
+        .slider__nav__button--active {
+            opacity: 1;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+
+        .marquee-content {
+            display: inline-flex;
+            animation: scroll 20s linear infinite;
+        }
+
+        .partner-logo {
+            height: 60px;
+            margin: 0 30px;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+
+            .image {
+                transform: rotate(-5deg);
+                position: absolute;
+                top: 0.5em;
+                right: 1.5em;
+
+                img {
+                    border: 10px solid #fff;
+                    margin: 0;
+                    padding: 0;
+                }
+
+                .clip {
+                    border: 2px solid #222;
+                    border-right: none;
+                    height: 75px;
+                    width: 20px;
+                    position: absolute;
+                    right: 30%;
+                    top: -15%;
+                    border-radius: 25px;
+
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        top: -1px;
+                        right: 0;
+                        height: 10px;
+                        width: 16px;
+                        border: 2px solid #222;
+                        border-bottom: none;
+                        border-top-left-radius: 25px;
+                        border-top-right-radius: 25px;
+                        z-index: 99;
+                    }
+
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        bottom: -1px;
+                        right: 0;
+                        height: 40px;
+                        width: 16px;
+                        border: 2px solid #222;
+                        border-top: none;
+                        border-bottom-left-radius: 25px;
+                        border-bottom-right-radius: 25px;
+                        z-index: 99;
+                    }
+                }
+            }
+
+
+
+.learn-more-btn {
+    text-decoration: none;
+    color: #fff;
+    background-color: #5a67d8;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    opacity: 0;
+    animation: fadeInUp 2s forwards;
+    animation-delay: 1s;
+}
+
+.learn-more-btn:hover {
+    background-color: #4c51bf;
+}
+
+.images-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 40px;
+}
+
+.intro-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.intro-image:hover {
+    transform: scale(1.1) rotate(2deg);
+}
+
+/* Fade-in animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.container{
+    max-width: 1500px   ;
+    width:100%;
+}
+
+
+.box {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  position: relative;
+  padding: 24px;
+  background: #fff;
+}
+
+.box-top {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.box-image {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  object-position: 50% 20%;
+}
+
+.title-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box-title {
+  border-left: 3px solid var(--purple);
+  padding-left: 12px;
+}
+
+.user-follow-info {
+  color: hsl(0, 0%, 60%);
+}
+
+.button {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: auto;
+  padding: 16px;
+  color:white;
+  background:navy;
+  box-shadow: 0px 0px 0px 1px black inset;
+  transition: background 0.4s ease;
+  border-radius: 30px;
+}
+
+.button:hover {
+  background:orange;
+}
+/* RESPONSIVE QUERIES */
+
+@media (min-width: 320px) {
+  .title-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: start;
+  }
+  .user-follow-info {
+    margin-top: 6px;
+  }
+}
+
+@media (min-width: 460px) {
+  .title-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+  }
+  .user-follow-info {
+    margin-top: 6px;
+  }
+}
+
+@media (min-width: 640px) {
+  .box {
+    flex-basis: calc(50% - 12px);
+  }
+  .title-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: start;
+  }
+  .user-follow-info {
+    margin-top: 6px;
+  }
+}
+
+@media (min-width: 840px) {
+  .title-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+  }
+  .user-follow-info {
+    margin-top: 6px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .box {
+    flex-basis: calc(33.3% - 16px);
+  }
+  .title-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: start;
+  }
+  .user-follow-info {
+    margin-top: 6px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .box {
+    flex-basis: calc(25% - 18px);
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.swiper {
+    width: 100%;
+    height: auto;
+  }
+
+  .hero-wrap {
+    position: relative;
+    height: 50vh; /* Reduced height to 60% of the viewport height */
+    background-size: cover; /* Ensure the image covers the entire section */
+    background-position: center center; /* Center the background image */
+    background-repeat: no-repeat;
+}
+
+.hero-wrap .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
+}
+
+.hero-wrap .slider-text {
+    position: absolute;
+    bottom: 0; /* Align text at the bottom */
+    left: 50%;
+    transform: translateX(-50%); /* Center text horizontally */
+    color: #fff;
+    z-index: 2;
+}
+
+.hero-wrap .breadcrumbs {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.hero-wrap .bread {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.hero-wrap p {
+    font-size: 1rem;
+}
+
+
+
+    </style>
 
 </head>
 <body>
@@ -35,130 +443,94 @@
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item "><a href="/" class="nav-link">Home</a></li>
+					<li class="nav-item "><a href="/" class="nav-link" >Home</a></li>
 					<li class="nav-item"><a href="/about" class="nav-link">About</a></li>
-					<li class="nav-item active"><a href="/destination" class="nav-link">Destination</a></li>
-					<li class="nav-item"><a href="/tours" class="nav-link">Tours</a></li>
-					<li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li>
-					<li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
-                    <li class="nav-item"><a href="/login" class="nav-link">login</a></li>
+					<li class="nav-item active"><a href="/destination" class="nav-link" >Destination</a></li>
+
+					<li class="nav-item"><a href="/contact" class="nav-link" >Contact</a></li>
+                    <li class="nav-item "><a href="/faqs" class="nav-link">FAQs</a></li>
+
+
+  <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle mr-4" id="informationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Information
+    </a>
+    <ul class="dropdown-menu nav-item" aria-labelledby="informationDropdown">
+        @foreach ($categories as $category)
+            <li>
+                <a href="{{ route('category.show', $category->id) }}" class="dropdown-item">
+                    {{ $category->name }}
+                </a>
+            </li>
+        @endforeach
+    </ul>
+</li>
+
+                    <li class="nav-item"><a href="/login" class="nav-link" >Account</a></li>
 
 				</ul>
 			</div>
 		</div>
 	</nav>
-<!-- END nav -->
 
-<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('pacific-main/images/bg_1.jpg');">
+    <section class="hero-wrap hero-wrap-2 " style="background-image: url('/images/crossroad-car-safari-scene.jpg');">
   <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
-         <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Tour List <i class="fa fa-chevron-right"></i></span></p>
-         <h1 class="mb-0 bread">Tours List</h1>
+       <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>About us <i class="fa fa-chevron-right"></i></span></p>
+       <h1 class="mb-0 bread">About Us</h1>
      </div>
+   </div>
  </div>
-</div>
 </section>
-<section class="ftco-section ftco-no-pb">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="search-wrap-1 ftco-animate">
-                    <form id="searchForm" class="search-property-1">
-                        <div class="row no-gutters">
-                            <!-- Destination Dropdown -->
-                            <div class="col-lg d-flex">
-                                <div class="form-group p-4 border-0">
-                                    <label for="#">Destination</label>
-                                    <div class="form-field">
-                                        <div class="icon"><span class="fa fa-search"></span></div>
-                                        <select id="destinationDropdown" class="form-control">
-                                            <option value="">Select Destination</option>
-                                            @foreach($destinations as $destination)
-                                                <option value="{{ $destination->id }}">{{ $destination->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Search Button -->
-                            <div class="col-lg d-flex">
-                                <div class="form-group d-flex w-100 border-0">
-                                    <div class="form-field w-100 align-items-center d-flex">
-                                        <input type="button" id="searchButton" value="Search" class="align-self-stretch form-control btn btn-primary">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+
+
+<section class="container mt-4">
+  <div class="swiper mySwiper" style="background:white">
+  <h1 class="text-center">Explore our various Destinations</h1>
+    <div class="swiper-wrapper">
+      @foreach ($destinations as $destination)
+      <div class="swiper-slide">
+        <div class="box transition duration-500 ease-in-out hover:scale-105 hover:shadow-lg opacity-0 animate-fade-in">
+          <div class="box-top">
+            <img class="box-image" src="{{ asset('storage/' . $destination->image) }}" alt="{{ $destination->name }}" style="border-radius:30px">
+            <div class="title-flex">
+              <h3 class="box-title">{{ $destination->name }}</h3>
+              <p class="user-follow-info">Destination</p>
             </div>
+            <!-- Truncate the description -->
+            <p class="description">{!! Str::limit($destination->description, 0) !!}</p>
+
+          <a href="/destination/{{ $destination->id }}" class="text-orange-500 font-semibold text-sm hover:underline flex items-center">
+                Read More
+
+            </a>
+          </div>
+
+          <!-- "Read More" button -->
+          <!-- "View Tours" button -->
+          <a href="/tour/{{ $destination->id }}" class="button">View Tours</a>
         </div>
+      </div>
+      @endforeach
     </div>
+    <!-- Slider navigation buttons -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
 </section>
 
-<section class="ftco-section">
-    <div class="container">
-        <div class="row" id="tours-list">
-            @foreach($destinations as $tour)
-            <div class="col-md-4 ftco-animate">
-                <div class="project-wrap">
-                    <a href="#" class="img" style="background-image: url({{  asset('storage/' . $destination->image) }});">
-                    </a>
-                    <div class="text p-4">
-                        <span class="days">{{ $tour->duration }} Days Tour</span>
-                        <h3><a href="#">{{ $tour->name }}</a></h3>
-                        <p class="location"><span class="fa fa-map-marker"></span> {{ $tour->name }}</p>
+<br>
 
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-
-        <div class="row mt-5">
-            <div class="col text-center">
-                <div class="block-27">
-                    <ul>
-                        <li><a href="#">&lt;</a></li>
-                        <li class="active"><span>1</span></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">&gt;</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-<section class="ftco-intro ftco-section ftco-no-pt">
- <div class="container">
-    <div class="row justify-content-center">
-       <div class="col-md-12 text-center">
-          <div class="img"  style="background-image: url(images/bg_2.jpg);">
-             <div class="overlay"></div>
-             <h2>We Are Pacific A Travel Agency</h2>
-             <p>We can manage your dream building A small river named Duden flows by their place</p>
-             <p class="mb-0"><a href="#" class="btn btn-primary px-4 py-3">Ask For A Quote</a></p>
-         </div>
-     </div>
- </div>
-</div>
-</section>
-
-<footer class="ftco-footer bg-bottom ftco-no-pt" style="background-image: url(archers-tours/images/bg_3.jpg);">
+<footer class="ftco-footer bg-bottom ftco-no-pt" style="background:navy;color:white"
+>
   <div class="container">
     <div class="row mb-5">
       <div class="col-md pt-5">
         <div class="ftco-footer-widget pt-md-5 mb-4">
-          <h2 class="ftco-heading-2">About Archers Tours & Travel</h2>
-          <p>Discover unparalleled travel experiences with Archers Tours & Travel. From adventure-packed excursions to serene beach getaways, we bring you closer to your dream destinations.</p>
+          <h2 class="ftco-heading-2" style="color:white">About Archers Tours & Travel</h2>
+          <p style="color:white">Discover unparalleled travel experiences with Archers Tours & Travel. From adventure-packed excursions to serene beach getaways, we bring you closer to your dream destinations.</p>
           <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
             <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
             <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
@@ -168,40 +540,38 @@
       </div>
       <div class="col-md pt-5 border-left">
         <div class="ftco-footer-widget pt-md-5 mb-4 ml-md-5">
-          <h2 class="ftco-heading-2">Information</h2>
-          <ul class="list-unstyled">
-            <li><a href="#" class="py-2 d-block">Online Enquiry</a></li>
-            <li><a href="#" class="py-2 d-block">General Enquiries</a></li>
-            <li><a href="#" class="py-2 d-block">Booking Conditions</a></li>
-            <li><a href="#" class="py-2 d-block">Privacy Policy</a></li>
-            <li><a href="#" class="py-2 d-block">Refund Policy</a></li>
-            <li><a href="/contact" class="py-2 d-block">Contact Us</a></li>
+          <h2 class="ftco-heading-2" style="color:white">Information</h2>
+          <ul class="list-unstyled" style="color:white">
+            <li><a href="#" class="py-2 d-block" style="color:white">Online Enquiry</a></li>
+            <li><a href="#" class="py-2 d-block" style="color:white">General Enquiries</a></li>
+            <li><a href="#" class="py-2 d-block" style="color:white">Booking Conditions</a></li>
+            <li><a href="/contact" class="py-2 d-block" style="color:white">Contact Us</a></li>
           </ul>
         </div>
       </div>
       <div class="col-md pt-5 border-left">
        <div class="ftco-footer-widget pt-md-5 mb-4">
-        <h2 class="ftco-heading-2">Experiences</h2>
+        <h2 class="ftco-heading-2" style="color:white">Experiences</h2>
         <ul class="list-unstyled">
-          <li><a href="#" class="py-2 d-block">Adventure Tours</a></li>
-          <li><a href="#" class="py-2 d-block">Luxury Resorts</a></li>
-          <li><a href="#" class="py-2 d-block">Beach Escapes</a></li>
-          <li><a href="#" class="py-2 d-block">Nature Trails</a></li>
-          <li><a href="#" class="py-2 d-block">Camping Trips</a></li>
-          <li><a href="#" class="py-2 d-block">Event Planning</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Adventure Tours</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Luxury Resorts</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Beach Escapes</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Nature Trails</a></li>
+          <li><a href="#" class="py-2 d-block"  style="color:white">Camping Trips</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Event Planning</a></li>
         </ul>
       </div>
     </div>
     <div class="col-md pt-5 border-left">
       <div class="ftco-footer-widget pt-md-5 mb-4">
-       <h2 class="ftco-heading-2">Have Questions?</h2>
+       <h2 class="ftco-heading-2" style="color:white">Have Questions?</h2>
        <div class="block-23 mb-3">
          <ul>
-           <li><span class=" fa fa-map-marker mr-4" style="color:navy;"></span><span style="color:white" class="mr-4">Peponi Plaza, Peponi Road - Westlands</span></li>
-           <li><span class=" fa fa-map-marker mr-4" style="color:navy"></span><span style="color:white"> P.O. Box 437, 00606 Nairobi - Kenya - East Africa</span></li>
+           <li><span class=" fa fa-map-marker mr-4" style="color:orange;"></span><span style="color:white" class="mr-4">Peponi Plaza, Mwanzi Road - Westlands</span></li>
+           <li><span class=" fa fa-map-marker mr-4" style="color:orange"></span><span style="color:white"> P.O. Box 437, 00606 Nairobi - Kenya - East Africa</span></li>
 
-           <li><a href="#" ><span class=" fa fa-phone mr-4" style="color:navy"></span><span  style="color:white">+254-20-3752472 /3 /4</span></a></li>
-           <li><a href="#"><span class=" fa fa-paper-plane mr-4" style="color:navy"></span><span style="color:white">info@archerstours.com</span></a></li>
+           <li><a href="#" ><span class=" fa fa-phone mr-4" style="color:orange"></span><span  style="color:white">+254-20-3752472 /0722394892</span></a></li>
+           <li><a href="#"><span class=" fa fa-paper-plane mr-4" style="color:orange"></span><span style="color:white">archers@archerstours.com</span></a></li>
          </ul>
        </div>
      </div>
@@ -210,7 +580,7 @@
  <div class="row">
   <div class="col-md-12 text-center">
 
-    <p>
+    <p style="color:white">
       &copy; <script>document.write(new Date().getFullYear());</script> Archers Tours & Travel | All rights reserved | Designed  by <a href="https://colorlib.com" target="_blank" style="color:white"  >DONKRAFT IT SOLUTIONS LTD</a>
     </p>
   </div>
@@ -288,6 +658,36 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
+    <!-- Swiper CSS -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<script>
+  const swiper = new Swiper('.mySwiper', {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 1, // Mobile devices will show 1 slide
+        spaceBetween: 20,
+      },
+      768: {
+        slidesPerView: 2, // Tablets will show 2 slides
+        spaceBetween: 30,
+      },
+      1024: {
+        slidesPerView: 3, // Larger screens will show 3 slides
+        spaceBetween: 30,
+      },
+    },
+  });
+</script>
 
 
 </body>

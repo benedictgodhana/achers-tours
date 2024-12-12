@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\UsersExport; // Create this export class for Excel
 use Barryvdh\DomPDF\Facade as PDF; // Import the PDF facade
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -22,7 +24,7 @@ class UserController extends Controller
         if ($search) {
             $users = User::where('name', 'LIKE', '%' . $search . '%')
                          ->orWhere('email', 'LIKE', '%' . $search . '%')
-                        
+
                          ->paginate(5); // Paginate results with 5 users per page
         } else {
             $users = User::paginate(5); // Paginate all users with 5 users per page
@@ -151,4 +153,25 @@ class UserController extends Controller
         $pdf = PDF::loadView('users.pdf', compact('users'));
         return $pdf->download('users.pdf');
     }
+
+
+    public function updatePassword(Request $request)
+{
+    $request->validate([
+        'current_password' => 'required',
+        'new_password' => 'required|min:8|confirmed',
+    ]);
+
+    $user = Auth::user();
+
+    // Check if current password matches
+    if (!Hash::check($request->current_password, $user->password)) {
+        return back()->withErrors(['current_password' => 'Current password is incorrect.']);
+    }
+
+    // Update password
+    $user->update(['password' => Hash::make($request->new_password)]);
+
+    return back()->with('status', 'Password updated successfully!');
+}
 }

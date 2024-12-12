@@ -19,6 +19,50 @@
 <link rel="stylesheet" href="{{ asset('pacific-main/css/style.css') }}">
 <script src="https://cdn.userway.org/widget.js" data-account="gER1tSTnfp"></script>
 
+<style>
+    .hero-wrap {
+    position: relative;
+    height: 40vh; /* Reduced height to 60% of the viewport height */
+    background-size: cover; /* Ensure the image covers the entire section */
+    background-position: center center; /* Center the background image */
+    background-repeat: no-repeat;
+}
+
+.hero-wrap .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
+}
+
+.hero-wrap .slider-text {
+    position: absolute;
+    bottom: 0; /* Align text at the bottom */
+    left: 50%;
+    transform: translateX(-50%); /* Center text horizontally */
+    color: #fff;
+    z-index: 2;
+}
+
+.hero-wrap .breadcrumbs {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.hero-wrap .bread {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.hero-wrap p {
+    font-size: 1rem;
+}
+
+</style>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -32,16 +76,34 @@
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
+					<li class="nav-item "><a href="/" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="/destination" class="nav-link">Destination</a></li>
-					<li class="nav-item"><a href="/tours" class="nav-link">Tours</a></li>
-					<li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li>
+
+
 					<li class="nav-item nav-item active"><a href="/contact" class="nav-link">Contact</a></li>
-                    <li class="nav-item"><a href="/login" class="nav-link">login</a></li>
-                    <li class="nav-item">
-               <div id="google_translate_element" class="nav-link"></div>
+                    <li class="nav-item"><a href="/faqs" class="nav-link">FAQs</a></li>
+
+  <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle mr-4" id="informationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Information
+    </a>
+    <ul class="dropdown-menu nav-item" aria-labelledby="informationDropdown">
+        @foreach ($categories as $category)
+            <li>
+                <a href="{{ route('category.show', $category->id) }}" class="dropdown-item">
+                    {{ $category->name }}
+                </a>
             </li>
+        @endforeach
+    </ul>
+</li>
+
+
+<li class="nav-item"><a href="/login" class="nav-link">Account</a></li>
+
+
+
 
 				</ul>
 			</div>
@@ -49,7 +111,7 @@
 	</nav>
  <!-- END nav -->
 
- <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('pacific-main/images/bg_1.jpg');">
+ <section class="hero-wrap hero-wrap-2 " style="background-image: url('/images/slider-1.jpg');">
   <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
@@ -64,41 +126,41 @@
 <section class="ftco-section ftco-no-pb contact-section mb-4">
   <div class="container">
     <div class="row d-flex contact-info">
-      <div class="col-md-3 d-flex">
-       <div class="align-self-stretch box p-4 text-center">
+      <div class="col-md-3 d-flex" >
+       <div class="align-self-stretch box p-4 text-center" style="border-radius:30px;background:navy">
         <div class="icon d-flex align-items-center justify-content-center" style="background:orange">
          <span class="fa fa-map-marker"></span>
        </div>
        <h3 class="mb-2" style="color:orange">Address</h3>
-       <p>Peponi Plaza, Peponi Road - Westlands, P.O. Box 437, 00606 Nairobi - Kenya - East Africa</p>
+       <p style="color:white">Peponi Plaza, Mwanzi Road - Westlands, P.O. Box 437, 00606 Nairobi - Kenya - East Africa</p>
      </div>
    </div>
    <div class="col-md-3 d-flex">
-     <div class="align-self-stretch box p-4 text-center">
+     <div class="align-self-stretch box p-4 text-center" style="border-radius:30px;background:navy">
       <div class="icon d-flex align-items-center justify-content-center" style="background:orange">
        <span class="fa fa-phone"></span>
      </div>
      <h3 class="mb-2" style="color:orange">Contact Number</h3>
-     <p><a href="tel://1234567920">+254-20-3752472 /3 /4</a></p>
+     <p><a href="tel://1234567920" style="color:white">Travel <br> 0720865455 <br> 0733964994 <br> TOURS <br> 0722394892</a></p>
    </div>
  </div>
  <div class="col-md-3 d-flex">
-   <div class="align-self-stretch box p-4 text-center">
+   <div class="align-self-stretch box p-4 text-center" style="border-radius:30px;background:navy">
     <div class="icon d-flex align-items-center justify-content-center" style="background:orange">
      <span class="fa fa-paper-plane"></span>
    </div>
    <h3 class="mb-2" style="color:orange">Email Address</h3>
-   <p><a href="mailto:info@yoursite.com">archers@archersafrica.com
+   <p><a href="mailto:archers@archersafrica.com" style="color:white">archers@archersafrica.com
 </a></p>
  </div>
 </div>
 <div class="col-md-3 d-flex">
- <div class="align-self-stretch box p-4 text-center">
+ <div class="align-self-stretch box p-4 text-center" style="border-radius:30px;background:navy">
   <div class="icon d-flex align-items-center justify-content-center" style="background:orange">
    <span class="fa fa-globe"></span>
  </div>
  <h3 class="mb-2" style="color:orange">Website</h3>
- <p><a href="https://www.archersafrica.com/">www.archersafrica.com</a></p>
+ <p style="color:white"><a href="https://www.archersafrica.com/" style="color:white">www.archersafrica.com</a></p>
 </div>
 </div>
 </div>
@@ -161,16 +223,14 @@
   </div>
 </section>
 
-
-
-
-<footer class="ftco-footer bg-bottom ftco-no-pt" style="background-image: url(archers-tours/images/bg_3.jpg);">
+<footer class="ftco-footer bg-bottom ftco-no-pt" style="background:navy;color:white"
+>
   <div class="container">
     <div class="row mb-5">
       <div class="col-md pt-5">
         <div class="ftco-footer-widget pt-md-5 mb-4">
-          <h2 class="ftco-heading-2">About Archers Tours & Travel</h2>
-          <p>Discover unparalleled travel experiences with Archers Tours & Travel. From adventure-packed excursions to serene beach getaways, we bring you closer to your dream destinations.</p>
+          <h2 class="ftco-heading-2" style="color:white">About Archers Tours & Travel</h2>
+          <p style="color:white">Discover unparalleled travel experiences with Archers Tours & Travel. From adventure-packed excursions to serene beach getaways, we bring you closer to your dream destinations.</p>
           <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
             <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
             <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
@@ -180,40 +240,38 @@
       </div>
       <div class="col-md pt-5 border-left">
         <div class="ftco-footer-widget pt-md-5 mb-4 ml-md-5">
-          <h2 class="ftco-heading-2">Information</h2>
-          <ul class="list-unstyled">
-            <li><a href="#" class="py-2 d-block">Online Enquiry</a></li>
-            <li><a href="#" class="py-2 d-block">General Enquiries</a></li>
-            <li><a href="#" class="py-2 d-block">Booking Conditions</a></li>
-            <li><a href="#" class="py-2 d-block">Privacy Policy</a></li>
-            <li><a href="#" class="py-2 d-block">Refund Policy</a></li>
-            <li><a href="/contact" class="py-2 d-block">Contact Us</a></li>
+          <h2 class="ftco-heading-2" style="color:white">Information</h2>
+          <ul class="list-unstyled" style="color:white">
+            <li><a href="#" class="py-2 d-block" style="color:white">Online Enquiry</a></li>
+            <li><a href="#" class="py-2 d-block" style="color:white">General Enquiries</a></li>
+            <li><a href="#" class="py-2 d-block" style="color:white">Booking Conditions</a></li>
+            <li><a href="/contact" class="py-2 d-block" style="color:white">Contact Us</a></li>
           </ul>
         </div>
       </div>
       <div class="col-md pt-5 border-left">
        <div class="ftco-footer-widget pt-md-5 mb-4">
-        <h2 class="ftco-heading-2">Experiences</h2>
+        <h2 class="ftco-heading-2" style="color:white">Experiences</h2>
         <ul class="list-unstyled">
-          <li><a href="#" class="py-2 d-block">Adventure Tours</a></li>
-          <li><a href="#" class="py-2 d-block">Luxury Resorts</a></li>
-          <li><a href="#" class="py-2 d-block">Beach Escapes</a></li>
-          <li><a href="#" class="py-2 d-block">Nature Trails</a></li>
-          <li><a href="#" class="py-2 d-block">Camping Trips</a></li>
-          <li><a href="#" class="py-2 d-block">Event Planning</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Adventure Tours</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Luxury Resorts</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Beach Escapes</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Nature Trails</a></li>
+          <li><a href="#" class="py-2 d-block"  style="color:white">Camping Trips</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Event Planning</a></li>
         </ul>
       </div>
     </div>
     <div class="col-md pt-5 border-left">
       <div class="ftco-footer-widget pt-md-5 mb-4">
-       <h2 class="ftco-heading-2">Have Questions?</h2>
+       <h2 class="ftco-heading-2" style="color:white">Have Questions?</h2>
        <div class="block-23 mb-3">
          <ul>
-           <li><span class=" fa fa-map-marker mr-4" style="color:navy;"></span><span style="color:white" class="mr-4">Peponi Plaza, Peponi Road - Westlands</span></li>
-           <li><span class=" fa fa-map-marker mr-4" style="color:navy"></span><span style="color:white"> P.O. Box 437, 00606 Nairobi - Kenya - East Africa</span></li>
+           <li><span class=" fa fa-map-marker mr-4" style="color:orange;"></span><span style="color:white" class="mr-4">Peponi Plaza, Mwanzi Road - Westlands</span></li>
+           <li><span class=" fa fa-map-marker mr-4" style="color:orange"></span><span style="color:white"> P.O. Box 437, 00606 Nairobi - Kenya - East Africa</span></li>
 
-           <li><a href="#" ><span class=" fa fa-phone mr-4" style="color:navy"></span><span  style="color:white">+254-20-3752472 /3 /4</span></a></li>
-           <li><a href="#"><span class=" fa fa-paper-plane mr-4" style="color:navy"></span><span style="color:white">info@archerstours.com</span></a></li>
+           <li><a href="#" ><span class=" fa fa-phone mr-4" style="color:orange"></span><span  style="color:white">+254-20-3752472 /0722394892</span></a></li>
+           <li><a href="#"><span class=" fa fa-paper-plane mr-4" style="color:orange"></span><span style="color:white">archers@archerstours.com</span></a></li>
          </ul>
        </div>
      </div>
@@ -222,13 +280,17 @@
  <div class="row">
   <div class="col-md-12 text-center">
 
-    <p>
+    <p style="color:white">
       &copy; <script>document.write(new Date().getFullYear());</script> Archers Tours & Travel | All rights reserved | Designed  by <a href="https://colorlib.com" target="_blank" style="color:white"  >DONKRAFT IT SOLUTIONS LTD</a>
     </p>
   </div>
  </div>
 </div>
 </footer>
+
+
+
+
 
 
 

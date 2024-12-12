@@ -1,63 +1,114 @@
 <x-app-layout>
-    <div class="p-6">
+    <section class="content-header">
+        <h1>
+            Add Blog Post
+            <small>Create a new blog post</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Add Blog Post</li>
+        </ol>
+    </section>
 
-        @if (session('success'))
-            <div id="success-message" class="bg-green-500 text-white p-4 rounded mb-4">
-                {{ session('success') }}
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Success Message -->
+                @if (session('success'))
+                    <div id="success-message" class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <!-- Form Card -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Add Blog Post</h3>
+                    </div>
+                    <!-- /.box-header -->
+
+                    <form action="{{ route('blogs.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" name="title" id="title" class="form-control" placeholder="Enter Blog Title" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <select name="category" id="category" class="form-control" required>
+                                    <option value="">Select a Category</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="image">Featured Image</label>
+                                <input type="file" name="image" id="image" class="form-control" accept="image/*" required onchange="previewImage(event)">
+                                <div id="image-preview-container" style="display: none; margin-top: 10px;">
+                                    <img id="image-preview" class="img-thumbnail" style="max-width: 200px;" alt="Image Preview">
+                                </div>
+                            </div>
+
+                            <div>
+                                <textarea class="textarea" placeholder="Content" name="content" id="editor"
+                                          style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                            </div>
+
+                        </div>
+                        <!-- /.box-body -->
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Publish</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box -->
             </div>
-        @endif
-
-        <div class="bg-white shadow-md rounded-lg p-6">
-        <h2 class="text-2xl font-semibold mb-4">Create a New Blog</h2>
-
-            <form action="{{ route('blogs.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="mb-4">
-                    <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
-                    <input type="text" name="title" id="title"
-                           class="mt-1 p-2 w-full border rounded-md focus:ring-2 focus:ring-blue-400"
-                           required>
-                </div>
-
-                <div class="mb-4">
-                    <label for="image" class="block text-sm font-medium text-gray-700">Featured Image</label>
-                    <input type="file" name="image" id="image"
-                           class="mt-1 p-2 w-full border rounded-md focus:ring-2 focus:ring-blue-400">
-                </div>
-
-                <div class="mb-4">
-                    <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
-                    <textarea name="content" id="editor"
-                              class="mt-1 p-2 w-full border rounded-md focus:ring-2 focus:ring-blue-400"
-                              rows="10"></textarea>
-                </div>
-
-                <div class="flex justify-end space-x-2">
-                    <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
-                        Publish
-                    </button>
-                    <a href="{{ route('blogs.index') }}" class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400">
-                        Cancel
-                    </a>
-                </div>
-            </form>
         </div>
-    </div>
+    </section>
+    <script src="https://cdn.ckeditor.com/4.25.0/standard/ckeditor.js"></script>
+<script>
+    // Initialize CKEditor for the content area
+    CKEDITOR.replace('editor', {
+        // CKEditor configuration options
+        filebrowserImageBrowseUrl: '{{ route('ckeditor.image_browser') }}',  // URL to browse image files
+        filebrowserUploadUrl: '{{ route('ckeditor.image_upload') }}',       // URL to upload images
+        allowedContent: true,  // Allows any content in the editor
+        height: 300,  // Optional: Set custom height for CKEditor
+    });
 
-    <script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('editor');
+    // Image preview functionality
+    function previewImage(event) {
+        const file = event.target.files[0];  // Get the uploaded file
+        const previewContainer = document.getElementById('image-preview-container');  // Container to show the image preview
+        const imagePreview = document.getElementById('image-preview');  // Image preview element
 
-        // Hide the success message after 4 seconds
-        setTimeout(() => {
-            const message = document.getElementById('success-message');
-            if (message) {
-                message.style.transition = 'opacity 0.5s';
-                message.style.opacity = '0';
+        if (file) {
+            const reader = new FileReader();  // Create a FileReader instance
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;  // Set the image source to the loaded file
+                previewContainer.style.display = 'block';  // Show the preview container
+            };
+            reader.readAsDataURL(file);  // Read the file as a data URL
+        } else {
+            previewContainer.style.display = 'none';  // Hide the preview container if no file is selected
+        }
+    }
 
-                // Optional: Completely remove the message from the DOM after fade-out
-                setTimeout(() => message.remove(), 500);
-            }
-        }, 4000);
-    </script>
+    // Auto-hide success message
+    setTimeout(() => {
+        const message = document.getElementById('success-message');  // Select the success message element
+        if (message) {
+            message.style.transition = 'opacity 0.5s';  // Smoothly fade out the message
+            message.style.opacity = '0';  // Set opacity to 0
+            setTimeout(() => message.remove(), 500);  // Remove the message after 0.5 seconds
+        }
+    }, 4000);  // Set timeout to 4 seconds
+</script>
+
 </x-app-layout>

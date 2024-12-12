@@ -176,6 +176,7 @@ s0.parentNode.insertBefore(s1,s0);
     height: 100%;
     object-fit: cover; /* Ensure the video covers the full background without distortion */
     z-index: -1; /* Ensure the video is behind the content */
+
 }
 
 .overlay {
@@ -218,6 +219,51 @@ p{
     color:black;
 }
 
+ /* Styling the blog entry container */
+ .blog-entry {
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Ensuring the image inside the block-20 takes up enough space */
+    .block-20 {
+        width: 100%;
+        height: 350px; /* Adjust height to make the image more prominent */
+        background-size: cover;
+        background-position: center;
+    }
+
+    /* Adjusting padding and margins for text inside the card */
+    .blog-entry .text {
+        padding: 20px; /* Increase padding for more spacious content */
+    }
+
+    .blog-entry h3 a {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+        text-decoration: none;
+    }
+
+    .blog-entry h3 a:hover {
+        color: #ff5733; /* Change color on hover */
+    }
+
+    .blog-entry .btn {
+        background-color: orange;
+        color: white;
+        padding: 12px 25px;
+        border-radius: 5px;
+        font-size: 1rem;
+        text-transform: uppercase;
+        transition: background-color 0.3s;
+    }
+
+    .blog-entry .btn:hover {
+        background-color: #ff5733; /* Darken the button color on hover */
+    }
 </style>
 
 </head>
@@ -236,23 +282,26 @@ p{
   <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
   <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
   <li class="nav-item"><a href="/destination" class="nav-link">Destination</a></li>
-  <li class="nav-item"><a href="/tours" class="nav-link">Tours</a></li>
-  <li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li>
   <li class="nav-item mr-4"><a href="/contact" class="nav-link">Contact</a>
+  <li class="nav-item "><a href="/faqs" class="nav-link">FAQs</a></li>
+
   <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle mr-4" id="informationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      Information
+        Information
     </a>
     <ul class="dropdown-menu nav-item" aria-labelledby="informationDropdown">
-      <li><a class="dropdown-item" href="/information/about">Health</a></li>
-      <li><a class="dropdown-item" href="/information/services">Visa</a></li>
-      <li><a class="dropdown-item" href="/information/contact">Contact</a></li>
-    </ul>
-  </li>
-  <li class="nav-item mr-4"><a href="/login" class="nav-link">Login</a></li>
-  <li class="nav-item">
-               <div id="google_translate_element" class="nav-link"></div>
+        @foreach ($categories as $category)
+            <li>
+                <a href="{{ route('category.show', $category->id) }}" class="dropdown-item">
+                    {{ $category->name }}
+                </a>
             </li>
+        @endforeach
+    </ul>
+</li>
+
+  <li class="nav-item mr-4"><a href="/login" class="nav-link">Account</a></li>
+
 </ul>
 			</div>
 		</div>
@@ -366,7 +415,7 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
                     @foreach ($destinations as $destination)
                         <div class="item">
                             <div class="project-destination">
-                                <a href="#" class="img" style="background-image: url({{ asset('storage/' . $destination->image) }});">
+                                <a href="/destination/{{ $destination->id }}" class="img" style="background-image: url({{ asset('storage/' . $destination->image) }});border-radius:30px">
                                     <div class="text" >
                                         <h3 style="background:orange">{{ $destination->name }}</h3>
                                         <span style="background:orange">{{ $destination->tours_count }} Tours</span> <!-- Display the tour count -->
@@ -394,7 +443,7 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
             @foreach ($tours as $tour)
                 <div class="col-md-4 ftco-animate">
                     <div class="project-wrap" >
-                        <a href="#" class="img" style="background-image: url({{ asset('storage/' . $tour->destination->image) }});">
+                        <a href="#" class="img" style="background-image: url({{ asset('storage/' . $tour->destination->image) }});border-radius:30px">
                         </a>
                         <div class="text p-4">
                             <span class="days" style="color:orange">{{ $tour->duration }} Days Tour</span>
@@ -446,94 +495,49 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
 				</div>
 			</div>
 		</section>
+        <section class="ftco-section testimony-section bg-bottom" style="background-image: url(pacific-main/images/bg_1.jpg);">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row justify-content-center pb-4">
+            <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
+                <h2 class="mb-4">Testimonials by Destination</h2>
+            </div>
+        </div>
+        <div class="row ftco-animate">
+            <div class="col-md-12">
+                <div class="carousel-testimony owl-carousel">
+                    <!-- Loop through each destination and its testimonials -->
+                        <div class="item">
+                            <div class="testimony-wrap py-4" style="border-radius:30px">
+                                <div class="text">
+                                    <p class="star" style="color:orange">
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                    </p>
+                                    <p class="mb-4">
+                                        @foreach($testimonials as $testimonial)
+                                            {!!$testimonial->message !!}
+                                            <br>
+                                        @endforeach
+                                    </p>
+                                    <div class="d-flex align-items-center">
+                                        <div class="pl-3">
+                                            <p class="name">{{ $testimonial->name }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-		<section class="ftco-section testimony-section bg-bottom" style="background-image: url(pacific-main/images/bg_1.jpg);">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row justify-content-center pb-4">
-					<div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-						<h2 class="mb-4">Testimonials</h2>
-					</div>
-				</div>
-				<div class="row ftco-animate">
-					<div class="col-md-12">
-						<div class="carousel-testimony owl-carousel"  >
-							<div class="item">
-								<div class="testimony-wrap py-4"  style="border-radius:30px">
-									<div class="text">
-										<p class="star"style="color:orange">
-											<span  class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-										</p>
-										<p class="mb-4">Soy Juan Luis Morales y en septiembre viajé con mis hijos a Nairobi para un safari, recomendado por un amigo a Archer's Tour & Travels. Stephen nos ayudó a planificar el viaje, y al llegar, un chófer nos recogió. El guía Charlie, con gran experiencia, nos acompañó en los parques de Samburu, Nakuru y Masai Mara. Todo fue excelente, incluyendo los alojamientos, la comida y la planificación, por lo que recomiendo 100% Archer's.</p>
-										<div class="d-flex align-items-center">
-											<div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
-											<div class="pl-3">
-												<p class="name">Acuna </p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testimony-wrap py-4"  style="border-radius:30px">
-									<div class="text">
-										<p class="star" style="color:orange">
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-										</p>
-										<p class="mb-4">We’ve just returned from a fantastic visit to Finch Hattons, and I want to thank you and the Archers team for everything. Special thanks to Stephen for his exceptional customer service, patience, and dedication, even working weekends and late nights. Finch Hattons exceeded all expectations—amazing environment, service, rooms, food, and even yoga and massage. It was the best safari experience we’ve had. We can’t wait to return!.</p>
-										<div class="d-flex align-items-center">
-											<div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
-											<div class="pl-3">
-												<p class="name">Vivien</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testimony-wrap py-4"  style="border-radius:30px">
-									<div class="text">
-										<p class="star" style="color:orange">
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-										</p>
-										<p class="mb-4">Hello
-I just wanted to thank you for the wonderful assistance you were to me and
-my friend. We had a wonderful time and really liked our tour guide
-Pollycarp. He was a safe driver. He was a great spotter of animals and my
-brother enjoyed talking to him. In fact they have a number of people go
-over there to go on safaris and he will probably always request Pollycarp as
-the guide.
-Thank you for your wonderful service and we will always recommend you
-to others.</p>
-										<div class="d-flex align-items-center">
-											<div class="user-img" style="background-image: url(images/person_3.jpg)"></div>
-											<div class="pl-3">
-												<p class="name">Jacque</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-<section class="ftco-section">
+        <section class="ftco-section">
     <div class="container">
         <div class="row justify-content-center pb-4">
             <div class="col-md-12 heading-section text-center ftco-animate">
@@ -543,11 +547,11 @@ to others.</p>
         </div>
         <div class="row d-flex">
             @foreach ($blogs as $blog)
-                <div class="col-md-4 d-flex ftco-animate">
-                    <div class="blog-entry justify-content-end">
+                <div class="col-md-6 col-lg-4 d-flex ftco-animate">
+                    <div class="blog-entry justify-content-end w-100">
                         <!-- Display the blog image -->
-                        <a href="{{ route('blog.show', $blog->id) }}" class="block-20" style="background-image: url('{{ asset('storage/' . $blog->image) }}');"></a>
-                        <div class="text">
+                        <a href="{{ route('blog.show', $blog->id) }}" class="block-20" style="background-image: url('{{ asset('storage/' . $blog->image) }}'); height: 350px; background-size: cover; background-position: center;border-radius:30px"></a>
+                        <div class="text p-4">
                             <div class="d-flex align-items-center mb-4 topp" style="background:orange;color:white">
                                 <div class="one">
                                     <span class="day" style="background:orange;color:white">{{ $blog->created_at->format('d') }}</span>
@@ -558,9 +562,11 @@ to others.</p>
                                 </div>
                             </div>
                             <!-- Display the blog title -->
-                            <h3 class="heading"><a href="{{ route('blog.show', $blog->id) }}">{{ $blog->title }}</a></h3>
+                            <h3 class="heading" style="font-size: 1.5rem; line-height: 1.5; font-weight: bold;">
+                                <a href="{{ route('blog.show', $blog->id) }}">{{ $blog->title }}</a>
+                            </h3>
                             <!-- Display the "Read more" button -->
-                            <p><a href="{{ route('blog.show', $blog->id) }}" class="btn " style="background:orange;color:white">Read more</a></p>
+                            <p><a href="{{ route('blog.show', $blog->id) }}" class="btn" style="background:orange;color:white; font-size: 1rem; padding: 10px 20px;">Read more</a></p>
                         </div>
                     </div>
                 </div>
@@ -569,12 +575,13 @@ to others.</p>
     </div>
 </section>
 
+
 		<!-- Intro Section -->
-<section class="ftco-intro ftco-section ftco-no-pt">
+<section class="ftco-intro ftco-section ftco-no-pt" >
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12 text-center">
-                <div class="img" style="background-image: url(pacific-main/images/bg_2.jpg);">
+                <div class="img" style="background-image: url(pacific-main/images/bg_2.jpg);border-radius:30px">
                     <div class="overlay"></div>
                     <h2>We Are Archers Tours & Travel</h2>
                     <p style="color:white">We can help you plan your dream safari and travel adventures in Africa, ensuring a once-in-a-lifetime experience with expert guides and personalized itineraries.</p>
@@ -657,13 +664,14 @@ to others.</p>
     </div>
     </div>
 
-<footer class="ftco-footer bg-bottom ftco-no-pt" style="background-image: url('pacific-main/images/bg_3.jpg');">
+<footer class="ftco-footer bg-bottom ftco-no-pt" style="background:navy;color:white"
+>
   <div class="container">
     <div class="row mb-5">
       <div class="col-md pt-5">
         <div class="ftco-footer-widget pt-md-5 mb-4">
-          <h2 class="ftco-heading-2">About Archers Tours & Travel</h2>
-          <p>Discover unparalleled travel experiences with Archers Tours & Travel. From adventure-packed excursions to serene beach getaways, we bring you closer to your dream destinations.</p>
+          <h2 class="ftco-heading-2" style="color:white">About Archers Tours & Travel</h2>
+          <p style="color:white">Discover unparalleled travel experiences with Archers Tours & Travel. From adventure-packed excursions to serene beach getaways, we bring you closer to your dream destinations.</p>
           <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
             <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
             <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
@@ -673,40 +681,38 @@ to others.</p>
       </div>
       <div class="col-md pt-5 border-left">
         <div class="ftco-footer-widget pt-md-5 mb-4 ml-md-5">
-          <h2 class="ftco-heading-2">Information</h2>
-          <ul class="list-unstyled">
-            <li><a href="#" class="py-2 d-block">Online Enquiry</a></li>
-            <li><a href="#" class="py-2 d-block">General Enquiries</a></li>
-            <li><a href="#" class="py-2 d-block">Booking Conditions</a></li>
-            <li><a href="#" class="py-2 d-block">Privacy Policy</a></li>
-            <li><a href="#" class="py-2 d-block">Refund Policy</a></li>
-            <li><a href="/contact" class="py-2 d-block">Contact Us</a></li>
+          <h2 class="ftco-heading-2" style="color:white">Information</h2>
+          <ul class="list-unstyled" style="color:white">
+            <li><a href="#" class="py-2 d-block" style="color:white">Online Enquiry</a></li>
+            <li><a href="#" class="py-2 d-block" style="color:white">General Enquiries</a></li>
+            <li><a href="#" class="py-2 d-block" style="color:white">Booking Conditions</a></li>
+            <li><a href="/contact" class="py-2 d-block" style="color:white">Contact Us</a></li>
           </ul>
         </div>
       </div>
       <div class="col-md pt-5 border-left">
        <div class="ftco-footer-widget pt-md-5 mb-4">
-        <h2 class="ftco-heading-2">Experiences</h2>
+        <h2 class="ftco-heading-2" style="color:white">Experiences</h2>
         <ul class="list-unstyled">
-          <li><a href="#" class="py-2 d-block">Adventure Tours</a></li>
-          <li><a href="#" class="py-2 d-block">Luxury Resorts</a></li>
-          <li><a href="#" class="py-2 d-block">Beach Escapes</a></li>
-          <li><a href="#" class="py-2 d-block">Nature Trails</a></li>
-          <li><a href="#" class="py-2 d-block">Camping Trips</a></li>
-          <li><a href="#" class="py-2 d-block">Event Planning</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Adventure Tours</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Luxury Resorts</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Beach Escapes</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Nature Trails</a></li>
+          <li><a href="#" class="py-2 d-block"  style="color:white">Camping Trips</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Event Planning</a></li>
         </ul>
       </div>
     </div>
     <div class="col-md pt-5 border-left">
       <div class="ftco-footer-widget pt-md-5 mb-4">
-       <h2 class="ftco-heading-2">Have Questions?</h2>
+       <h2 class="ftco-heading-2" style="color:white">Have Questions?</h2>
        <div class="block-23 mb-3">
          <ul>
-           <li><span class=" fa fa-map-marker mr-4" style="color:orange;"></span><span style="color:black" class="mr-4">Peponi Plaza, Peponi Road - Westlands</span></li>
-           <li><span class=" fa fa-map-marker mr-4" style="color:orange"></span><span style="color:black"> P.O. Box 437, 00606 Nairobi - Kenya - East Africa</span></li>
+           <li><span class=" fa fa-map-marker mr-4" style="color:orange;"></span><span style="color:white" class="mr-4">Peponi Plaza, Mwanzi Road - Westlands</span></li>
+           <li><span class=" fa fa-map-marker mr-4" style="color:orange"></span><span style="color:white"> P.O. Box 437, 00606 Nairobi - Kenya - East Africa</span></li>
 
-           <li><a href="#" ><span class=" fa fa-phone mr-4" style="color:orange"></span><span  style="color:black">+254-20-3752472 /3 /4</span></a></li>
-           <li><a href="#"><span class=" fa fa-paper-plane mr-4" style="color:orange"></span><span style="color:black">info@archerstours.com</span></a></li>
+           <li><a href="#" ><span class=" fa fa-phone mr-4" style="color:orange"></span><span  style="color:white">+254-20-3752472 /0722394892</span></a></li>
+           <li><a href="#"><span class=" fa fa-paper-plane mr-4" style="color:orange"></span><span style="color:white">archers@archerstours.com</span></a></li>
          </ul>
        </div>
      </div>
@@ -715,13 +721,16 @@ to others.</p>
  <div class="row">
   <div class="col-md-12 text-center">
 
-    <p>
-      &copy; <script>document.write(new Date().getFullYear());</script> Archers Tours & Travel | All rights reserved | Designed  by <a href="https://colorlib.com" target="_blank" style="color:black"  >DONKRAFT IT SOLUTIONS LTD</a>
+    <p style="color:white">
+      &copy; <script>document.write(new Date().getFullYear());</script> Archers Tours & Travel | All rights reserved | Designed  by <a href="https://colorlib.com" target="_blank" style="color:white"  >DONKRAFT IT SOLUTIONS LTD</a>
     </p>
   </div>
  </div>
 </div>
 </footer>
+
+
+
 
 
 
@@ -794,6 +803,7 @@ $('#quoteForm').on('submit', function(e) {
 
 
 <script>
+
     $(document).ready(function () {
         // Check if the modal has been seen
         if (!localStorage.getItem('welcomeModalSeen')) {
@@ -809,6 +819,8 @@ $('#quoteForm').on('submit', function(e) {
         }
     });
 </script>
+
+
 <script src="https://cdn.userway.org/widget.js" data-account="gER1tSTnfp"></script>
 
 

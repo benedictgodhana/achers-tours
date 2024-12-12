@@ -1,70 +1,60 @@
 <x-app-layout>
-    <div class="p-6" >
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Destinations</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+        </div>
+        <!-- /.box-header -->
+
+        <!-- Success Message -->
         @if (session('success'))
-            <div id="success-message" class="bg-green-500 text-white p-4 rounded mb-4">
+            <div id="success-message" class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 {{ session('success') }}
             </div>
         @endif
 
-        <div class="bg-white shadow-md rounded-lg p-6" style="width:100%">
-            <h2 class="text-2xl font-semibold mb-4">Destinations</h2>
+        <div class="box-body">
+            <div class="row">
+                <!-- Search Field -->
+                <div class="col-md-4">
+                    <input type="text" id="search" class="form-control" placeholder="Search by title or creator..." onkeyup="filterDestinations()">
+                </div>
 
-            <a href="{{ route('destinations.create') }}"
-               class="px-4 py-2 bg-blue-500 text-white rounded-md mb-4 inline-flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-                Create New Destination
-            </a>
+                <!-- Filter Field -->
 
-            <div class="overflow-x-auto mt-4 hidden md:block"> <!-- Table for larger screens -->
-                <table id="destinations-table" class="min-w-full bg-white border rounded-lg">
-                    <thead class="bg-gray-100">
+            </div>
+
+            <div class="table-responsive mt-3">
+                <table class="table no-margin">
+                    <thead>
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Author</th>
-                            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Created By</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-200">
+                    <tbody id="destination-table-body">
                         @foreach ($destinations as $destination)
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4">
-                                    @if ($destination->image)
-                                        <img src="{{ asset('storage/' . $destination->image) }}" alt="{{ $destination->name }}" class="w-16 h-16 object-cover rounded">
-                                    @else
-                                        <span>No Image</span>
-                                    @endif
+                            <tr data-creator="{{ $destination->user->name }}" data-title="{{ $destination->name }}">
+                                <td>
+                                    <img src="{{ asset('storage/' . $destination->image) }}" alt="{{ $destination->title }}" width="50" height="50">
                                 </td>
-                                <td class="px-6 py-4">{{ $destination->name }}</td>
-                                <td class="px-6 py-4">{{ \Illuminate\Support\Str::limit($destination->description, 50) }}</td>
-                                <td class="px-6 py-4">{{ $destination->user->name ?? 'Unknown' }}</td> <!-- Assuming the author is the user -->
-                                <td class="px-6 py-4">
-                                    <a href="{{ route('destinations.show', $destination->id) }}"
-                                       class="px-4 py-2 bg-green-500 text-white rounded-md inline-flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 12h4m-2-2v4m0 4a10 10 0 100-20 10 10 0 000 20z" />
-                                        </svg>
-                                        View
-                                    </a>
-                                    <a href="{{ route('destinations.edit', $destination->id) }}"
-                                       class="px-4 py-2 bg-yellow-500 text-white rounded-md inline-flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232a2.828 2.828 0 114 4L7.5 21H3v-4.5L15.232 5.232z" />
-                                        </svg>
-                                        Edit
-                                    </a>
-                                    <form action="{{ route('destinations.destroy', $destination->id) }}" method="POST" class="inline-block">
+                                <td>{{ $destination->name }}</td>
+                                <td>{!! \Illuminate\Support\Str::limit($destination->description, 100) !!}</td>
+                                <td>{{ $destination->user->name }}</td>
+                                <td>
+                                    <a href="{{ route('destinations.show', $destination->id) }}" class="btn btn-info btn-sm">View</a>
+                                    <a href="{{ route('destinations.edit', $destination->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <form action="{{ route('destinations.destroy', $destination->id) }}" method="POST" style="display:inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-md inline-flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                            Delete
-                                        </button>
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -73,98 +63,92 @@
                 </table>
             </div>
 
-            <!-- Cards for mobile screens -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:hidden gap-4 mt-4">
-                @foreach ($destinations as $destination)
-                    <div class="bg-white border rounded-lg shadow p-4">
-                        <div class="flex items-center">
-                            @if ($destination->image)
-                                <img src="{{ asset('storage/' . $destination->image) }}" alt="{{ $destination->name }}" class="w-16 h-16 object-cover rounded">
-                            @else
-                                <span>No Image</span>
-                            @endif
-                            <div class="ml-4">
-                                <h3 class="text-lg font-semibold">{{ $destination->name }}</h3>
-                                <p class="text-gray-500">{{ \Illuminate\Support\Str::limit($destination->description, 50) }}</p>
-                                <p class="text-gray-400">Author: {{ $destination->user->name ?? 'Unknown' }}</p>
-                                <div class="mt-2">
-                                    <a href="{{ route('destinations.show', $destination->id) }}"
-                                       class="px-2 py-1 bg-green-500 text-white rounded-md inline-flex items-center text-sm">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 12h4m-2-2v4m0 4a10 10 0 100-20 10 10 0 000 20z" />
-                                        </svg>
-                                        View
-                                    </a>
-                                    <a href="{{ route('destinations.edit', $destination->id) }}"
-                                       class="px-2 py-1 bg-yellow-500 text-white rounded-md inline-flex items-center text-sm">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232a2.828 2.828 0 114 4L7.5 21H3v-4.5L15.232 5.232z" />
-                                        </svg>
-                                        Edit
-                                    </a>
-                                    <form action="{{ route('destinations.destroy', $destination->id) }}" method="POST" class="inline-block">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="px-2 py-1 bg-red-500 text-white rounded-md inline-flex items-center text-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                            Delete
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
+            <div class="pagination-wrapper">
+                    <ul class="pagination">
+                        @if ($destinations->onFirstPage())
+                            <li class="disabled"><span>«</span></li>
+                        @else
+                            <li><a href="{{ $destinations->previousPageUrl() }}">«</a></li>
+                        @endif
+
+                        @foreach ($destinations->getUrlRange(1, $destinations->lastPage()) as $page => $url)
+                            <li class="{{ ($destinations->currentPage() == $page) ? 'active' : '' }}">
+                                <a href="{{ $url }}">{{ $page }}</a>
+                            </li>
+                        @endforeach
+
+                        @if ($destinations->hasMorePages())
+                            <li><a href="{{ $destinations->nextPageUrl() }}">»</a></li>
+                        @else
+                            <li class="disabled"><span>»</span></li>
+                        @endif
+                    </ul>
+                </div>        </div>
+        <!-- /.box-body -->
+
+        <!-- Box Footer with print and export buttons -->
+        <div class="box-footer clearfix">
+            <a href="{{ route('destinations.create') }}" class="btn btn-sm btn-info btn-flat pull-left">Add New Destination</a>
+            <a href="{{ route('destinations.index') }}" class="btn btn-sm btn-default btn-flat pull-right">View All Destinations</a>
+            <button onclick="printTable()" class="btn btn-sm btn-primary btn-flat pull-right">Print</button>
+            <button onclick="exportTable()" class="btn btn-sm btn-success btn-flat pull-right" style="margin-right: 10px;">Export</button>
         </div>
+        <!-- /.box-footer -->
     </div>
+    <!-- /.box -->
 
-    <!-- Include jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Include DataTables -->
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-
+    <!-- Success message auto-hide script -->
     <script>
-        // Initialize DataTables
-        $(document).ready(function() {
-            $('#destinations-table').DataTable();
-        });
-
-        // Hide the success message after 4 seconds
         setTimeout(() => {
             const message = document.getElementById('success-message');
             if (message) {
                 message.style.transition = 'opacity 0.5s';
                 message.style.opacity = '0';
-
-                setTimeout(() => message.remove(), 500); // Remove after fade-out
+                setTimeout(() => message.remove(), 500);
             }
         }, 4000);
+
+        function filterDestinations() {
+            const searchInput = document.getElementById('search').value.toLowerCase();
+            const filterSelect = document.getElementById('filter').value;
+            const tableRows = document.querySelectorAll('#destination-table-body tr');
+
+            tableRows.forEach(row => {
+                const title = row.getAttribute('data-title').toLowerCase();
+                const creator = row.getAttribute('data-creator').toLowerCase();
+                const showRow = (title.includes(searchInput) || creator.includes(searchInput)) &&
+                                (filterSelect === '' || filterSelect === creator);
+
+                row.style.display = showRow ? '' : 'none';
+            });
+        }
+
+        function printTable() {
+            const printWindow = window.open('', '', 'height=600,width=800');
+            printWindow.document.write('<html><head><title>Print</title>');
+            printWindow.document.write('</head><body>');
+            printWindow.document.write(document.getElementById('destination-table-body').outerHTML);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        function exportTable() {
+            const table = document.getElementById('destination-table-body');
+            let rows = Array.from(table.rows);
+            let csv = 'Image,Title,Description,Created By,Actions\n';
+
+            rows.forEach(row => {
+                const rowData = Array.from(row.cells).map(cell => cell.textContent.trim());
+                csv += rowData.join(',') + '\n';
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'destinations.csv';
+            a.click();
+        }
     </script>
-
-    <style>
-        /* Add border to the table cells */
-        #destinations-table td {
-            border: 1px solid #e5e7eb; /* Light gray border */
-        }
-
-        /* Styling the search input */
-        .dataTables_filter {
-            margin-bottom: 20px; /* Spacing below the search input */
-        }
-
-        .dataTables_filter input {
-            height: 40px; /* Height of the search input */
-            padding: 10px; /* Padding inside the search input */
-            border-radius: 4px; /* Rounded corners */
-            border: 1px solid #ddd; /* Border color */
-        }
-
-        .dataTables_length {
-            margin-bottom: 20px; /* Space below the length select */
-        }
-    </style>
 </x-app-layout>

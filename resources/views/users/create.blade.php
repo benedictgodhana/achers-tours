@@ -1,56 +1,52 @@
 <x-app-layout>
-    <div class="p-6">
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Create User</h3>
+        </div>
+        <!-- /.box-header -->
+
+        <!-- Success Message -->
         @if (session('success'))
-            <div class="bg-green-500 text-white p-4 rounded mb-4">
+            <div id="success-message" class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 {{ session('success') }}
             </div>
         @endif
 
-        <div class="bg-white shadow-md rounded-lg p-6">
-            <h2 class="text-2xl font-semibold mb-4">Create New User</h2>
-
+        <div class="box-body">
             <form action="{{ route('users.store') }}" method="POST">
                 @csrf
-
-                <div class="mb-4">
-                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                    <input type="text" id="name" name="name" value="{{ old('name') }}" required
-                           class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-200" />
-                    @error('name')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" class="form-control" required>
                 </div>
 
-                <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" id="email" name="email" value="{{ old('email') }}" required
-                           class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-200" />
-                    @error('email')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
                 </div>
 
-                <div class="mb-4">
-                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                    <input type="password" id="password" name="password" required
-                           class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-200" />
-                    @error('password')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
                 </div>
 
-                <div class="mb-4">
-                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation" required
-                           class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-blue-200" />
-                </div>
-
-                <div>
-                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md">
-                        Create User
-                    </button>
-                </div>
+                <button type="submit" class="btn btn-info">Create User</button>
             </form>
         </div>
+        <!-- /.box-body -->
     </div>
+    <!-- /.box -->
+
+    <!-- Success message auto-hide script -->
+    <script>
+        setTimeout(() => {
+            const message = document.getElementById('success-message');
+            if (message) {
+                message.style.transition = 'opacity 0.5s';
+                message.style.opacity = '0';
+                setTimeout(() => message.remove(), 500);
+            }
+        }, 4000);
+    </script>
 </x-app-layout>

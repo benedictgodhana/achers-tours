@@ -5,12 +5,28 @@ namespace App\Http\Requests\Auth;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class LoginRequest extends FormRequest
 {
+
+
+    protected function logLogin()
+{
+    DB::table('logs')->insert([
+        'user_id' => Auth::id(), // Store the authenticated user's ID
+        'action' => 'login',      // Action type (e.g., 'login', 'logout')
+        'details' => json_encode([
+            'email' => $this->input('email'), // Store the email from the request
+            'ip' => $this->ip(),               // Store the IP address of the user
+            'timestamp' => now(),              // Store the current timestamp
+        ]),
+    ]);
+}
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -48,6 +64,9 @@ class LoginRequest extends FormRequest
                 'email' => trans('auth.failed'),
             ]);
         }
+
+        // Log the login
+        $this->logLogin();
 
         RateLimiter::clear($this->throttleKey());
     }

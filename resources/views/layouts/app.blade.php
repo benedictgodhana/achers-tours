@@ -1,228 +1,356 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 2 | Starter</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap -->
+<link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}">
+<!-- Ionicons -->
+<link rel="stylesheet" href="{{ asset('bower_components/Ionicons/css/ionicons.min.css') }}">
+<!-- AdminLTE -->
+<link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css') }}">
+<!-- AdminLTE Skins -->
+<link rel="stylesheet" href="{{ asset('dist/css/skins/skin-blue.min.css') }}">
 
-    <title>{{ config('app.name', 'IlabAfrica Item Requisition System') }}</title>
+<link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bower_components/Ionicons/css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/skins/_all-skins.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bower_components/morris.js/morris.css') }}">
+    <link rel="stylesheet" href="{{ asset('bower_components/jvectormap/jquery-jvectormap.css') }}">
+    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 
-    <style>
-        /* Apply Poppins font */
-        body,
-        a,
-        button {
-            font-family: 'Poppins', sans-serif;
-        }
+  <!-- Google Font -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-        /* Vuetify-inspired styling */
-        body {
-            background-color: #f5f5f5;
-            overflow: hidden;
-            /* Prevent scrolling on the body */
-        }
 
-        /* Sidebar with elevated look */
-        #sidebar {
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-            background-color:orange;
-            height: 100vh;
-            /* Full height for sidebar */
-            overflow-y: auto;
-            /* Allow scrolling in the sidebar */
-        }
+        <style>
+  body {
+    margin: 0;
+    overflow: hidden; /* Prevent body scroll when header and aside are fixed */
+  }
 
-        /* Elevated header */
-        header {
-            background: white;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
-        }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+  }
 
-        /* Modern button styling */
-        a,
-        button {
-            transition: background-color 0.2s, box-shadow 0.2s;
-        }
+  .main-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+  }
 
-        a:hover,
-        button:hover {
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
+  .main-sidebar {
+    position: fixed;
+    top: 50px; /* Adjust based on header height */
+    bottom: 0;
+    width: 230px; /* Sidebar width */
+    overflow-y: auto;
+  }
 
-        /* Sidebar Links */
-        .sidebar-link {
-            padding: 12px 16px;
-            border-radius: 8px;
-            transition: background-color 0.2s;
-            font-size: 12px;
-            font-weight: 900;
-            color:black;
-        }
+  .content-wrapper {
+    margin-top: 50px; /* Height of the header */
+    margin-left: 230px; /* Width of the sidebar */
+    height: calc(100vh - 50px); /* Full height minus header */
+    overflow-y: auto; /* Enable scrolling for the main section */
+    padding: 20px;
+    background: #f4f4f4; /* Background for the content */
+  }
+</style>
 
-        .sidebar-link:hover {
-            background-color: white;
-            color: #1e88e5;
-        }
-
-        .sidebar-active {
-            background-color: #2196f3;
-            color: white;
-        }
-
-        /* Logo Styling */
-        .sidebar-logo img {
-            max-width: 200px;
-            margin: 0 auto;
-            display: block;
-            height: 60px;
-        }
-
-        /* Footer text */
-        footer {
-            margin-top: auto;
-            text-align: center;
-            color: #9e9e9e;
-            font-size: 12px;
-        }
-    </style>
 </head>
 
-<body class="font-sans antialiased">
-    <div class="min-h-screen flex">
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
 
-        <!-- Sidebar -->
-        <aside class="flex min-w-[240px] flex-col gap-1 p-2 font-sans text-base font-normal text-blue-gray-700" id="sidebar">
-            <!-- Logo -->
-            <div class="p-6 sidebar-logo mt-16">
-                <img src="/images/logo_medium_3-removebg-preview.png" alt="IlabAfrica Logo" style="height:90px">
-            </div>
+  <!-- Main Header -->
+  <header class="main-header">
 
-            <div class="p-4 flex flex-col">
-                <ul class="space-y-4">
-                    <li>
-                        <a href="/dashboard" class="sidebar-link flex items-center {{ request()->is('dashboard') ? 'sidebar-active' : '' }}">
-                            <div class="grid mr-4 place-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-                                    class="w-5 h-5">
-                                    <path fill-rule="evenodd"
-                                        d="M2.25 2.25a.75.75 0 000 1.5H3v10.5a3 3 0 003 3h1.21l-1.172 3.513a.75.75 0 001.424.474l.329-.987h8.418l.33.987a.75.75 0 001.422-.474l-1.17-3.513H18a3 3 0 003-3V3.75h.75a.75.75 0 000-1.5H2.25zm6.04 16.5l.5-1.5h6.42l.5 1.5H8.29zm7.46-12a.75.75 0 00-1.5 0v6a.75.75 0 001.5 0v-6zm-3 2.25a.75.75 0 00-1.5 0v3.75a.75.75 0 001.5 0V9zm-3 2.25a.75.75 0 00-1.5 0v1.5a.75.75 0 001.5 0v-1.5z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </div> Dashboard
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/destinations" class="sidebar-link flex items-center {{ request()->is('destinations') ? 'sidebar-active' : '' }}">
-                        <svg class="w-5 h-5 mr-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 6.25 7 13 7 13s7-6.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5 14.5 7.62 14.5 9 13.38 11.5 12 11.5z"/>
-            </svg>
-            Manage Destinations                       </a>
-                    </li>
-                    <li>
-                        <a href="/tours" class="sidebar-link flex items-center {{ request()->is('tours') ? 'sidebar-active' : '' }} flex">
-                        <svg class="w-5 h-5 mr-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M21 2H3v2h18V2zm-6 10H3v2h12v-2zm-7 4H3v2h5v-2zm3-8H3v2h8V8zm12 6h-7v8h-2v-8h-2v10h-2v-8h-2v8H3v2h18v-2h-2v-8z"/>
-            </svg>
-            Manage Tours
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/packages" class="sidebar-link flex items-center {{ request()->is('packages') ? 'sidebar-active' : '' }}">
-                        <svg class="w-5 h-5 mr-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M10 1l-6 6h12l-6-6zm7 5H3l-1 5h18L17 6zm-3.08 9l-1.41-1.41L10 15.34l-2.51-2.75-1.41 1.41L10 18.41l3.92-3.41z"/>
-            </svg>
-            Packages
-                        </a>
-                    </li>
+    <!-- Logo -->
+    <a href="index2.html" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>A</b>LT</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Archers</b>Tours</span>
+    </a>
 
-                    <li>
-                        <a href="/blogs" class="sidebar-link flex items-center {{ request()->is('blogs') ? 'sidebar-active' : '' }}">
-                        <svg class="w-5 h-5 mr-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm2 13H6v-2h8v2zm4-4H6v-2h12v2zm0-4H6V6h12v2z"/>
-            </svg>
-            Manage Blogs                      </a>
-                    </li>
-
-
-                    <li>
-                        <a href="/users" class="sidebar-link flex items-center {{ request()->is('users') ? 'sidebar-active' : '' }}">
-                            <div class="grid mr-4 place-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-5 h-5">
-                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-3.31 0-10 1.67-10 5v2h20v-2c0-3.33-6.69-5-10-5z" />
-                                </svg>
-                            </div>
-                            User Management
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/profile" class="sidebar-link flex items-center {{ request()->is('profile') ? 'sidebar-active' : '' }}">
-                            <div class="grid mr-4 place-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-                                    class="w-5 h-5">
-                                    <path fill-rule="evenodd"
-                                        d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            Profile
-                        </a>
-
-
-                    </li>
-
-                    <li>
-                        <a href="/settings" class="sidebar-link flex items-center {{ request()->is('settings') ? 'sidebar-active' : '' }}">
-                            <div class="grid mr-4 place-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-                                    class="w-5 h-5">
-                                    <path fill-rule="evenodd"
-                                        d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 00-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 00-2.282.819l-.922 1.597a1.875 1.875 0 00.432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 000 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 00-.432 2.385l.922 1.597a1.875 1.875 0 002.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 002.28-.819l.923-1.597a1.875 1.875 0 00-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 000-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 00-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 00-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 00-1.85-1.567h-1.843zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-
-                            Settings
-                        </a>
-                    </li>
-                    <li>
-                        <a href="route('logout')" class="sidebar-link flex items-center ">
-                            <div class="grid mr-4 place-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-                                    class="w-5 h-5">
-                                    <path fill-rule="evenodd"
-                                        d="M12 2.25a.75.75 0 01.75.75v9a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM6.166 5.106a.75.75 0 010 1.06 8.25 8.25 0 1011.668 0 .75.75 0 111.06-1.06c3.808 3.807 3.808 9.98 0 13.788-3.807 3.808-9.98 3.808-13.788 0-3.808-3.807-3.808-9.98 0-13.788a.75.75 0 011.06 0z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            Logout
-                        </a>
-                    </li>
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+          <li class="dropdown messages-menu">
+            <!-- Menu toggle button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-envelope-o"></i>
+              <span class="label label-success">4</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have 4 messages</li>
+              <li>
+                <!-- inner menu: contains the messages -->
+                <ul class="menu">
+                  <li><!-- start message -->
+                    <a href="#">
+                      <div class="pull-left">
+                        <!-- User Image -->
+                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                      </div>
+                      <!-- Message title and timestamp -->
+                      <h4>
+                        Support Team
+                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                      </h4>
+                      <!-- The message -->
+                      <p>Why not buy a new awesome theme?</p>
+                    </a>
+                  </li>
+                  <!-- end message -->
                 </ul>
+                <!-- /.menu -->
+              </li>
+              <li class="footer"><a href="#">See All Messages</a></li>
+            </ul>
+          </li>
+          <!-- /.messages-menu -->
 
-                <footer class="mt-8">
-                    Copyright &copy; <script>
-                        document.write(new Date().getFullYear());
-                    </script>
-                    Archers Tours and Travel.
-                </footer>
-            </div>
-        </aside>
+          <!-- Notifications Menu -->
+          <li class="dropdown notifications-menu">
+            <!-- Menu toggle button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell-o"></i>
+              <span class="label label-warning">10</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have 10 notifications</li>
+              <li>
+                <!-- Inner Menu: contains the notifications -->
+                <ul class="menu">
+                  <li><!-- start notification -->
+                    <a href="#">
+                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                    </a>
+                  </li>
+                  <!-- end notification -->
+                </ul>
+              </li>
+              <li class="footer"><a href="#">View all</a></li>
+            </ul>
+          </li>
+          <!-- Tasks Menu -->
+          <li class="dropdown tasks-menu">
+            <!-- Menu Toggle Button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-flag-o"></i>
+              <span class="label label-danger">9</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have 9 tasks</li>
+              <li>
+                <!-- Inner menu: contains the tasks -->
+                <ul class="menu">
+                  <li><!-- Task item -->
+                    <a href="#">
+                      <!-- Task title and progress text -->
+                      <h3>
+                        Design some buttons
+                        <small class="pull-right">20%</small>
+                      </h3>
+                      <!-- The progress bar -->
+                      <div class="progress xs">
+                        <!-- Change the css width attribute to simulate progress -->
+                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
+                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                          <span class="sr-only">20% Complete</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <!-- end task item -->
+                </ul>
+              </li>
+              <li class="footer">
+                <a href="#">View all tasks</a>
+              </li>
+            </ul>
+          </li>
+          <!-- User Account Menu -->
+          <li class="dropdown user user-menu">
+            <!-- Menu Toggle Button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <!-- The user image in the navbar-->
+              <img src="dist/img/avatar-15.png" class="user-image" alt="User Image">
+              <!-- hidden-xs hides the username on small devices so only the image appears. -->
+              <span class="hidden-xs">{{Auth::user()->name}}</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- The user image in the menu -->
+              <li class="user-header">
+                <img src="dist/img/avatar-15.png" class="img-circle" alt="User Image">
 
-        <!-- Main Content -->
-        <div class="flex-1 bg-gray-100">
+                <p>
+                {{Auth::user()->name}}
+                  <small>Member since Nov. 2012</small>
+                </p>
+              </li>
+              <!-- Menu Body -->
+
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="/profile" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+          <li>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel">
+        <div class="pull-left image">
+            <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+            <p>{{ Auth::user()->name }}</p>
+            <!-- Status -->
+            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+    </div>
+      <!-- search form (Optional) -->
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+        </div>
+      </form>
+      <!-- /.search form -->
+
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">MAIN NAVIGATION</li>
+
+        <li class="active">
+            <a href="/dashboard">
+                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="/destinations">
+                <i class="fa fa-map"></i> <span>Manage Destinations</span>
+            </a>
+        </li>
+        <li>
+            <a href="/tours">
+                <i class="fa fa-suitcase"></i> <span>Manage Tours</span>
+            </a>
+        </li>
+        <li>
+            <a href="/packages">
+                <i class="fa fa-gift"></i> <span>Packages</span>
+            </a>
+        </li>
+        <li>
+            <a href="/blogs">
+                <i class="fa fa-info-circle"></i> <span>Manage General Info</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('users.index') }}">
+                <i class="fa fa-users"></i> <span>User Management</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('testimonials.index') }}">
+                <i class="fa fa-comment"></i> <span>Testimonials</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('comments.index') }}">
+                <i class="fa fa-comments"></i> <span>Comments</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('information_categories.index') }}">
+                <i class="fa fa-folder"></i> <span>Information Categories</span>
+            </a>
+        </li>
+        <li>
+            <a href="/logs">
+                <i class="fa fa-file-text"></i> <span>Logs</span>
+            </a>
+        </li>
+        <li>
+            <a href="/settings">
+                <i class="fa fa-cogs"></i> <span>Settings</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('logout') }}"
+               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="fa fa-sign-out"></i> <span>Logout</span>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        </li>
+    </ul>
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="flex-1 bg-gray-100">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
@@ -238,18 +366,132 @@
             <main class="p-6 mt-16">
                 {{ $slot }}
             </main>
-        </div>
+    <!-- Main content -->
+    <section class="content container-fluid">
+
+      <!--------------------------
+        | Your Page Content Here |
+        -------------------------->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Main Footer -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Home tab content -->
+      <div class="tab-pane active" id="control-sidebar-home-tab">
+        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:;">
+              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+                <p>Will be 23 on April 24th</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+        <h3 class="control-sidebar-heading">Tasks Progress</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:;">
+              <h4 class="control-sidebar-subheading">
+                Custom Template Design
+                <span class="pull-right-container">
+                    <span class="label label-danger pull-right">70%</span>
+                  </span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+      </div>
+      <!-- /.tab-pane -->
+      <!-- Stats tab content -->
+      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+      <!-- /.tab-pane -->
+      <!-- Settings tab content -->
+      <div class="tab-pane" id="control-sidebar-settings-tab">
+        <form method="post">
+          <h3 class="control-sidebar-heading">General Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Report panel usage
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Some information about this general settings option
+            </p>
+          </div>
+          <!-- /.form-group -->
+        </form>
+      </div>
+      <!-- /.tab-pane -->
     </div>
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+  immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
 
-    <!-- Sidebar Toggle Script -->
-    <script>
-        const sidebar = document.getElementById('sidebar');
-        const toggleButton = document.getElementById('sidebarCollapse');
+<!-- REQUIRED JS SCRIPTS -->
+<!-- JavaScript Libraries -->
+<script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
 
-        toggleButton.addEventListener('click', () => {
-            sidebar.classList.toggle('-translate-x-64');
-        });
-    </script>
+<script>
+    // Resolve conflict in jQuery UI tooltip with Bootstrap tooltip
+    $.widget.bridge('uibutton', $.ui.button);
+</script>
+
+<script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('bower_components/raphael/raphael.min.js') }}"></script>
+<script src="{{ asset('bower_components/morris.js/morris.min.js') }}"></script>
+<script src="{{ asset('bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
+<script src="{{ asset('plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
+<script src="{{ asset('plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+<script src="{{ asset('bower_components/jquery-knob/dist/jquery.knob.min.js') }}"></script>
+<script src="{{ asset('bower_components/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+<script src="{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
+<script src="{{ asset('bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ asset('bower_components/fastclick/lib/fastclick.js') }}"></script>
+<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+
+<script src="bower_components/chart.js/Chart.js"></script>
+
+<!-- Optional Scripts -->
+<script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
+
+
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. -->
 </body>
-
 </html>

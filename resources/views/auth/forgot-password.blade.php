@@ -7,48 +7,48 @@
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body class="h-full bg-white">
+<body class="h-screen bg-gradient-to-r from-blue-50 to-indigo-100 flex items-center justify-center">
 
-<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img class="mx-auto h-12 w-auto" src="/images/logo_medium_3-removebg-preview.png" alt="Your Company">
-        <h2 class="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900">Reset your password</h2>
-        <p class="mt-2 text-center text-sm text-gray-600">
-            Enter your email address, and we’ll send you a link to reset your password.
-        </p>
+<div class="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
+    <!-- Logo -->
+    <div class="text-center">
+        <a href="/">
+            <img class="mx-auto h-14 w-auto" src="/images/logo_medium_3-removebg-preview.png" alt="iLabAfrica">
+        </a>
+        <h2 class="mt-6 text-3xl font-extrabold text-gray-800">Forgot Password?</h2>
+        <p class="mt-2 text-sm text-gray-600">Enter your email to reset your password.</p>
     </div>
 
-    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form class="space-y-6" method="POST" action="{{ route('password.email') }}">
-            @csrf
+    <!-- Forgot Password Form -->
+    <form class="mt-8 space-y-6" method="POST" action="{{ route('password.email') }}">
+        @csrf
 
-            <!-- Email Field -->
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-900">Email address</label>
-                <div class="mt-2">
-                    <input id="email" name="email" type="email" autocomplete="email" required
-                           class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
-                    @error('email')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
+        <!-- Email Field -->
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+            <div class="mt-2">
+                <input id="email" name="email" type="email" autocomplete="email" required
+                       class="block w-full rounded-lg border-gray-300 shadow-sm py-2 px-3 text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                @error('email')
+                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                @enderror
             </div>
+        </div>
 
-            <!-- Submit Button -->
-            <div>
-                <button type="submit"
-                        class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    Send Password Reset Link
-                </button>
-            </div>
-        </form>
+        <!-- Submit Button -->
+        <div>
+            <button type="submit"
+                    class="w-full flex justify-center rounded-lg bg-indigo-600 py-2 px-4 text-sm font-semibold text-white shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                Send Password Reset Link
+            </button>
+        </div>
+    </form>
 
-        <!-- Back to Login Link -->
-        <p class="mt-10 text-center text-sm text-gray-500">
-            <a href="{{ route('login') }}" class="font-semibold text-indigo-600 hover:text-indigo-500">
-                Back to Login
-            </a>
-        </p>
+    <!-- Additional Footer Info -->
+    <div class="mt-6 text-center text-sm text-gray-600">
+        <a href="{{ route('login') }}" class="font-medium text-indigo-600 hover:underline">
+            Back to Login
+        </a>
     </div>
 </div>
 

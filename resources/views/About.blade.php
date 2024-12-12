@@ -64,6 +64,67 @@ s0.parentNode.insertBefore(s1,s0);
         }
     }
 
+    .hero-wrap {
+    position: relative;
+    height: 40vh; /* Reduced height to 40% of the viewport height */
+    background-size: cover; /* Ensure the image covers the section */
+    background-position: center center; /* Center the background image */
+    background-repeat: no-repeat;
+}
+
+.hero-wrap .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay for better readability */
+}
+
+.hero-wrap .slider-text {
+    position: absolute;
+    bottom: 10%; /* Align text near the bottom */
+    left: 50%;
+    transform: translateX(-50%); /* Center text horizontally */
+    color: #fff;
+    z-index: 2;
+}
+
+.hero-wrap .breadcrumbs {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Ensure that the logos fit within the container */
+.carousel-logos {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+.item {
+    flex: 1 0 auto; /* Allow the logos to be flexible but prevent them from growing too large */
+    padding: 10px; /* Add some padding between logos */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-img {
+    max-width: 100%; /* Make sure logos scale responsively */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 60px; /* Limit maximum height to avoid logos becoming too large */
+}
+
+/* Optional: Add a responsive media query to make the logos adjust on smaller screens */
+@media (max-width: 768px) {
+    .logo-img {
+        max-height: 40px; /* Reduce logo size for smaller screens */
+    }
+}
+
 
 </style>
 
@@ -83,13 +144,29 @@ s0.parentNode.insertBefore(s1,s0);
 					<li class="nav-item"><a href="/" class="nav-link">Home</a></li>
 					<li  class="nav-item active"><a href="/about" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="/destination" class="nav-link">Destination</a></li>
-					<li class="nav-item"><a href="/tour" class="nav-link">Tours</a></li>
-					<li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
-                    <li class="nav-item"><a href="/login" class="nav-link">login</a></li>
-                    <li class="nav-item">
-               <div id="google_translate_element" class="nav-link"></div>
+                    <li class="nav-item "><a href="/faqs" class="nav-link">FAQs</a></li>
+
+
+  <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle mr-4" id="informationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Information
+    </a>
+    <ul class="dropdown-menu nav-item" aria-labelledby="informationDropdown">
+        @foreach ($categories as $category)
+            <li>
+                <a href="{{ route('category.show', $category->id) }}" class="dropdown-item">
+                    {{ $category->name }}
+                </a>
             </li>
+        @endforeach
+    </ul>
+</li>
+
+
+
+                    <li class="nav-item"><a href="/login" class="nav-link">Account</a></li>
+
 
 				</ul>
      </div>
@@ -97,7 +174,7 @@ s0.parentNode.insertBefore(s1,s0);
  </nav>
  <!-- END nav -->
 
- <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('pacific-main/images/bg_1.jpg');">
+ <section class="hero-wrap hero-wrap-2 " style="background-image: url('pacific-main/images/bg_1.jpg');">
   <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
@@ -115,7 +192,6 @@ s0.parentNode.insertBefore(s1,s0);
 			<div class="col-md-6 order-md-last heading-section pl-md-5 ftco-animate d-flex align-items-center">
 				<div class="w-100">
 					<span class="subheading" style="color:orange">About Us</span>
-					<h2 class="mb-4">Embark on Your Next Adventure with Us</h2>
                     <p>We are a Tours and Travel company based in Nairobi, Kenya, with over 70 years experience in
 organizing safaris, beach holidays and travel requirements for visitors from all over the world.
 Our talent is a result of an accumulation of past experience, our aim to tailor travels to individual
@@ -195,7 +271,7 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
    <div class="col-md-12 about-intro">
     <div class="row">
      <div class="col-md-6 d-flex align-items-stretch">
-      <div class="img d-flex w-100 align-items-center justify-content-center" style="background-image:url(/pacific-main/images/hotel-resto-7.jpg);">
+      <div class="img d-flex w-100 align-items-center justify-content-center" style="background-image:url(/pacific-main/images/hotel-resto-7.jpg);border-radius:30px">
       </div>
     </div>
     <div class="col-md-6 pl-md-5 py-5">
@@ -300,8 +376,7 @@ to others.</p>
 				</div>
 			</div>
 		</section>
-
-<section class="ftco-section logo-section bg-bottom" style="background-image: url(images/bg_1.jpg);">
+        <section class="ftco-section logo-section bg-bottom" style="background-image: url(images/bg_1.jpg);">
     <div class="overlay"></div>
     <div class="container">
         <div class="row justify-content-center pb-4">
@@ -309,7 +384,6 @@ to others.</p>
                 <span class="subheading" style="color:orange">In partnership with</span>
             </div>
         </div>
-
 
         <div class="row ftco-animate">
             <div class="col-md-12">
@@ -324,11 +398,10 @@ to others.</p>
                             <img src="/images/png-transparent-iata-hd-logo.png" alt="Company 2 Logo" class="logo-img">
                         </div>
                         <div class="item">
-    <a href="https://payments.pesapal.com/archersafrica" target="_blank" rel="noopener noreferrer">
-        <img src="/images/imag4.png" alt="Company 3 Logo" class="logo-img">
-    </a>
-</div>
-
+                            <a href="https://payments.pesapal.com/archersafrica" target="_blank" rel="noopener noreferrer">
+                                <img src="/images/imag4.png" alt="Company 3 Logo" class="logo-img">
+                            </a>
+                        </div>
                         <div class="item">
                             <img src="/images/Untitled.jpeg" alt="Company 5 Logo" class="logo-img">
                         </div>
@@ -340,13 +413,14 @@ to others.</p>
     </div>
 </section>
 
-<footer class="ftco-footer bg-bottom ftco-no-pt" style="background-image: url(/pacific-main/images/bg_3.jpg);">
+<footer class="ftco-footer bg-bottom ftco-no-pt" style="background:navy;color:white"
+>
   <div class="container">
     <div class="row mb-5">
       <div class="col-md pt-5">
         <div class="ftco-footer-widget pt-md-5 mb-4">
-          <h2 class="ftco-heading-2">About Archers Tours & Travel</h2>
-          <p>Discover unparalleled travel experiences with Archers Tours & Travel. From adventure-packed excursions to serene beach getaways, we bring you closer to your dream destinations.</p>
+          <h2 class="ftco-heading-2" style="color:white">About Archers Tours & Travel</h2>
+          <p style="color:white">Discover unparalleled travel experiences with Archers Tours & Travel. From adventure-packed excursions to serene beach getaways, we bring you closer to your dream destinations.</p>
           <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
             <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
             <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
@@ -356,40 +430,38 @@ to others.</p>
       </div>
       <div class="col-md pt-5 border-left">
         <div class="ftco-footer-widget pt-md-5 mb-4 ml-md-5">
-          <h2 class="ftco-heading-2">Information</h2>
-          <ul class="list-unstyled">
-            <li><a href="#" class="py-2 d-block">Online Enquiry</a></li>
-            <li><a href="#" class="py-2 d-block">General Enquiries</a></li>
-            <li><a href="#" class="py-2 d-block">Booking Conditions</a></li>
-            <li><a href="#" class="py-2 d-block">Privacy Policy</a></li>
-            <li><a href="#" class="py-2 d-block">Refund Policy</a></li>
-            <li><a href="/contact" class="py-2 d-block">Contact Us</a></li>
+          <h2 class="ftco-heading-2" style="color:white">Information</h2>
+          <ul class="list-unstyled" style="color:white">
+            <li><a href="#" class="py-2 d-block" style="color:white">Online Enquiry</a></li>
+            <li><a href="#" class="py-2 d-block" style="color:white">General Enquiries</a></li>
+            <li><a href="#" class="py-2 d-block" style="color:white">Booking Conditions</a></li>
+            <li><a href="/contact" class="py-2 d-block" style="color:white">Contact Us</a></li>
           </ul>
         </div>
       </div>
       <div class="col-md pt-5 border-left">
        <div class="ftco-footer-widget pt-md-5 mb-4">
-        <h2 class="ftco-heading-2">Experiences</h2>
+        <h2 class="ftco-heading-2" style="color:white">Experiences</h2>
         <ul class="list-unstyled">
-          <li><a href="#" class="py-2 d-block">Adventure Tours</a></li>
-          <li><a href="#" class="py-2 d-block">Luxury Resorts</a></li>
-          <li><a href="#" class="py-2 d-block">Beach Escapes</a></li>
-          <li><a href="#" class="py-2 d-block">Nature Trails</a></li>
-          <li><a href="#" class="py-2 d-block">Camping Trips</a></li>
-          <li><a href="#" class="py-2 d-block">Event Planning</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Adventure Tours</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Luxury Resorts</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Beach Escapes</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Nature Trails</a></li>
+          <li><a href="#" class="py-2 d-block"  style="color:white">Camping Trips</a></li>
+          <li><a href="#" class="py-2 d-block" style="color:white">Event Planning</a></li>
         </ul>
       </div>
     </div>
     <div class="col-md pt-5 border-left">
       <div class="ftco-footer-widget pt-md-5 mb-4">
-       <h2 class="ftco-heading-2">Have Questions?</h2>
+       <h2 class="ftco-heading-2" style="color:white">Have Questions?</h2>
        <div class="block-23 mb-3">
          <ul>
-           <li><span class=" fa fa-map-marker mr-4" style="color:orange;"></span><span style="color:black" class="mr-4">Peponi Plaza, Peponi Road - Westlands</span></li>
-           <li><span class=" fa fa-map-marker mr-4" style="color:orange"></span><span style="color:black"> P.O. Box 437, 00606 Nairobi - Kenya - East Africa</span></li>
+           <li><span class=" fa fa-map-marker mr-4" style="color:orange;"></span><span style="color:white" class="mr-4">Peponi Plaza, Mwanzi Road - Westlands</span></li>
+           <li><span class=" fa fa-map-marker mr-4" style="color:orange"></span><span style="color:white"> P.O. Box 437, 00606 Nairobi - Kenya - East Africa</span></li>
 
-           <li><a href="#" ><span class=" fa fa-phone mr-4" style="color:orange"></span><span  style="color:black">+254-20-3752472 /3 /4</span></a></li>
-           <li><a href="#"><span class=" fa fa-paper-plane mr-4" style="color:orange"></span><span style="color:black">info@archerstours.com</span></a></li>
+           <li><a href="#" ><span class=" fa fa-phone mr-4" style="color:orange"></span><span  style="color:white">+254-20-3752472 /0722394892</span></a></li>
+           <li><a href="#"><span class=" fa fa-paper-plane mr-4" style="color:orange"></span><span style="color:white">archers@archerstours.com</span></a></li>
          </ul>
        </div>
      </div>
@@ -398,14 +470,13 @@ to others.</p>
  <div class="row">
   <div class="col-md-12 text-center">
 
-    <p>
-      &copy; <script>document.write(new Date().getFullYear());</script> Archers Tours & Travel | All rights reserved | Designed  by <a href="https://colorlib.com" target="_blank" style="color:black"  >DONKRAFT IT SOLUTIONS LTD</a>
+    <p style="color:white">
+      &copy; <script>document.write(new Date().getFullYear());</script> Archers Tours & Travel | All rights reserved | Designed  by <a href="https://colorlib.com" target="_blank" style="color:white"  >DONKRAFT IT SOLUTIONS LTD</a>
     </p>
   </div>
  </div>
 </div>
 </footer>
-
 
 
 <script type="text/javascript">
