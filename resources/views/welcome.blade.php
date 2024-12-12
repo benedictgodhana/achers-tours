@@ -521,13 +521,14 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
                                         @foreach($testimonials as $testimonial)
                                             {!!$testimonial->message !!}
                                             <br>
-                                        @endforeach
                                     </p>
                                     <div class="d-flex align-items-center">
                                         <div class="pl-3">
                                             <p class="name">{{ $testimonial->name }}</p>
                                         </div>
                                     </div>
+                                    @endforeach
+
                                 </div>
                             </div>
                         </div>
