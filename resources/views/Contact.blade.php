@@ -17,7 +17,30 @@
 <link rel="stylesheet" href="{{ asset('pacific-main/css/jquery.timepicker.css') }}">
 <link rel="stylesheet" href="{{ asset('pacific-main/css/flaticon.css') }}">
 <link rel="stylesheet" href="{{ asset('pacific-main/css/style.css') }}">
-<script src="https://cdn.userway.org/widget.js" data-account="gER1tSTnfp"></script>
+
+<script>
+      (function(d){
+         var s = d.createElement("script");
+         /* uncomment the following line to override default position*/
+         /* s.setAttribute("data-position", 1);*/
+         /* uncomment the following line to override default size (values: small, large)*/
+         /* s.setAttribute("data-size", "large");*/
+         /* uncomment the following line to override default language (e.g., fr, de, es, he, nl, etc.)*/
+         /* s.setAttribute("data-language", "null");*/
+         /* uncomment the following line to override color set via widget (e.g., #053f67)*/
+         /* s.setAttribute("data-color", "#0048FF");*/
+         /* uncomment the following line to override type set via widget (1=person, 2=chair, 3=eye, 4=text)*/
+         /* s.setAttribute("data-type", "1");*/
+         /* s.setAttribute("data-statement_text:", "Our Accessibility Statement");*/
+         /* s.setAttribute("data-statement_url", "http://www.example.com/accessibility";*/
+         /* uncomment the following line to override support on mobile devices*/
+         /* s.setAttribute("data-mobile", true);*/
+         /* uncomment the following line to set custom trigger action for accessibility menu*/
+         /* s.setAttribute("data-trigger", "triggerId")*/
+         s.setAttribute("data-account", "gER1tSTnfp");
+         s.setAttribute("src", "https://cdn.userway.org/widget.js");
+         (d.body || d.head).appendChild(s);})(document)
+ </script>
 
 <style>
     .hero-wrap {
@@ -60,6 +83,13 @@
 .hero-wrap p {
     font-size: 1rem;
 }
+#userway-widget {
+    position: fixed;
+    bottom: 1rem; /* Move to the bottom */
+    right: 1rem; /* Keep the distance from the right */
+    z-index: 9999; /* Ensure it stays on top of everything */
+}
+
 
 </style>
 
@@ -67,12 +97,13 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> Menu
+			</button>
         <a class="navbar-brand" href="{{ url('/') }}">
     <img src="{{ asset('/images/logo_medium_3-removebg-preview.png') }}" alt="Pacific Travel Agency" style="height: 40px;">
 </a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="oi oi-menu"></span> Menu
-			</button>
+
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
