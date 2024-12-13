@@ -74,7 +74,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   }
 
   .content-wrapper {
-    margin-top: 50px; /* Height of the header */
+    margin-top: 120px; /* Height of the header */
     height: calc(100vh - 50px); /* Full height minus header */
     padding: 20px;
   }
@@ -379,7 +379,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Main Footer -->
 
   <!-- Control Sidebar -->
- 
+
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
   immediately after the control sidebar -->

@@ -29,7 +29,8 @@
             </div>
 
             <div class="table-responsive mt-3">
-                <table class="table no-margin">
+                <!-- Table for large screens -->
+                <table class="table no-margin" id="blog-table-body">
                     <thead>
                         <tr>
                             <th>Image</th>
@@ -41,63 +42,87 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody id="blog-table-body">
-                    @foreach ($blogs as $blog)
-    <tr data-author="{{ $blog->author }}" data-title="{{ $blog->title }}">
-        <td>
-            <img src="{{ Storage::url($blog->image) }}" class="img-thumbnail" style="max-width: 200px;width:100%">
-        </td>
-        <td>{{ $blog->title }}</td>
-        <td>
-            @if($blog->category)
-                {{ $blog->category->name }}
-            @else
-                N/A
-            @endif
-        </td>
-        <td>{{ $blog->author }}</td>
-        <td>{!! \Illuminate\Support\Str::limit($blog->content, 50) !!}</td>
-        <td>{{ $blog->created_at->format('d M Y') }}</td>
-        <td>
-            <a href="{{ route('blogs.edit', $blog->id) }}" class="btn btn-warning btn-sm">Edit</a>
-            <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST" style="display:inline-block;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-            </form>
-        </td>
-    </tr>
-@endforeach
-
+                    <tbody>
+                        @foreach ($blogs as $blog)
+                            <tr data-author="{{ $blog->author }}" data-title="{{ $blog->title }}">
+                                <td>
+                                    <img src="{{ Storage::url($blog->image) }}" class="img-thumbnail" style="max-width: 200px;width:100%">
+                                </td>
+                                <td>{{ $blog->title }}</td>
+                                <td>
+                                    @if($blog->category)
+                                        {{ $blog->category->name }}
+                                    @else
+                                        N/A
+                                    @endif
+                                </td>
+                                <td>{{ $blog->author }}</td>
+                                <td>{!! \Illuminate\Support\Str::limit($blog->content, 50) !!}</td>
+                                <td>{{ $blog->created_at->format('d M Y') }}</td>
+                                <td>
+                                    <a href="{{ route('blogs.edit', $blog->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST" style="display:inline-block;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
+
+            <div class="cards-container">
+                <!-- Cards for small screens -->
+                @foreach ($blogs as $blog)
+                    <div class="blog-card" data-author="{{ $blog->author }}" data-title="{{ $blog->title }}">
+                        <img src="{{ Storage::url($blog->image) }}" class="img-thumbnail" style="max-width: 200px;width:100%">
+                        <h4>{{ $blog->title }}</h4>
+                        <p>{!! \Illuminate\Support\Str::limit($blog->content, 50) !!}</p>
+                        <p>Author: {{ $blog->author }}</p>
+                        <p>Category: {{ $blog->category ? $blog->category->name : 'N/A' }}</p>
+                        <p>Created At: {{ $blog->created_at->format('d M Y') }}</p>
+                        <br>
+                        <a href="{{ route('blogs.edit', $blog->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
+                    
+
+                @endforeach
+            </div>
+
+            <!-- Pagination -->
             <div class="pagination-wrapper">
-    <ul class="pagination">
-        {{-- Display Previous Button --}}
-        @if ($blogs->currentPage() > 1)
-            <li><a href="{{ $blogs->previousPageUrl() }}">Previous</a></li>
-        @else
-            <li class="disabled"><span>Previous</span></li>
-        @endif
+                <ul class="pagination">
+                    {{-- Display Previous Button --}}
+                    @if ($blogs->currentPage() > 1)
+                        <li><a href="{{ $blogs->previousPageUrl() }}">Previous</a></li>
+                    @else
+                        <li class="disabled"><span>Previous</span></li>
+                    @endif
 
-        {{-- Display Page Numbers --}}
-        @foreach ($blogs->links()->elements[0] as $page => $url)
-            @if ($page == $blogs->currentPage())
-                <li class="active"><span>{{ $page }}</span></li>
-            @else
-                <li><a href="{{ $url }}">{{ $page }}</a></li>
-            @endif
-        @endforeach
+                    {{-- Display Page Numbers --}}
+                    @foreach ($blogs->links()->elements[0] as $page => $url)
+                        @if ($page == $blogs->currentPage())
+                            <li class="active"><span>{{ $page }}</span></li>
+                        @else
+                            <li><a href="{{ $url }}">{{ $page }}</a></li>
+                        @endif
+                    @endforeach
 
-        {{-- Display Next Button --}}
-        @if ($blogs->hasMorePages())
-            <li><a href="{{ $blogs->nextPageUrl() }}">Next</a></li>
-        @else
-            <li class="disabled"><span>Next</span></li>
-        @endif
-    </ul>
-</div>
+                    {{-- Display Next Button --}}
+                    @if ($blogs->hasMorePages())
+                        <li><a href="{{ $blogs->nextPageUrl() }}">Next</a></li>
+                    @else
+                        <li class="disabled"><span>Next</span></li>
+                    @endif
+                </ul>
+            </div>
 
         </div>
         <!-- /.box-body -->
@@ -137,6 +162,15 @@
 
                 row.style.display = showRow ? '' : 'none';
             });
+
+            const cards = document.querySelectorAll('.blog-card');
+            cards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                const author = card.getAttribute('data-author').toLowerCase();
+                const showCard = (title.includes(searchInput) || author.includes(searchInput)) &&
+                                 (filterSelect === '' || filterSelect === author);
+                card.style.display = showCard ? 'block' : 'none';
+            });
         }
 
         function printTable() {
@@ -167,4 +201,29 @@
             a.click();
         }
     </script>
+
+    <style>
+        /* Hide table and show cards on small screens */
+@media (max-width: 768px) {
+    #blog-table-body {
+        display: none;
+    }
+
+    .blog-card {
+        display: block;
+    }
+}
+
+/* Hide cards and show table on large screens */
+@media (min-width: 769px) {
+    #blog-table-body {
+        display: table;
+    }
+
+    .blog-card {
+        display: none;
+    }
+}
+
+    </style>
 </x-app-layout>
