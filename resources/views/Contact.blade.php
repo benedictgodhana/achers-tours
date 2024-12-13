@@ -153,50 +153,49 @@
    </div>
  </div>
 </section>
-
 <section class="ftco-section ftco-no-pb contact-section mb-4">
   <div class="container">
     <div class="row d-flex contact-info">
-      <div class="col-md-3 d-flex" >
-       <div class="align-self-stretch box p-4 text-center" style="border-radius:30px;background:navy">
-        <div class="icon d-flex align-items-center justify-content-center" style="background:orange">
-         <span class="fa fa-map-marker"></span>
-       </div>
-       <h3 class="mb-2" style="color:orange">Address</h3>
-       <p style="color:white">Peponi Plaza, Mwanzi Road - Westlands, P.O. Box 437, 00606 Nairobi - Kenya - East Africa</p>
-     </div>
-   </div>
-   <div class="col-md-3 d-flex">
-     <div class="align-self-stretch box p-4 text-center" style="border-radius:30px;background:navy">
-      <div class="icon d-flex align-items-center justify-content-center" style="background:orange">
-       <span class="fa fa-phone"></span>
-     </div>
-     <h3 class="mb-2" style="color:orange">Contact Number</h3>
-     <p><a href="tel://1234567920" style="color:white">Travel <br> 0720865455 <br> 0733964994 <br> TOURS <br> 0722394892</a></p>
-   </div>
- </div>
- <div class="col-md-3 d-flex">
-   <div class="align-self-stretch box p-4 text-center" style="border-radius:30px;background:navy">
-    <div class="icon d-flex align-items-center justify-content-center" style="background:orange">
-     <span class="fa fa-paper-plane"></span>
-   </div>
-   <h3 class="mb-2" style="color:orange">Email Address</h3>
-   <p><a href="mailto:archers@archersafrica.com" style="color:white">archers@archersafrica.com
-</a></p>
- </div>
-</div>
-<div class="col-md-3 d-flex">
- <div class="align-self-stretch box p-4 text-center" style="border-radius:30px;background:navy">
-  <div class="icon d-flex align-items-center justify-content-center" style="background:orange">
-   <span class="fa fa-globe"></span>
- </div>
- <h3 class="mb-2" style="color:orange">Website</h3>
- <p style="color:white"><a href="https://www.archersafrica.com/" style="color:white">www.archersafrica.com</a></p>
-</div>
-</div>
-</div>
-</div>
+      <div class="col-md-3 d-flex mb-4 mb-md-0">
+        <div class="align-self-stretch box p-4 text-center" style="border-radius:30px;background:navy">
+          <div class="icon d-flex align-items-center justify-content-center" style="background:orange">
+            <span class="fa fa-map-marker"></span>
+          </div>
+          <h3 class="mb-2" style="color:orange">Address</h3>
+          <p style="color:white">Peponi Plaza, Mwanzi Road - Westlands, P.O. Box 437, 00606 Nairobi - Kenya - East Africa</p>
+        </div>
+      </div>
+      <div class="col-md-3 d-flex mb-4 mb-md-0">
+        <div class="align-self-stretch box p-4 text-center" style="border-radius:30px;background:navy">
+          <div class="icon d-flex align-items-center justify-content-center" style="background:orange">
+            <span class="fa fa-phone"></span>
+          </div>
+          <h3 class="mb-2" style="color:orange">Contact Number</h3>
+          <p><a href="tel://1234567920" style="color:white">Travel <br> 0720865455 <br> 0733964994 <br> TOURS <br> 0722394892</a></p>
+        </div>
+      </div>
+      <div class="col-md-3 d-flex mb-4 mb-md-0">
+        <div class="align-self-stretch box p-4 text-center" style="border-radius:30px;background:navy">
+          <div class="icon d-flex align-items-center justify-content-center" style="background:orange">
+            <span class="fa fa-paper-plane"></span>
+          </div>
+          <h3 class="mb-2" style="color:orange">Email Address</h3>
+          <p><a href="mailto:archers@archersafrica.com" style="color:white">archers@archersafrica.com</a></p>
+        </div>
+      </div>
+      <div class="col-md-3 d-flex">
+        <div class="align-self-stretch box p-4 text-center" style="border-radius:30px;background:navy">
+          <div class="icon d-flex align-items-center justify-content-center" style="background:orange">
+            <span class="fa fa-globe"></span>
+          </div>
+          <h3 class="mb-2" style="color:orange">Website</h3>
+          <p style="color:white"><a href="https://www.archersafrica.com/" style="color:white">www.archersafrica.com</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
 <section class="ftco-section contact-section ftco-no-pt">
   <div class="container">
     <div class="row block-9">
