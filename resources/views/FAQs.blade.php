@@ -5,19 +5,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="{{ asset('pacific-main/css/animate.css') }}">
-  <link rel="stylesheet" href="{{ asset('pacific-main/css/owl.carousel.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('pacific-main/css/owl.theme.default.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('pacific-main/css/magnific-popup.css') }}">
-  <link rel="stylesheet" href="{{ asset('pacific-main/css/bootstrap-datepicker.css') }}">
-  <link rel="stylesheet" href="{{ asset('pacific-main/css/jquery.timepicker.css') }}">
-  <link rel="stylesheet" href="{{ asset('pacific-main/css/flaticon.css') }}">
-  <link rel="stylesheet" href="{{ asset('pacific-main/css/style.css') }}">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
 
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('pacific-main/css/animate.css') }}">
+<link rel="stylesheet" href="{{ asset('pacific-main/css/owl.carousel.min.css') }}">
+<link rel="stylesheet" href="{{ asset('pacific-main/css/owl.theme.default.min.css') }}">
+<link rel="stylesheet" href="{{ asset('pacific-main/css/magnific-popup.css') }}">
+<link rel="stylesheet" href="{{ asset('pacific-main/css/bootstrap-datepicker.css') }}">
+<link rel="stylesheet" href="{{ asset('pacific-main/css/jquery.timepicker.css') }}">
+<link rel="stylesheet" href="{{ asset('pacific-main/css/flaticon.css') }}">
+<link rel="stylesheet" href="{{ asset('pacific-main/css/style.css') }}">
   <style>
     .faq-section {
       padding: 50px 0;
@@ -290,8 +290,26 @@
 </div>
 </footer>
 
+
+
+<script src="{{ asset('pacific-main/js/jquery.min.js') }}"></script>
+<script src="{{ asset('pacific-main/js/jquery-migrate-3.0.1.min.js') }}"></script>
+<script src="{{ asset('pacific-main/js/popper.min.js') }}"></script>
+<script src="{{ asset('pacific-main/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('pacific-main/js/jquery.easing.1.3.js') }}"></script>
+<script src="{{ asset('pacific-main/js/jquery.waypoints.min.js') }}"></script>
+<script src="{{ asset('pacific-main/js/jquery.stellar.min.js') }}"></script>
+<script src="{{ asset('pacific-main/js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('pacific-main/js/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ asset('pacific-main/js/jquery.animateNumber.min.js') }}"></script>
+<script src="{{ asset('pacific-main/js/bootstrap-datepicker.js') }}"></script>
+<script src="{{ asset('pacific-main/js/scrollax.min.js') }}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<script src="{{ asset('pacific-main/js/google-map.js') }}"></script>
+<script src="{{ asset('pacific-main/js/main.js') }}"></script>
+
+
   <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
