@@ -231,7 +231,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <a href="/profile" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                <a href="{{ route('logout') }}"  class="btn btn-default btn-flat"
+               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="fa fa-sign-out"></i> <span>Logout</span>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
                 </div>
               </li>
             </ul>
@@ -327,11 +333,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <i class="fa fa-file-text"></i> <span>Logs</span>
             </a>
         </li>
-        <li>
+        <!-- <li>
             <a href="/settings">
                 <i class="fa fa-cogs"></i> <span>Settings</span>
             </a>
-        </li>
+        </li> -->
         <li>
             <a href="{{ route('logout') }}"
                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
