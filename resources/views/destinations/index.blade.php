@@ -43,7 +43,8 @@
                         @foreach ($destinations as $destination)
                             <tr data-creator="{{ $destination->user->name }}" data-title="{{ $destination->name }}">
                                 <td>
-                                    <img src="{{ asset('storage/' . $destination->image) }}" alt="{{ $destination->title }}" width="50" height="50">
+                                <img src="{{ Storage::url($destination->image) }}" class="img-thumbnail" style="max-width: 200px;">
+
                                 </td>
                                 <td>{{ $destination->name }}</td>
                                 <td>{!! \Illuminate\Support\Str::limit($destination->description, 100) !!}</td>

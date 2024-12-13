@@ -44,7 +44,8 @@
                         @foreach ($packages as $package)
                             <tr data-creator="{{ $package->user->name }}" data-title="{{ $package->name }}">
                                 <td>
-                                    <img src="{{ asset('storage/' . $package->image) }}" alt="{{ $package->title }}" width="50" height="50">
+                                <img src="{{ Storage::url($package->image) }}" class="img-thumbnail" style="max-width: 200px;">
+
                                 </td>
                                 <td>{{ $package->name }}</td>
                                 <td>{{ $package->tour->name}}</td>

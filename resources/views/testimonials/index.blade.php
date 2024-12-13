@@ -42,7 +42,8 @@
                         @foreach ($testimonials as $testimonial)
                             <tr data-author="{{ $testimonial->name }}" data-content="{{ $testimonial->content }}">
                                 <td>
-                                    <img src="{{ asset('storage/' . $testimonial->image) }}" alt="{{ $testimonial->name }}" width="50" height="50">
+                                <img src="{{ Storage::url($testimonial->image) }}" class="img-thumbnail" style="max-width: 200px;">
+
                                 </td>
                                 <td>{!! \Illuminate\Support\Str::limit($testimonial->message, 100) !!}</td>
                                 <td>{{ $testimonial->name }}</td>

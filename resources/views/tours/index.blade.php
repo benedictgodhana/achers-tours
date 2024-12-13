@@ -44,7 +44,8 @@
                         @foreach ($tours as $tour)
                             <tr data-creator="{{ $tour->user->name }}" data-title="{{ $tour->name }}">
                                 <td>
-                                    <img src="{{ asset('storage/' . $tour->image) }}" alt="{{ $tour->title }}" width="50" height="50">
+                                <img src="{{ Storage::url($tour->image) }}" class="img-thumbnail" style="max-width: 200px;">
+
                                 </td>
                                 <td>{{ $tour->name }}</td>
                                 <td>{{ $tour->destination->name }}</td>

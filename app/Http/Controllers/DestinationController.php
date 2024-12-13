@@ -20,7 +20,7 @@ class DestinationController extends Controller
         $destinations = Destination::when($search, function ($query) use ($search) {
             return $query->where('name', 'like', '%' . $search . '%')
                          ->orWhere('description', 'like', '%' . $search . '%');
-        })->paginate(5  ); // Adjust the number to 5 for pagination
+        })->paginate(4  ); // Adjust the number to 5 for pagination
 
         // Return the view with the paginated results and the search query
         return view('destinations.index', compact('destinations', 'search'));
@@ -39,27 +39,32 @@ class DestinationController extends Controller
      * Store a newly created destination in storage.
      */
     public function store(Request $request)
-{
-    $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'required',
-        'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-    ]);
+    {
+        // Validate the request
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // image file validation
+        ]);
 
-    $destination = new Destination($validated);
-    $destination->user_id = auth()->id();
+        // Handle file upload
+        if ($request->hasFile('image')) {
+            $originalFilename = $request->file('image')->getClientOriginalName(); // Get original file name
+            $filename = time() . '_' . $originalFilename; // Add timestamp to avoid overwriting
+            $imagePath = $request->file('image')->storeAs('destinations', $filename, 'public'); // Save to public/storage/destinations with custom name
 
-    // Handle image upload
-    if ($request->hasFile('image')) {
-        // Store the image and get the path
-        $path = $request->file('image')->store('destinations', 'public');
-        $destination->image = $path;
+            // Save to database
+            Destination::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'image' => $imagePath,  // Store the image path in the database
+                'user_id' => auth()->id(), // Store authenticated user ID
+            ]);
+        }
+
+        return redirect()->route('destinations.index')->with('success', 'Destination created successfully.');
     }
 
-    $destination->save();
-
-    return redirect()->route('destinations.index')->with('success', 'Destination created successfully.');
-}
 
     /**
      * Display the specified destination and its tours.
