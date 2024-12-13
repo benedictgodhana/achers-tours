@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">Blogs</h3>
+            <h3 class="box-title">General Information</h3>
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -45,14 +45,11 @@
                         @foreach ($blogs as $blog)
                             <tr data-author="{{ $blog->author }}" data-title="{{ $blog->title }}">
                                 <td>
-                                    @if($blog->image)
-                                        <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" width="50" height="50">
-                                    @else
-                                        <img src="{{ asset('images/no-image.jpg') }}" alt="No image" width="50" height="50">
-                                    @endif
+                                <img src="{{ Storage::url($blog->image) }}" class="img-thumbnail" style="max-width: 200px;width:100%">
+
                                 </td>
                                 <td>{{ $blog->title }}</td>
-                                <td>{{ $blog->category ? $blog->category->name : 'No Category' }}</td>
+                                <td>{{ $blog->category->name }}</td>
 
                                 <td>{{ $blog->author}}</td>
                                 <td>{!! \Illuminate\Support\Str::limit($blog->content, 50) !!}</td>
@@ -102,8 +99,8 @@
 
         <!-- Box Footer with print and export buttons -->
         <div class="box-footer clearfix">
-            <a href="{{ route('blogs.create') }}" class="btn btn-sm btn-info btn-flat pull-left">Add New Blog</a>
-            <a href="{{ route('blogs.index') }}" class="btn btn-sm btn-default btn-flat pull-right">View All Blogs</a>
+            <a href="{{ route('blogs.create') }}" class="btn btn-sm btn-info btn-flat pull-left">Add New Information</a>
+            <a href="{{ route('blogs.index') }}" class="btn btn-sm btn-default btn-flat pull-right">View All Information</a>
             <button onclick="printTable()" class="btn btn-sm btn-primary btn-flat pull-right">Print</button>
             <button onclick="exportTable()" class="btn btn-sm btn-success btn-flat pull-right" style="margin-right: 10px;">Export</button>
         </div>
