@@ -826,8 +826,8 @@ a {
           <p style="color:white">Discover unparalleled travel experiences with Archers Tours & Travel. From adventure-packed excursions to serene beach getaways, we bring you closer to your dream destinations.</p>
           <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
             <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
-            <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
-            <li class="ftco-animate"><a href="#"><span class="fa fa-instagram"></span></a></li>
+            <li class="ftco-animate"><a href="https://www.facebook.com/ArchersToursandTravel"><span class="fa fa-facebook"></span></a></li>
+            <li class="ftco-animate"><a href="https://www.instagram.com/archerstourstravel/"><span class="fa fa-instagram"></span></a></li>
           </ul>
         </div>
       </div>
