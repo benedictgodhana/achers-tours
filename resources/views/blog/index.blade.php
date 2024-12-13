@@ -42,28 +42,33 @@
                         </tr>
                     </thead>
                     <tbody id="blog-table-body">
-                        @foreach ($blogs as $blog)
-                            <tr data-author="{{ $blog->author }}" data-title="{{ $blog->title }}">
-                                <td>
-                                <img src="{{ Storage::url($blog->image) }}" class="img-thumbnail" style="max-width: 200px;width:100%">
+                    @foreach ($blogs as $blog)
+    <tr data-author="{{ $blog->author }}" data-title="{{ $blog->title }}">
+        <td>
+            <img src="{{ Storage::url($blog->image) }}" class="img-thumbnail" style="max-width: 200px;width:100%">
+        </td>
+        <td>{{ $blog->title }}</td>
+        <td>
+            @if($blog->category)
+                {{ $blog->category->name }}
+            @else
+                N/A
+            @endif
+        </td>
+        <td>{{ $blog->author }}</td>
+        <td>{!! \Illuminate\Support\Str::limit($blog->content, 50) !!}</td>
+        <td>{{ $blog->created_at->format('d M Y') }}</td>
+        <td>
+            <a href="{{ route('blogs.edit', $blog->id) }}" class="btn btn-warning btn-sm">Edit</a>
+            <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST" style="display:inline-block;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+        </td>
+    </tr>
+@endforeach
 
-                                </td>
-                                <td>{{ $blog->title }}</td>
-                                <td>{{ $blog->category->name }}</td>
-
-                                <td>{{ $blog->author}}</td>
-                                <td>{!! \Illuminate\Support\Str::limit($blog->content, 50) !!}</td>
-                                <td>{{ $blog->created_at->format('d M Y') }}</td>
-                                <td>
-                                    <a href="{{ route('blogs.edit', $blog->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                    <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST" style="display:inline-block;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
                     </tbody>
                 </table>
             </div>
