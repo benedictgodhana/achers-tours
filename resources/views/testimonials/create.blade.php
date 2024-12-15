@@ -46,13 +46,7 @@
                                           style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" required></textarea>
                             </div>
 
-                            <div class="form-group">
-                                <label for="image">Image</label>
-                                <input type="file" name="image" id="image" class="form-control" accept="image/*" required onchange="previewImage(event)">
-                                <div id="image-preview-container" style="display: none; margin-top: 10px;">
-                                    <img id="image-preview" class="img-thumbnail" style="max-width: 200px;" alt="Image Preview">
-                                </div>
-                            </div>
+                          
                         </div>
                         <!-- /.box-body -->
 

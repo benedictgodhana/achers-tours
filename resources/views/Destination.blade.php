@@ -501,7 +501,7 @@
               <p class="user-follow-info">Destination</p>
             </div>
             <!-- Truncate the description -->
-            <p class="description">{!! Str::limit($destination->description, 0) !!}</p>
+            <p class="description">{!! Str::limit($destination->description, 100) !!}</p>
 
           <a href="/destination/{{ $destination->id }}" class="text-orange-500 font-semibold text-sm hover:underline flex items-center">
                 Read More
@@ -581,8 +581,8 @@
  <div class="row">
   <div class="col-md-12 text-center">
 
-    <p style="color:white">
-      &copy; <script>document.write(new Date().getFullYear());</script> Archers Tours & Travel | All rights reserved | Designed  by <a href="https://colorlib.com" target="_blank" style="color:white"  >DONKRAFT IT SOLUTIONS LTD</a>
+  <p style="color:white">
+      &copy; <script>document.write(new Date().getFullYear());</script> Archers Tours & Travel | All rights reserved | Powered  by <a href="https://donkraft.co.ke/" target="_blank" style="color:white"  >DONKRAFT IT SOLUTIONS LTD</a>
     </p>
   </div>
  </div>

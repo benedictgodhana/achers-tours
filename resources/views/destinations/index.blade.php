@@ -27,23 +27,25 @@
                 <!-- Filter Field -->
 
             </div>
+            <br>
 
             <div class="table-responsive mt-3">
-                <table class="table no-margin">
+                <table class="table  table-bordered table-hover no-margin">
                     <thead>
-                        <tr>
+                        <tr class="bg-primary">
                             <th>Image</th>
                             <th>Title</th>
                             <th>Description</th>
                             <th>Created By</th>
                             <th>Actions</th>
                         </tr>
+                        <br>
                     </thead>
                     <tbody id="destination-table-body">
                         @foreach ($destinations as $destination)
                             <tr data-creator="{{ $destination->user->name }}" data-title="{{ $destination->name }}">
                                 <td>
-                                <img src="{{ Storage::url($destination->image) }}" class="img-thumbnail" style="max-width: 200px;">
+                                <img src="{{ Storage::url($destination->image) }}" class="img-thumbnail" style="max-width: 100px;">
 
                                 </td>
                                 <td>{{ $destination->name }}</td>

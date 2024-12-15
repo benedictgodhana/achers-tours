@@ -24,11 +24,12 @@
                     <input type="text" id="search" class="form-control" placeholder="Search by commenter or content..." onkeyup="filterComments()">
                 </div>
             </div>
+            <br>
 
             <div class="table-responsive mt-3">
-                <table class="table no-margin">
+                <table class="table  table-bordered table-hover no-margin">
                     <thead>
-                        <tr>
+                        <tr class="bg-primary">
                             <th>Author</th>
                             <th>Comment</th>
                             <th>For Blog</th>

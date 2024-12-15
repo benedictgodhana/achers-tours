@@ -69,42 +69,38 @@ public function store(Request $request)
 
     }
 
-   // Update a testimonial
-public function update(Request $request, $id)
-{
-    $testimonial = Testimonial::findOrFail($id);
+    public function update(Request $request, Testimonial $testimonial)
+    {
+        $request->validate([
+            'name' => 'sometimes|required|string|max:255',
+            'email' => 'sometimes|required|email',
+            'message' => 'sometimes|required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'is_approved' => 'sometimes|required|boolean',
+            'user_id' => 'sometimes|required|integer|exists:users,id',
+        ]);
 
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'nullable|email',
-        'message' => 'required|string',
-        'image' => 'nullable|image|max:2048',
-        'user_id' => 'required|exists:users,id',
-        'is_approved' => 'required|boolean',
-    ]);
+        // Update specific fields only if they exist in the request
+        $testimonial->name = $request->input('name', $testimonial->name);
+        $testimonial->email = $request->input('email', $testimonial->email);
+        $testimonial->message = $request->input('message', $testimonial->message);
 
-    // Handle image upload and update if a new image is uploaded
-    if ($request->hasFile('image')) {
-        // Delete the old image if exists
-        if ($testimonial->image) {
-            Storage::delete($testimonial->image); // Delete the old image from storage
+        // Update image if it exists
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('testimonials', 'public');
+            $testimonial->image = $path;  // Update image path
         }
 
-        // Store the new image and get the path
-        $path = $request->file('image')->store('testimonials');
-        $testimonial->image = $path; // Update the image path
+        // Update is_approved if it exists
+        $testimonial->is_approved = $request->input('is_approved', $testimonial->is_approved);
+
+        // Set user_id to the currently authenticated user
+        $testimonial->user_id = $request->user_id ?? auth()->id();
+
+        $testimonial->save();  // Save the testimonial
+
+        return redirect()->route('testimonials.index')->with('success', 'Testimonial updated successfully.');
     }
-
-    // Update other fields
-    $testimonial->update([
-        'name' => $request->name,
-        'email' => $request->email,
-        'message' => $request->message,
-        'is_approved' => $request->is_approved,
-    ]);
-
-    return redirect()->route('testimonials.index')->with('success', 'Testimonial updated successfully.');
-}
 
 
     // Delete a testimonial
@@ -112,7 +108,9 @@ public function update(Request $request, $id)
     {
         $testimonial = Testimonial::findOrFail($id);
         $testimonial->delete();
-        return response()->json(['message' => 'Testimonial deleted successfully']);
+
+        return redirect()->route('testimonials.index')->with('success', 'Testimonial Deleted successfully.');
+
     }
 }
 

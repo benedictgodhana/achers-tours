@@ -28,11 +28,13 @@
                 <!-- Add any additional filter options here -->
             </div>
 
+            <br>
+
             <div class="table-responsive mt-3">
-                <table class="table no-margin">
+                <table class="table  table-bordered table-hover no-margin">
                     <thead>
-                        <tr>
-=                            <th>Name</th>
+                        <tr class="bg-primary">
+                           <th>Name</th>
                             <th>Email</th>
                             <th>Registered At</th>
                             <th>Actions</th>

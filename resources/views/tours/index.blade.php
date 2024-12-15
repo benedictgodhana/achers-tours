@@ -28,10 +28,12 @@
 
             </div>
 
+            <br>
+
             <div class="table-responsive mt-3">
-                <table class="table no-margin">
+                <table class="table  table-bordered table-hover no-margin">
                     <thead>
-                        <tr>
+                        <tr class="bg-primary">
                             <th>Image</th>
                             <th>Title</th>
                             <th>Destination</th>
@@ -44,7 +46,7 @@
                         @foreach ($tours as $tour)
                             <tr data-creator="{{ $tour->user->name }}" data-title="{{ $tour->name }}">
                                 <td>
-                                <img src="{{ Storage::url($tour->image) }}" class="img-thumbnail" style="max-width: 200px;">
+                                <img src="{{ Storage::url($tour->image) }}" class="img-thumbnail" style="max-width: 100px;">
 
                                 </td>
                                 <td>{{ $tour->name }}</td>

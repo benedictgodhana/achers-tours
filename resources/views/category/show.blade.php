@@ -144,15 +144,14 @@ s0.parentNode.insertBefore(s1,s0);
      <div class="collapse navbar-collapse" id="ftco-nav">
      <ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a href="/" class="nav-link">Home</a></li>
-					<li  class="nav-item active"><a href="/about" class="nav-link">About</a></li>
+					<li  class="nav-item "><a href="/about" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="/destination" class="nav-link">Destination</a></li>
 					<li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
 
+
+
                     <li class="nav-item"><a href="/login" class="nav-link">Account</a></li>
 
-                    <li class="nav-item">
-               <div id="google_translate_element" class="nav-link"></div>
-            </li>
 
 				</ul>
      </div>

@@ -30,9 +30,9 @@
 
             <div class="table-responsive mt-3">
                 <!-- Table for large screens -->
-                <table class="table no-margin" id="blog-table-body">
+                <table class="table  table-bordered table-hover no-margin" id="blog-table-body">
                     <thead>
-                        <tr>
+                        <tr class="bg-primary">
                             <th>Image</th>
                             <th>Title</th>
                             <th>Information Category</th>
@@ -46,7 +46,7 @@
                         @foreach ($blogs as $blog)
                             <tr data-author="{{ $blog->author }}" data-title="{{ $blog->title }}">
                                 <td>
-                                    <img src="{{ Storage::url($blog->image) }}" class="img-thumbnail" style="max-width: 200px;width:100%">
+                                    <img src="{{ Storage::url($blog->image) }}" class="img-thumbnail" style="max-width: 100px;width:100%">
                                 </td>
                                 <td>{{ $blog->title }}</td>
                                 <td>
@@ -91,7 +91,7 @@
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </div>
-                    
+
 
                 @endforeach
             </div>

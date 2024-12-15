@@ -508,36 +508,37 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
             <div class="col-md-12">
                 <div class="carousel-testimony owl-carousel">
                     <!-- Loop through each destination and its testimonials -->
-                        <div class="item">
-                            <div class="testimony-wrap py-4" style="border-radius:30px">
-                                <div class="text">
-                                    <p class="star" style="color:orange">
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                    </p>
-                                    <p class="mb-4">
-                                        @foreach($testimonials as $testimonial)
-                                            {!!$testimonial->message !!}
-                                            <br>
-                                    </p>
-                                    <div class="d-flex align-items-center">
-                                        <div class="pl-3">
-                                            <p class="name">{{ $testimonial->name }}</p>
+                    @foreach($testimonials as $testimonial)
+                        @if($testimonial->is_approved == 1)
+                            <div class="item">
+                                <div class="testimony-wrap py-4" style="border-radius:30px">
+                                    <div class="text">
+                                        <p class="star" style="color:orange">
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        </p>
+                                        <p class="mb-4">
+                                            {!! $testimonial->message !!}
+                                        </p>
+                                        <div class="d-flex align-items-center">
+                                            <div class="pl-3">
+                                                <p class="name">{{ $testimonial->name }}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                    @endforeach
-
                                 </div>
                             </div>
-                        </div>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 
         <section class="ftco-section">
     <div class="container">
@@ -724,7 +725,7 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
   <div class="col-md-12 text-center">
 
     <p style="color:white">
-      &copy; <script>document.write(new Date().getFullYear());</script> Archers Tours & Travel | All rights reserved | Designed  by <a href="https://colorlib.com" target="_blank" style="color:white"  >DONKRAFT IT SOLUTIONS LTD</a>
+      &copy; <script>document.write(new Date().getFullYear());</script> Archers Tours & Travel | All rights reserved | Powered  by <a href="https://donkraft.co.ke/" target="_blank" style="color:white"  >DONKRAFT IT SOLUTIONS LTD</a>
     </p>
   </div>
  </div>

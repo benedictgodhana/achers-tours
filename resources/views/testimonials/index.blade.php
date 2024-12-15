@@ -25,11 +25,12 @@
                 </div>
             </div>
 
+            <br>
+
             <div class="table-responsive mt-3">
-                <table class="table no-margin">
+                <table class="table  table-bordered table-hover no-margin">
                     <thead>
-                        <tr>
-                            <th>Image</th>
+                        <tr class="bg-primary">
                             <th>Testimonial</th>
                             <th>Author</th>
                             <th>Author's Email</th>
@@ -41,10 +42,7 @@
                     <tbody id="testimonial-table-body">
                         @foreach ($testimonials as $testimonial)
                             <tr data-author="{{ $testimonial->name }}" data-content="{{ $testimonial->content }}">
-                                <td>
-                                <img src="{{ Storage::url($testimonial->image) }}" class="img-thumbnail" style="max-width: 200px;">
-
-                                </td>
+                              
                                 <td>{!! \Illuminate\Support\Str::limit($testimonial->message, 100) !!}</td>
                                 <td>{{ $testimonial->name }}</td>
                                 <td>{{ $testimonial->email }}</td>

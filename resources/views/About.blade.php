@@ -290,93 +290,50 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
 </div>
 </div>
 </section>
-
-
 <section class="ftco-section testimony-section bg-bottom" style="background-image: url(pacific-main/images/bg_1.jpg);">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row justify-content-center pb-4">
-					<div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-						<h2 class="mb-4">Testimonials</h2>
-					</div>
-				</div>
-				<div class="row ftco-animate">
-					<div class="col-md-12">
-						<div class="carousel-testimony owl-carousel">
-							<div class="item">
-								<div class="testimony-wrap py-4"  style="border-radius:30px">
-									<div class="text">
-										<p class="star"style="color:orange">
-											<span  class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-										</p>
-										<p class="mb-4">Soy Juan Luis Morales y en septiembre viajé con mis hijos a Nairobi para un safari, recomendado por un amigo a Archer's Tour & Travels. Stephen nos ayudó a planificar el viaje, y al llegar, un chófer nos recogió. El guía Charlie, con gran experiencia, nos acompañó en los parques de Samburu, Nakuru y Masai Mara. Todo fue excelente, incluyendo los alojamientos, la comida y la planificación, por lo que recomiendo 100% Archer's.</p>
-										<div class="d-flex align-items-center">
-											<div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
-											<div class="pl-3">
-												<p class="name">Acuna </p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testimony-wrap py-4"  style="border-radius:30px">
-									<div class="text">
-										<p class="star" style="color:orange">
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-										</p>
-										<p class="mb-4">We’ve just returned from a fantastic visit to Finch Hattons, and I want to thank you and the Archers team for everything. Special thanks to Stephen for his exceptional customer service, patience, and dedication, even working weekends and late nights. Finch Hattons exceeded all expectations—amazing environment, service, rooms, food, and even yoga and massage. It was the best safari experience we’ve had. We can’t wait to return!.</p>
-										<div class="d-flex align-items-center">
-											<div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
-											<div class="pl-3">
-												<p class="name">Vivien</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item" >
-								<div class="testimony-wrap py-4"  style="border-radius:30px">
-									<div class="text">
-										<p class="star" style="color:orange">
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-										</p>
-										<p class="mb-4">Hello
-I just wanted to thank you for the wonderful assistance you were to me and
-my friend. We had a wonderful time and really liked our tour guide
-Pollycarp. He was a safe driver. He was a great spotter of animals and my
-brother enjoyed talking to him. In fact they have a number of people go
-over there to go on safaris and he will probably always request Pollycarp as
-the guide.
-Thank you for your wonderful service and we will always recommend you
-to others.</p>
-										<div class="d-flex align-items-center">
-											<div class="user-img" style="background-image: url(images/person_3.jpg)"></div>
-											<div class="pl-3">
-												<p class="name">Jacque</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row justify-content-center pb-4">
+            <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
+                <h2 class="mb-4">Testimonials by Destination</h2>
+            </div>
+        </div>
+        <div class="row ftco-animate">
+            <div class="col-md-12">
+                <div class="carousel-testimony owl-carousel">
+                    <!-- Loop through each destination and its testimonials -->
+                    @foreach($testimonials as $testimonial)
+                        @if($testimonial->is_approved == 1)
+                            <div class="item">
+                                <div class="testimony-wrap py-4" style="border-radius:30px">
+                                    <div class="text">
+                                        <p class="star" style="color:orange">
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        </p>
+                                        <p class="mb-4">
+                                            {!! $testimonial->message !!}
+                                        </p>
+                                        <div class="d-flex align-items-center">
+                                            <div class="pl-3">
+                                                <p class="name">{{ $testimonial->name }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+
         <section class="ftco-section logo-section bg-bottom" style="background-image: url(images/bg_1.jpg);">
     <div class="overlay"></div>
     <div class="container">
@@ -471,8 +428,8 @@ to others.</p>
  <div class="row">
   <div class="col-md-12 text-center">
 
-    <p style="color:white">
-      &copy; <script>document.write(new Date().getFullYear());</script> Archers Tours & Travel | All rights reserved | Designed  by <a href="https://colorlib.com" target="_blank" style="color:white"  >DONKRAFT IT SOLUTIONS LTD</a>
+  <p style="color:white">
+      &copy; <script>document.write(new Date().getFullYear());</script> Archers Tours & Travel | All rights reserved | Powered  by <a href="https://donkraft.co.ke/" target="_blank" style="color:white"  >DONKRAFT IT SOLUTIONS LTD</a>
     </p>
   </div>
  </div>

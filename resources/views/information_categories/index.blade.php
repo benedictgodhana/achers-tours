@@ -24,11 +24,12 @@
                     <input type="text" id="search" class="form-control" placeholder="Search by name or description..." onkeyup="filterCategories()">
                 </div>
             </div>
+            <br>
 
             <div class="table-responsive mt-3">
                 <table class="table no-margin">
                     <thead>
-                        <tr>
+                        <tr class="bg-primary">
                             <th>Date</th>
                             <th>Name</th>
                             <th>Description</th>

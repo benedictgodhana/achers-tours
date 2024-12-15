@@ -25,10 +25,11 @@
                 </div>
             </div>
 
+            <br>
             <div class="table-responsive mt-3">
-                <table class="table no-margin">
+                <table class="table  table-bordered table-hover no-margin">
                     <thead>
-                        <tr>
+                        <tr class="bg-primary">
                             <th>Action</th>
                             <th>Details</th>
                             <th>User</th>

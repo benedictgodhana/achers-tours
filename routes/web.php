@@ -60,8 +60,9 @@ Route::get('/about', function () {
     $blogs = Blog::latest()->take(3)->get();
     $categories = InformationCategory::all(); // Fetch all categories from the categories table
 
+    $testimonials = Testimonial::where('is_approved', 1)->get(); // Filter approved testimonials
 
-    return view('About', compact('blogs','categories'));
+    return view('About', compact('blogs','categories','testimonials'));
 });
 
 

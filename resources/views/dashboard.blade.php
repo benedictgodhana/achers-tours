@@ -38,6 +38,8 @@
                     <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
+
+
             <div class="col-lg-3 col-xs-6">
                 <div class="small-box bg-red">
                     <div class="inner">
@@ -50,37 +52,64 @@
                     <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
+
+            <div class="col-lg-3 col-xs-6">
+                <div class="small-box bg-primary">
+                    <div class="inner">
+                        <h3>{{ $testimonialCount }}</h3>
+                        <p>Testimonials</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-xs-6">
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>{{ $commentCount }}</h3>
+                        <p>Comments</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                <div class="small-box bg-purple">
+                    <div class="inner">
+                        <h3>{{ $blogsCount }}</h3>
+                        <p> Total Information</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                <div class="small-box bg-maroon">
+                    <div class="inner">
+                        <h3>{{ $categoryCount }}</h3>
+                        <p>Information Categories</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
         </div>
+
+
         <!-- /.row -->
 
-        <!-- Main Row -->
-        <div class="row">
-            <!-- Calendar Section -->
-            <div class="col-lg-6">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Calendar</h3>
-                    </div>
-                    <div class="box-body">
-                        <div id="calendar"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Graph Section -->
-            <div class="col-lg-6">
-                <div class="box box-success">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Graph Overview</h3>
-                    </div>
-                    <div class="box-body">
-                        <canvas id="dashboardGraph" style="height: 300px;"></canvas>
-                    </div>
-                </div>
-            </div>
         </div>
 
-        
+
     </section>
 
     <!-- Include Scripts -->

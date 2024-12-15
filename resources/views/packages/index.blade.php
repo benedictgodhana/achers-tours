@@ -29,9 +29,9 @@
             </div>
 
             <div class="table-responsive mt-3">
-                <table class="table no-margin">
+                <table class="table  table-bordered table-hover no-margin">
                     <thead>
-                        <tr>
+                        <tr class="bg-primary">
                             <th>Image</th>
                             <th>Title</th>
                             <th>Tour</th>
@@ -44,7 +44,7 @@
                         @foreach ($packages as $package)
                             <tr data-creator="{{ $package->user->name }}" data-title="{{ $package->name }}">
                                 <td>
-                                <img src="{{ Storage::url($package->image) }}" class="img-thumbnail" style="max-width: 200px;">
+                                <img src="{{ Storage::url($package->image) }}" class="img-thumbnail" style="max-width: 100px;">
 
                                 </td>
                                 <td>{{ $package->name }}</td>
