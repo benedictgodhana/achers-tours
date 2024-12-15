@@ -164,6 +164,8 @@ Route::get('/package/{id}', function ($id) {
 
 // Authenticated Routes
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('logs/{log}', [LogController::class, 'show'])->name('logs.show');
+
 
     Route::get('/logs', [LogController::class, 'viewLogs'])->name('logs.index');
     Route::resource('users', UserController::class);

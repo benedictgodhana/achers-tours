@@ -9,37 +9,47 @@ use App\Exports\UsersExport; // Create this export class for Excel
 use Barryvdh\DomPDF\Facade as PDF; // Import the PDF facade
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    protected function logAction($action, $details = [])
+    {
+        DB::table('logs')->insert([
+            'user_id' => auth()->id(),
+            'action' => $action,
+            'details' => json_encode(array_merge([
+                'email' => auth()->user()->email,
+                'ip' => request()->ip(),
+                'timestamp' => now(),
+            ], $details)),
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        // Retrieve the search query from the request
         $search = $request->input('search');
-
-        // Fetch users based on the search query or fetch all users if no query is provided
-        if ($search) {
-            $users = User::where('name', 'LIKE', '%' . $search . '%')
+        $users = $search ? User::where('name', 'LIKE', '%' . $search . '%')
                          ->orWhere('email', 'LIKE', '%' . $search . '%')
+                         ->paginate(5)
+                         : User::paginate(5);
 
-                         ->paginate(5); // Paginate results with 5 users per page
-        } else {
-            $users = User::paginate(5); // Paginate all users with 5 users per page
-        }
+        $this->logAction('Viewed user list', ['search' => $search]);
 
         return view('users.index', compact('users', 'search'));
     }
-
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('users.create'); // Return a view for creating a new user
+        $this->logAction('Viewed create user form');
+
+        return view('users.create');
     }
 
     /**
@@ -47,7 +57,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate input data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -55,21 +64,18 @@ class UserController extends Controller
         ]);
 
         try {
-            // Create a new user with validated data
             User::create([
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
                 'password' => bcrypt($validatedData['password']),
-                'added_by' => auth()->user()->name, // Capture the authenticated user's name
+                'added_by' => auth()->user()->name,
             ]);
 
-            // Redirect to users index with success message
+            $this->logAction('Created user', ['email' => $validatedData['email']]);
+
             return redirect()->route('users.index')->with('success', 'User created successfully!');
         } catch (\Exception $e) {
-            // Log the error message for debugging
             \Log::error('User Creation Error: ' . $e->getMessage());
-
-            // Redirect back with error message
             return redirect()->back()->with('error', 'Failed to add user: ' . $e->getMessage());
         }
     }
@@ -79,7 +85,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', compact('user')); // Return a view for showing user details
+        $this->logAction('Viewed user details', ['user_id' => $user->id, 'email' => $user->email]);
+
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -87,6 +95,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $this->logAction('Viewed edit user form', ['user_id' => $user->id, 'email' => $user->email]);
+
         return view('users.edit', compact('user'));
     }
 
@@ -97,7 +107,6 @@ class UserController extends Controller
     {
         try {
             $user = User::findOrFail($id);
-
             $validatedData = $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users,email,' . $id,
@@ -115,6 +124,8 @@ class UserController extends Controller
 
             $user->update($updateData);
 
+            $this->logAction('Updated user', ['user_id' => $id, 'email' => $validatedData['email']]);
+
             return redirect()->route('users.index')->with('success', 'User Updated successfully!');
         } catch (\Exception $e) {
             \Log::error('User Update Error: ' . $e->getMessage());
@@ -128,6 +139,8 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+        $this->logAction('Deleted user', ['user_id' => $user->id, 'email' => $user->email]);
+
         return redirect()->route('users.index')->with('success', 'User deleted successfully!');
     }
 
@@ -136,6 +149,8 @@ class UserController extends Controller
      */
     public function exportExcel()
     {
+        $this->logAction('Exported users to Excel');
+
         return Excel::download(new UsersExport, 'users.xlsx');
     }
 
@@ -147,31 +162,33 @@ class UserController extends Controller
         $users = User::all();
 
         if ($users->isEmpty()) {
+            $this->logAction('Failed to generate PDF', ['error' => 'No users to export']);
             return redirect()->back()->with('error', 'No users to export.');
         }
 
         $pdf = PDF::loadView('users.pdf', compact('users'));
+        $this->logAction('Generated users PDF');
+
         return $pdf->download('users.pdf');
     }
 
-
     public function updatePassword(Request $request)
-{
-    $request->validate([
-        'current_password' => 'required',
-        'new_password' => 'required|min:8|confirmed',
-    ]);
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+        ]);
 
-    $user = Auth::user();
+        $user = Auth::user();
 
-    // Check if current password matches
-    if (!Hash::check($request->current_password, $user->password)) {
-        return back()->withErrors(['current_password' => 'Current password is incorrect.']);
+        if (!Hash::check($request->current_password, $user->password)) {
+            $this->logAction('Failed password update', ['error' => 'Incorrect current password']);
+            return back()->withErrors(['current_password' => 'Current password is incorrect.']);
+        }
+
+        $user->update(['password' => Hash::make($request->new_password)]);
+        $this->logAction('Updated password', ['email' => $user->email]);
+
+        return back()->with('status', 'Password updated successfully!');
     }
-
-    // Update password
-    $user->update(['password' => Hash::make($request->new_password)]);
-
-    return back()->with('status', 'Password updated successfully!');
-}
 }

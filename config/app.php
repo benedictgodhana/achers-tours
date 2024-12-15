@@ -70,7 +70,9 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    // config/app.php
+
+    'timezone' => 'Africa/Nairobi',  // Set timezone to Africa/Nairobi
 
     /*
     |--------------------------------------------------------------------------

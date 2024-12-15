@@ -6,30 +6,41 @@ use App\Models\Package;
 use App\Models\Tour;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class PackageController extends Controller
 {
+
+    protected function logAction($action, $details = [])
+    {
+        DB::table('logs')->insert([
+            'user_id' => auth()->id(),
+            'action' => $action,
+            'details' => json_encode(array_merge([
+                'email' => auth()->user()->email,
+                'ip' => request()->ip(),
+                'timestamp' => now(),
+            ], $details)),
+        ]);
+    }
+
     public function index(Request $request)
     {
-        // Get the search query from the request
         $search = $request->input('search');
-
-        // Fetch packages with related tours and users, applying search if provided
         $packages = Package::with(['tour', 'user'])
             ->when($search, function ($query) use ($search) {
                 return $query->where('name', 'like', '%' . $search . '%')
                              ->orWhere('description', 'like', '%' . $search . '%');
             })
-            ->paginate(10); // Adjust the number of items per page as needed
+            ->paginate(10);
 
         return view('packages.index', compact('packages'));
     }
 
-
     public function create()
     {
-        $tours = Tour::all(); // Fetch all tours for the dropdown
+        $tours = Tour::all();
         return view('packages.create', compact('tours'));
     }
 
@@ -43,21 +54,21 @@ class PackageController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Create a new package instance
         $package = new Package($request->all());
-        $package->user_id = Auth::id(); // Set the creator
+        $package->user_id = Auth::id();
 
-        // Handle the image upload
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('packages', 'public'); // Store in storage/app/public/packages
-            $package->image = $imagePath; // Save the path to the image
+            $imagePath = $request->file('image')->store('packages', 'public');
+            $package->image = $imagePath;
         }
 
-        $package->save(); // Save the package to the database
+        $package->save();
+
+        // Log the creation of the package
+        $this->logAction('created package', ['name' => $package->name]);
 
         return redirect()->route('packages.index')->with('success', 'Package created successfully!');
     }
-
 
     public function show(Package $package)
     {
@@ -66,42 +77,44 @@ class PackageController extends Controller
 
     public function edit(Package $package)
     {
-        $tours = Tour::all(); // Fetch all tours for the dropdown
+        $tours = Tour::all();
         return view('packages.edit', compact('package', 'tours'));
     }
 
     public function update(Request $request, Package $package)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'required|string',
-        'tour_id' => 'required|exists:tours,id',
-        'duration' => 'required|integer',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'tour_id' => 'required|exists:tours,id',
+            'duration' => 'required|integer',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-    // Store the new image if provided
-    if ($request->hasFile('image')) {
-        // Delete the old image if it exists
-        if ($package->image) {
-            Storage::delete($package->image);
+        if ($request->hasFile('image')) {
+            if ($package->image) {
+                Storage::delete($package->image);
+            }
+            $path = $request->file('image')->store('packages', 'public');
+            $package->image = $path;
         }
 
-        // Store the new image
-        $path = $request->file('image')->store('images/packages', 'public');
-        $package->image = $path;
+        $package->update($request->except('image'));
+
+        // Log the update of the package
+        $this->logAction('updated package', ['name' => $package->name]);
+
+        return redirect()->route('packages.index')->with('success', 'Package updated successfully!');
     }
-
-    // Update the package with the rest of the data
-    $package->update($request->except('image')); // Exclude image from mass assignment
-
-    return redirect()->route('packages.index')->with('success', 'Package updated successfully!');
-}
-
 
     public function destroy(Package $package)
     {
+        Storage::delete($package->image);
         $package->delete();
+
+        // Log the deletion of the package
+        $this->logAction('deleted package', ['name' => $package->name]);
+
         return redirect()->route('packages.index')->with('success', 'Package deleted successfully!');
     }
 }

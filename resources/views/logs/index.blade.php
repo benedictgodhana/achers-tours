@@ -21,32 +21,35 @@
             <div class="row">
                 <!-- Search Field -->
                 <div class="col-md-4">
-                    <input type="text" id="search" class="form-control" placeholder="Search by action or user..." onkeyup="filterLogs()">
+                    <input type="text" id="search" class="form-control" placeholder="Search by action, user, or details..." onkeyup="filterLogs()">
                 </div>
             </div>
 
             <br>
             <div class="table-responsive mt-3">
-                <table class="table  table-bordered table-hover no-margin">
+                <table class="table table-bordered table-hover no-margin">
                     <thead>
                         <tr class="bg-primary">
                             <th>Action</th>
-                            <th>Details</th>
                             <th>User</th>
-
+                            <th>Email</th>
+                            <th>IP</th>
+                            <th>Timestamp</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody id="log-table-body">
                         @foreach ($logs as $log)
                             <tr data-action="{{ $log->action }}" data-details="{{ $log->details }}">
                                 <td>{{ $log->action }}</td>
-                                <td>{{ $log->details ? \Illuminate\Support\Str::limit($log->details, 100) : 'No Details Available' }}</td>
                                 <td>{{ $log->user->name }}</td>
-
-
+                                <td>{{ $log->user->email }}</td>
+                                <td>{{ json_decode($log->details)->ip ?? 'N/A' }}</td>
+                                <td>{{ \Carbon\Carbon::parse(json_decode($log->details)->timestamp)->timezone('Africa/Nairobi')->format('d-m-Y H:i:s') }}</td>
                                 <td>
-                                    <!-- You can add more actions if necessary -->
-                                </td>
+    <a href="{{ route('logs.show', $log->id) }}" class="btn btn-sm btn-info">View</a>
+</td>
+
                             </tr>
                         @endforeach
                     </tbody>
@@ -124,7 +127,7 @@
         function exportTable() {
             const table = document.getElementById('log-table-body');
             let rows = Array.from(table.rows);
-            let csv = 'Action,Details,User,Created At\n';
+            let csv = 'Action,Details,User,Email,IP,Timestamp\n';
 
             rows.forEach(row => {
                 const rowData = Array.from(row.cells).map(cell => cell.textContent.trim());
@@ -138,5 +141,26 @@
             a.download = 'logs.csv';
             a.click();
         }
+
+        function viewLogDetails(logId) {
+            // Implement logic to view full details of the log
+            alert('View log details for ID: ' + logId);
+        }
+    </script>
+
+    <script>
+        function filterLogs() {
+    const searchInput = document.getElementById('search').value.toLowerCase();
+    const tableRows = document.querySelectorAll('#log-table-body tr');
+
+    tableRows.forEach(row => {
+        const actionDetails = JSON.parse(row.getAttribute('data-details')); // Parse the JSON
+        const action = actionDetails && actionDetails.action ? actionDetails.action.toLowerCase() : '';
+        const showRow = action.includes(searchInput); // Check if search input matches action
+
+        row.style.display = showRow ? '' : 'none';
+    });
+}
+
     </script>
 </x-app-layout>

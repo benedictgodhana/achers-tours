@@ -6,27 +6,71 @@ use App\Models\Blog;
 use App\Models\InformationCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
+    /**
+     * Log user actions.
+     *
+     * @param string $action
+     * @param array $details
+     */
+    protected function logAction($action, $details = [])
+    {
+        DB::table('logs')->insert([
+            'user_id' => auth()->id(),
+            'action' => $action,
+            'details' => json_encode(array_merge([
+                'email' => auth()->user()->email,
+                'ip' => request()->ip(),
+                'timestamp' => now(),
+            ], $details)),
+        ]);
+    }
+
+    /**
+     * Display a listing of blogs.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $blogs = Blog::paginate(4);
+
+        // Log action: View all blogs
+        $this->logAction('viewed all blogs');
+
         return view('blog.index', compact('blogs'));
     }
 
-
+    /**
+     * Show the form for creating a new blog.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         $categories = InformationCategory::all(); // Fetch all categories from the database
-        return view('blog.create', compact('categories')); // Pass categories to the view
+
+        // Log action: Open create blog form
+        $this->logAction('opened create blog form');
+
+        return view('blog.create', compact('categories'));
     }
+
+    /**
+     * Store a newly created blog in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required',
-            'category' => 'required|exists:information_categories,id', // Ensure the category exists
+            'category' => 'required|exists:information_categories,id',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -38,32 +82,52 @@ class BlogController extends Controller
         Blog::create([
             'title' => $request->title,
             'content' => $request->content,
-            'category_id' => $request->category, // use category_id
+            'category_id' => $request->category,
             'image' => $imagePath,
-            'author' => Auth::user()->name, // Use the name of the logged-in user
+            'author' => Auth::user()->name,
         ]);
+
+        // Log action: Create blog post
+        $this->logAction('created blog post', ['title' => $request->title, 'author' => Auth::user()->name]);
 
         return redirect()->route('blogs.index')->with('success', 'Blog created successfully.');
     }
 
-
+    /**
+     * Remove the specified blog from storage.
+     *
+     * @param  \App\Models\Blog  $blog
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy(Blog $blog)
     {
         $blog->delete();
+
+        // Log action: Delete blog post
+        $this->logAction('deleted blog post', ['blog_id' => $blog->id, 'title' => $blog->title]);
+
         return redirect()->route('blogs.index')->with('success', 'Blog deleted successfully.');
     }
 
-
+    /**
+     * Show the form for editing the specified blog.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
         $categories = InformationCategory::all(); // Fetch all categories from the database
+        $blog = Blog::findOrFail($id);
 
-        $blog = Blog::findOrFail($id); // Retrieve the blog or show a 404 error
-        return view('blog.edit', compact('blog','categories')); // Return the edit view with the blog data
+        // Log action: Edit blog post
+        $this->logAction('opened edit blog form', ['blog_id' => $blog->id, 'title' => $blog->title]);
+
+        return view('blog.edit', compact('blog','categories'));
     }
 
     /**
-     * Update the specified blog in the database.
+     * Update the specified blog in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -79,77 +143,107 @@ class BlogController extends Controller
         $blog = Blog::findOrFail($id);
         $blog->update($request->only(['title', 'content']));
 
+        // Log action: Update blog post
+        $this->logAction('updated blog post', ['blog_id' => $blog->id, 'title' => $request->title]);
+
         return redirect()->route('blogs.index')->with('success', 'Blog updated successfully!');
     }
 
-
+    /**
+     * Display the specified blog.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
         $categories = InformationCategory::all();
-        $blog = Blog::find($id); // Retrieve the blog post by ID, handle the case when not found
+        $blog = Blog::find($id);
 
         if (!$blog) {
             abort(404, 'Blog not found.');
         }
 
+        // Log action: View blog post
+        $this->logAction('viewed blog post', ['blog_id' => $blog->id, 'title' => $blog->title]);
+
         $relatedBlogs = Blog::where('category_id', $blog->category_id)
-                            ->where('id', '!=', $id) // Exclude the current blog from the related blogs
+                            ->where('id', '!=', $id)
                             ->latest()
                             ->take(3)
                             ->get();
 
-        // Get all blogs from the same category to display within the view
         $categoryBlogs = Blog::where('category_id', $blog->category_id)
-                             ->where('id', '!=', $id) // Exclude the current blog from the list
+                             ->where('id', '!=', $id)
                              ->latest()
                              ->get();
 
-        $noInformationMessage = 'No information found for this category'; // Default message
+        $noInformationMessage = 'No information found for this category';
 
-        return view('blog.show', compact('blog', 'relatedBlogs', 'categoryBlogs', 'categories', 'noInformationMessage')); // Pass the current blog, related blogs, and message to the view
+        return view('blog.show', compact('blog', 'relatedBlogs', 'categoryBlogs', 'categories', 'noInformationMessage'));
     }
 
-
+    /**
+     * Display blogs by category.
+     *
+     * @param  string  $category
+     * @return \Illuminate\Http\Response
+     */
     public function category($category)
     {
-        // Fetch blogs based on the selected category
         $blogs = Blog::where('category', $category)->get();
 
-        // Pass the filtered blogs to the view
+        // Log action: View blogs by category
+        $this->logAction('viewed blogs by category', ['category' => $category]);
+
         return view('blogs.index', compact('blogs'));
     }
 
-
+    /**
+     * Store a comment for a blog.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Blog  $blog
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function storeComment(Request $request, Blog $blog)
-{
-    $request->validate([
-        'author' => 'required|string',
-        'email' => 'required|email',
-        'content' => 'required|string',
-    ]);
+    {
+        $request->validate([
+            'author' => 'required|string',
+            'email' => 'required|email',
+            'content' => 'required|string',
+        ]);
 
-    // Create the comment associated with the blog post
-    $blog->comments()->create([
-        'author' => $request->author, // Name from the form
-        'email' => $request->email,   // Email from the form
-        'content' => $request->content, // Comment content
-    ]);
+        $blog->comments()->create([
+            'author' => $request->author,
+            'email' => $request->email,
+            'content' => $request->content,
+        ]);
 
-    return redirect()->back()->with('success', 'Your comment has been posted!');
-}
+        // Log action: Post comment on blog
+        $this->logAction('posted comment', ['blog_id' => $blog->id, 'title' => $blog->title]);
 
-
-public function categoryPage($id)
-{
-    $categories = InformationCategory::findOrFail($id);
-    $blogs = Blog::where('category_id', $id)->get(); // Fetch blogs for the category
-
-    if ($blogs->isEmpty()) {
-        abort(404, 'No blogs found for this category.');
+        return redirect()->back()->with('success', 'Your comment has been posted!');
     }
 
-    return view('category.show', compact('categories', 'blogs'));
-}
+    /**
+     * Display blogs by category page.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function categoryPage($id)
+    {
+        $categories = InformationCategory::findOrFail($id);
+        $blogs = Blog::where('category_id', $id)->get();
 
+        if ($blogs->isEmpty()) {
+            abort(404, 'No blogs found for this category.');
+        }
 
+        // Log action: View category page
+        $this->logAction('viewed category page', ['category' => $categories->name, 'category_id' => $id]);
+
+        return view('category.show', compact('categories', 'blogs'));
+    }
 }

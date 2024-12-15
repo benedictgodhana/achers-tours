@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Log; // Import the Log model
@@ -13,9 +12,23 @@ class LogController extends Controller
      */
     public function viewLogs()
     {
-        $logs = Log::latest()->paginate(10); // Fetch logs and paginate them, 10 logs per page
+        // Fetch logs ordered by the most recent first
+        $logs = Log::latest()->paginate(10); // 10 logs per page
 
-        return view('logs.index', compact('logs')); // Pass logs to the view
+        // Return the view with the paginated logs
+        return view('logs.index', compact('logs'));
     }
 
+
+    public function show(Log $log)
+    {
+        // Decode the details field as an array
+        $details = json_decode($log->details, true);
+        if (is_array($details)) {
+            return view('logs.show', compact('log', 'details'));
+        } else {
+            // Handle the case where details are not properly decoded
+            return redirect()->route('logs.index')->with('error', 'Log details could not be retrieved.');
+        }
+    }
 }
