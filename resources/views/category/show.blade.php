@@ -39,6 +39,13 @@ s0.parentNode.insertBefore(s1,s0);
 
 
 <style>
+
+
+.container{
+    max-width: 1500px   ;
+    width:100%;
+}
+
     .marquee-wrapper {
         overflow: hidden;
         position: relative;

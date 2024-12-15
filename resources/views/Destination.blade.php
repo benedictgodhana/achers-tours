@@ -425,6 +425,33 @@
 .hero-wrap p {
     font-size: 1rem;
 }
+.swiper-container {
+  position: relative; /* Ensure Swiper container has relative positioning */
+}
+.swiper-button-next, .swiper-button-prev {
+  position: absolute;
+  top: 50%; /* Center the buttons vertically */
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 90, 95, 0.8); /* Add some background color for better visibility */
+  border-radius: 50%; /* Rounded buttons */
+  width: 40px; /* Increase button size */
+  height: 40px; /* Increase button size */
+  z-index: 10; /* Ensure buttons are above content */
+  cursor: pointer; /* Add pointer cursor for hover */
+  transition: background-color 0.3s ease-in-out; /* Smooth background color change on hover */
+}
+.swiper-button-next {
+  right: 20px; /* Push button to the right */
+}
+.swiper-button-prev {
+  left: 20px; /* Push button to the left */
+}
+.swiper-button-next:hover, .swiper-button-prev:hover {
+  background-color: rgba(255, 90, 95, 1); /* Darker background on hover */
+}
 
 
 
@@ -486,34 +513,30 @@
  </div>
 </section>
 
-
 <section class="container mt-4">
   <div class="swiper mySwiper" style="background:white">
-  <h1 class="text-center">Explore our various Destinations</h1>
+    <h1 class="text-center">Explore our various Destinations</h1>
     <div class="swiper-wrapper">
       @foreach ($destinations as $destination)
-      <div class="swiper-slide">
-        <div class="box transition duration-500 ease-in-out hover:scale-105 hover:shadow-lg opacity-0 animate-fade-in">
-          <div class="box-top">
-            <img class="box-image" src="{{ asset('storage/' . $destination->image) }}" alt="{{ $destination->name }}" style="border-radius:30px">
-            <div class="title-flex">
-              <h3 class="box-title">{{ $destination->name }}</h3>
-              <p class="user-follow-info">Destination</p>
-            </div>
-            <!-- Truncate the description -->
-            <p class="description">{!! Str::limit($destination->description, 100) !!}</p>
+        <div class="swiper-slide">
+          <div class="box transition duration-500 ease-in-out hover:scale-105 hover:shadow-lg opacity-0 animate-fade-in">
+            <div class="box-top">
+              <img class="box-image" src="{{ asset('storage/' . $destination->image) }}" alt="{{ $destination->name }}" style="border-radius:30px">
+              <div class="title-flex">
+                <h3 class="box-title">{{ $destination->name }}</h3>
+                <p class="user-follow-info">Destination</p>
+              </div>
+              <!-- Truncate the description -->
+              <p class="description">{!! Str::limit($destination->description, 100) !!}</p>
 
-          <a href="/destination/{{ $destination->id }}" class="text-orange-500 font-semibold text-sm hover:underline flex items-center">
+              <a href="/destination/{{ $destination->id }}" class="text-orange-500 font-semibold text-sm hover:underline flex items-center">
                 Read More
-
-            </a>
+              </a>
+            </div>
+            <!-- "View Tours" button -->
+            <a href="/tour/{{ $destination->id }}" class="button">View Tours</a>
           </div>
-
-          <!-- "Read More" button -->
-          <!-- "View Tours" button -->
-          <a href="/tour/{{ $destination->id }}" class="button">View Tours</a>
         </div>
-      </div>
       @endforeach
     </div>
     <!-- Slider navigation buttons -->
@@ -528,56 +551,64 @@
 >
   <div class="container">
     <div class="row mb-5">
-      <div class="col-md pt-5">
-        <div class="ftco-footer-widget pt-md-5 mb-4">
-          <h2 class="ftco-heading-2" style="color:white">About Archers Tours & Travel</h2>
-          <p style="color:white">Discover unparalleled travel experiences with Archers Tours & Travel. From adventure-packed excursions to serene beach getaways, we bring you closer to your dream destinations.</p>
-          <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
+    <div class="col-md pt-5">
+    <div class="ftco-footer-widget pt-md-5 mb-4">
+
+        <div class="d-flex align-items-center mb-4">
+            <h2 class="ftco-heading-2" style="color:white">About Archers Tours & Travel</h2>
+        </div>
+        <img src="/images/logo_medium_3-removebg-preview.png" alt="Archers Tours & Travel Logo" class="mr-3" style="width: 250px; height: 50px;">
+        <br>
+        <br>
+
+        <p style="color:white">Discover unparalleled travel experiences with Archers Tours & Travel. From adventure-packed excursions to serene beach getaways, we bring you closer to your dream destinations.</p>
+        <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
             <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
             <li class="ftco-animate"><a href="https://www.facebook.com/ArchersToursandTravel"><span class="fa fa-facebook"></span></a></li>
             <li class="ftco-animate"><a href="https://www.instagram.com/archerstourstravel/"><span class="fa fa-instagram"></span></a></li>
-          </ul>
-        </div>
-      </div>
+        </ul>
+    </div>
+</div>
+
       <div class="col-md pt-5 border-left">
-        <div class="ftco-footer-widget pt-md-5 mb-4 ml-md-5">
-          <h2 class="ftco-heading-2" style="color:white">Information</h2>
-          <ul class="list-unstyled" style="color:white">
-            <li><a href="#" class="py-2 d-block" style="color:white">Online Enquiry</a></li>
-            <li><a href="#" class="py-2 d-block" style="color:white">General Enquiries</a></li>
-            <li><a href="#" class="py-2 d-block" style="color:white">Booking Conditions</a></li>
-            <li><a href="/contact" class="py-2 d-block" style="color:white">Contact Us</a></li>
-          </ul>
+    <div class="ftco-footer-widget pt-md-5 mb-4 ml-md-5">
+        <h2 class="ftco-heading-2" style="color:white">Information</h2>
+        <ul class="list-unstyled" style="color:white">
+            @foreach ($categories as $category)
+                <li><a href="{{ route('category.show', $category->id) }}" class="py-2 d-block" style="color:white">{{ $category->name }}</a></li>
+            @endforeach
+        </ul>
+    </div>
+</div>
+<div class="col-md pt-5 border-left">
+    <div class="ftco-footer-widget pt-md-5 mb-4">
+        <h2 class="ftco-heading-2" style="color:white">Have Questions?</h2>
+        <div class="block-23 mb-3">
+            <ul class="list-unstyled">
+                <li style="color:white;">Peponi Plaza, Mwanzi Road - Westlands</li>
+                <li style="color:white;">P.O. Box 437, 00606 Nairobi - Kenya - East Africa</li>
+                <li><a href="#" style="color:white;">+254-20-3752472 / 0722394892</a></li>
+                <li><a href="#" style="color:white;">archers@archerstours.com</a></li>
+            </ul>
         </div>
-      </div>
-      <div class="col-md pt-5 border-left">
-       <div class="ftco-footer-widget pt-md-5 mb-4">
+    </div>
+</div>
+
+
+   <div class="col-md pt-5 border-left">
+    <div class="ftco-footer-widget pt-md-5 mb-4">
         <h2 class="ftco-heading-2" style="color:white">Experiences</h2>
         <ul class="list-unstyled">
-          <li><a href="#" class="py-2 d-block" style="color:white">Adventure Tours</a></li>
-          <li><a href="#" class="py-2 d-block" style="color:white">Luxury Resorts</a></li>
-          <li><a href="#" class="py-2 d-block" style="color:white">Beach Escapes</a></li>
-          <li><a href="#" class="py-2 d-block" style="color:white">Nature Trails</a></li>
-          <li><a href="#" class="py-2 d-block"  style="color:white">Camping Trips</a></li>
-          <li><a href="#" class="py-2 d-block" style="color:white">Event Planning</a></li>
+            <li><p class="py-2 d-block" style="color:white">Adventure Tours</p></li>
+            <li><p class="py-2 d-block" style="color:white">Luxury Resorts</p></li>
+            <li><p class="py-2 d-block" style="color:white">Beach Escapes</p></li>
+            <li><p class="py-2 d-block" style="color:white">Nature Trails</p></li>
+            <li><p class="py-2 d-block" style="color:white">Camping Trips</p></li>
+            <li><p class="py-2 d-block" style="color:white">Event Planning</p></li>
         </ul>
-      </div>
     </div>
-    <div class="col-md pt-5 border-left">
-      <div class="ftco-footer-widget pt-md-5 mb-4">
-       <h2 class="ftco-heading-2" style="color:white">Have Questions?</h2>
-       <div class="block-23 mb-3">
-         <ul>
-           <li><span class=" fa fa-map-marker mr-4" style="color:orange;"></span><span style="color:white" class="mr-4">Peponi Plaza, Mwanzi Road - Westlands</span></li>
-           <li><span class=" fa fa-map-marker mr-4" style="color:orange"></span><span style="color:white"> P.O. Box 437, 00606 Nairobi - Kenya - East Africa</span></li>
-
-           <li><a href="#" ><span class=" fa fa-phone mr-4" style="color:orange"></span><span  style="color:white">+254-20-3752472 /0722394892</span></a></li>
-           <li><a href="#"><span class=" fa fa-paper-plane mr-4" style="color:orange"></span><span style="color:white">archers@archerstours.com</span></a></li>
-         </ul>
-       </div>
-     </div>
-   </div>
- </div>
+</div>
+    </div>
  <div class="row">
   <div class="col-md-12 text-center">
 

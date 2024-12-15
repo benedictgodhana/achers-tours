@@ -69,38 +69,42 @@ public function store(Request $request)
 
     }
 
-    public function update(Request $request, Testimonial $testimonial)
-    {
-        $request->validate([
-            'name' => 'sometimes|required|string|max:255',
-            'email' => 'sometimes|required|email',
-            'message' => 'sometimes|required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'is_approved' => 'sometimes|required|boolean',
-            'user_id' => 'sometimes|required|integer|exists:users,id',
-        ]);
+    
+public function update(Request $request, Testimonial $testimonial)
+{
+    // Ensure the user is authenticated
+    $userId = auth()->id(); // Get the authenticated user's ID
 
-        // Update specific fields only if they exist in the request
-        $testimonial->name = $request->input('name', $testimonial->name);
-        $testimonial->email = $request->input('email', $testimonial->email);
-        $testimonial->message = $request->input('message', $testimonial->message);
+    $request->validate([
+        'name' => 'sometimes|required|string|max:255',
+        'email' => 'sometimes|nullable|email',
+        'message' => 'sometimes|required|string',
+        'is_approved' => 'sometimes|required|boolean',
+    ]);
 
-        // Update image if it exists
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('testimonials', 'public');
-            $testimonial->image = $path;  // Update image path
-        }
-
-        // Update is_approved if it exists
-        $testimonial->is_approved = $request->input('is_approved', $testimonial->is_approved);
-
-        // Set user_id to the currently authenticated user
-        $testimonial->user_id = $request->user_id ?? auth()->id();
-
-        $testimonial->save();  // Save the testimonial
-
-        return redirect()->route('testimonials.index')->with('success', 'Testimonial updated successfully.');
+    // Update the fields if they exist in the request
+    if ($request->has('name')) {
+        $testimonial->name = $request->input('name');
     }
+    if ($request->has('email')) {
+        $testimonial->email = $request->input('email');
+    }
+    if ($request->has('message')) {
+        $testimonial->message = $request->input('message');
+    }
+    if ($request->has('is_approved')) {
+        $testimonial->is_approved = $request->input('is_approved');
+    }
+
+    // Update the user_id to the current authenticated user
+    $testimonial->user_id = $userId;
+
+    // Save the changes
+    $testimonial->save();
+
+    // Redirect back to the testimonials index with a success message
+    return redirect()->route('testimonials.index')->with('success', 'Testimonial updated successfully.');
+}
 
 
     // Delete a testimonial

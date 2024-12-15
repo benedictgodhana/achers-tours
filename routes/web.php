@@ -45,7 +45,12 @@ Route::get('/', function () {
     $destinations = Destination::withCount('tours')->get();
     $tours = Tour::with('destination')->get();
     $blogs = Blog::latest()->take(3)->get();
-    $testimonials = Testimonial::where('is_approved', 1)->get(); // Filter approved testimonials
+    $testimonials = Testimonial::where('is_approved', 1)  // Fetch approved testimonials only
+    ->distinct('id')  // Select only unique entries based on the ID
+    ->get();
+
+
+
 
     return view('welcome', [
         'destinations' => $destinations,
@@ -142,8 +147,9 @@ Route::get('/tour/{id}', function ($id) {
     $tours = Tour::where('destination_id', $id)->get();
     $blogs = Blog::latest()->take(3)->get();
 
+    $categories = InformationCategory::all(); // Fetch all categories from the categories table
 
-    return view('tour', compact('destination', 'tours', 'blogs'));
+    return view('tour', compact('destination', 'tours', 'blogs','categories'));
 });
 
 
@@ -193,7 +199,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', [TestimonialController::class, 'index'])->name('testimonials.index');        // List all testimonials
         Route::post('/', [TestimonialController::class, 'store'])->name('testimonials.store');      // Store a new testimonial
         Route::get('{id}', [TestimonialController::class, 'show'])->name('testimonials.show');     // Show a specific testimonial
-        Route::put('{id}', [TestimonialController::class, 'update'])->name('testimonials.update');   // Update a testimonial
+        Route::put('{testimonial}', [TestimonialController::class, 'update'])->name('testimonials.update');
         Route::get('edit/{id}', [TestimonialController::class, 'edit'])->name('testimonials.edit');
         Route::delete('{id}', [TestimonialController::class, 'destroy'])->name('testimonials.destroy'); // Delete a testimonial
     });

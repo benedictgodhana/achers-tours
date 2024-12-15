@@ -36,6 +36,13 @@ s0.parentNode.insertBefore(s1,s0);
 
 
 <style>
+
+
+.container{
+    max-width: 1500px   ;
+    width:100%;
+}
+
     .marquee-wrapper {
         overflow: hidden;
         position: relative;
@@ -290,7 +297,7 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
 </div>
 </div>
 </section>
-<section class="ftco-section testimony-section bg-bottom" style="background-image: url(pacific-main/images/bg_1.jpg);">
+<<section class="ftco-section testimony-section bg-bottom" style="background-image: url(pacific-main/images/bg_1.jpg);">
     <div class="overlay"></div>
     <div class="container">
         <div class="row justify-content-center pb-4">
@@ -298,40 +305,34 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
                 <h2 class="mb-4">Testimonials by Destination</h2>
             </div>
         </div>
-        <div class="row ftco-animate">
-            <div class="col-md-12">
-                <div class="carousel-testimony owl-carousel">
-                    <!-- Loop through each destination and its testimonials -->
-                    @foreach($testimonials as $testimonial)
-                        @if($testimonial->is_approved == 1)
-                            <div class="item">
-                                <div class="testimony-wrap py-4" style="border-radius:30px">
-                                    <div class="text">
-                                        <p class="star" style="color:orange">
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                        </p>
-                                        <p class="mb-4">
-                                            {!! $testimonial->message !!}
-                                        </p>
-                                        <div class="d-flex align-items-center">
-                                            <div class="pl-3">
-                                                <p class="name">{{ $testimonial->name }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+        <div class="row">
+            @foreach($testimonials as $testimonial)
+            <div class="col-md-4 d-flex align-items-stretch mb-4">
+                <div class="testimony-wrap py-4" style="border-radius: 30px; background: white; width: 100%;">
+                    <div class="text">
+                        <p class="star" style="color:orange">
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </p>
+                        <p class="mb-4">
+                            {!! $testimonial->message !!}
+                        </p>
+                        <div class="d-flex align-items-center">
+                            <div class="pl-3">
+                                <p class="name">{{ $testimonial->name }}</p>
                             </div>
-                        @endif
-                    @endforeach
+                        </div>
+                    </div>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 </section>
+
 
 
         <section class="ftco-section logo-section bg-bottom" style="background-image: url(images/bg_1.jpg);">
@@ -375,56 +376,64 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
 >
   <div class="container">
     <div class="row mb-5">
-      <div class="col-md pt-5">
-        <div class="ftco-footer-widget pt-md-5 mb-4">
-          <h2 class="ftco-heading-2" style="color:white">About Archers Tours & Travel</h2>
-          <p style="color:white">Discover unparalleled travel experiences with Archers Tours & Travel. From adventure-packed excursions to serene beach getaways, we bring you closer to your dream destinations.</p>
-          <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
+    <div class="col-md pt-5">
+    <div class="ftco-footer-widget pt-md-5 mb-4">
+
+        <div class="d-flex align-items-center mb-4">
+            <h2 class="ftco-heading-2" style="color:white">About Archers Tours & Travel</h2>
+        </div>
+        <img src="/images/logo_medium_3-removebg-preview.png" alt="Archers Tours & Travel Logo" class="mr-3" style="width: 250px; height: 50px;">
+        <br>
+        <br>
+
+        <p style="color:white">Discover unparalleled travel experiences with Archers Tours & Travel. From adventure-packed excursions to serene beach getaways, we bring you closer to your dream destinations.</p>
+        <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
             <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
             <li class="ftco-animate"><a href="https://www.facebook.com/ArchersToursandTravel"><span class="fa fa-facebook"></span></a></li>
             <li class="ftco-animate"><a href="https://www.instagram.com/archerstourstravel/"><span class="fa fa-instagram"></span></a></li>
-          </ul>
-        </div>
-      </div>
+        </ul>
+    </div>
+</div>
+
       <div class="col-md pt-5 border-left">
-        <div class="ftco-footer-widget pt-md-5 mb-4 ml-md-5">
-          <h2 class="ftco-heading-2" style="color:white">Information</h2>
-          <ul class="list-unstyled" style="color:white">
-            <li><a href="#" class="py-2 d-block" style="color:white">Online Enquiry</a></li>
-            <li><a href="#" class="py-2 d-block" style="color:white">General Enquiries</a></li>
-            <li><a href="#" class="py-2 d-block" style="color:white">Booking Conditions</a></li>
-            <li><a href="/contact" class="py-2 d-block" style="color:white">Contact Us</a></li>
-          </ul>
+    <div class="ftco-footer-widget pt-md-5 mb-4 ml-md-5">
+        <h2 class="ftco-heading-2" style="color:white">Information</h2>
+        <ul class="list-unstyled" style="color:white">
+            @foreach ($categories as $category)
+                <li><a href="{{ route('category.show', $category->id) }}" class="py-2 d-block" style="color:white">{{ $category->name }}</a></li>
+            @endforeach
+        </ul>
+    </div>
+</div>
+<div class="col-md pt-5 border-left">
+    <div class="ftco-footer-widget pt-md-5 mb-4">
+        <h2 class="ftco-heading-2" style="color:white">Have Questions?</h2>
+        <div class="block-23 mb-3">
+            <ul class="list-unstyled">
+                <li style="color:white;">Peponi Plaza, Mwanzi Road - Westlands</li>
+                <li style="color:white;">P.O. Box 437, 00606 Nairobi - Kenya - East Africa</li>
+                <li><a href="#" style="color:white;">+254-20-3752472 / 0722394892</a></li>
+                <li><a href="#" style="color:white;">archers@archerstours.com</a></li>
+            </ul>
         </div>
-      </div>
-      <div class="col-md pt-5 border-left">
-       <div class="ftco-footer-widget pt-md-5 mb-4">
+    </div>
+</div>
+
+
+   <div class="col-md pt-5 border-left">
+    <div class="ftco-footer-widget pt-md-5 mb-4">
         <h2 class="ftco-heading-2" style="color:white">Experiences</h2>
         <ul class="list-unstyled">
-          <li><a href="#" class="py-2 d-block" style="color:white">Adventure Tours</a></li>
-          <li><a href="#" class="py-2 d-block" style="color:white">Luxury Resorts</a></li>
-          <li><a href="#" class="py-2 d-block" style="color:white">Beach Escapes</a></li>
-          <li><a href="#" class="py-2 d-block" style="color:white">Nature Trails</a></li>
-          <li><a href="#" class="py-2 d-block"  style="color:white">Camping Trips</a></li>
-          <li><a href="#" class="py-2 d-block" style="color:white">Event Planning</a></li>
+            <li><p class="py-2 d-block" style="color:white">Adventure Tours</p></li>
+            <li><p class="py-2 d-block" style="color:white">Luxury Resorts</p></li>
+            <li><p class="py-2 d-block" style="color:white">Beach Escapes</p></li>
+            <li><p class="py-2 d-block" style="color:white">Nature Trails</p></li>
+            <li><p class="py-2 d-block" style="color:white">Camping Trips</p></li>
+            <li><p class="py-2 d-block" style="color:white">Event Planning</p></li>
         </ul>
-      </div>
     </div>
-    <div class="col-md pt-5 border-left">
-      <div class="ftco-footer-widget pt-md-5 mb-4">
-       <h2 class="ftco-heading-2" style="color:white">Have Questions?</h2>
-       <div class="block-23 mb-3">
-         <ul>
-           <li><span class=" fa fa-map-marker mr-4" style="color:orange;"></span><span style="color:white" class="mr-4">Peponi Plaza, Mwanzi Road - Westlands</span></li>
-           <li><span class=" fa fa-map-marker mr-4" style="color:orange"></span><span style="color:white"> P.O. Box 437, 00606 Nairobi - Kenya - East Africa</span></li>
-
-           <li><a href="#" ><span class=" fa fa-phone mr-4" style="color:orange"></span><span  style="color:white">+254-20-3752472 /0722394892</span></a></li>
-           <li><a href="#"><span class=" fa fa-paper-plane mr-4" style="color:orange"></span><span style="color:white">archers@archerstours.com</span></a></li>
-         </ul>
-       </div>
-     </div>
-   </div>
- </div>
+</div>
+    </div>
  <div class="row">
   <div class="col-md-12 text-center">
 
