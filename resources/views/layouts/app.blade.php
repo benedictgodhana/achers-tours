@@ -91,9 +91,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Logo -->
     <a href="index2.html" class="logo" style="background:orange">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>A T</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Archers</b>Tours</span>
+      <span class="logo-lg"><b>Archers Tours</b></span>
     </a>
 
     <!-- Header Navbar -->
@@ -106,7 +106,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
-          
+
           <!-- /.messages-menu -->
 
           <!-- Notifications Menu -->
