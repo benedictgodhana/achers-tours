@@ -17,17 +17,30 @@ class BlogController extends Controller
      * @param array $details
      */
     protected function logAction($action, $details = [])
-    {
+{
+    if (auth()->check()) {
         DB::table('logs')->insert([
             'user_id' => auth()->id(),
             'action' => $action,
             'details' => json_encode(array_merge([
-                'email' => auth()->user()->email,
+                'email' => auth()->user()->email ?? 'guest', // Default to 'guest' if email is null
+                'ip' => request()->ip(),
+                'timestamp' => now(),
+            ], $details)),
+        ]);
+    } else {
+        DB::table('logs')->insert([
+            'user_id' => null, // Set user_id to null when not authenticated
+            'action' => $action,
+            'details' => json_encode(array_merge([
+                'email' => 'guest', // Default to 'guest' if email is null
                 'ip' => request()->ip(),
                 'timestamp' => now(),
             ], $details)),
         ]);
     }
+}
+
 
     /**
      * Display a listing of blogs.

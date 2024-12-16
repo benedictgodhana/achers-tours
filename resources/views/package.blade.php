@@ -705,6 +705,38 @@ a {
     margin-bottom: 1em; /* Adjust spacing as needed */
   }
 
+
+  .modal-content {
+    border-radius: 8px;
+}
+
+.modal-header {
+    background-color:navy; /* Navy Blue */
+    color: white;
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+.modal-body {
+    background-color:orange; /* Orange */
+    color: #333; /* Dark text color */
+}
+
+
+
+.btn-primary {
+    background-color:navy; /* Orange button */
+    border-color: #F4A261;
+    color:white;
+}
+
+.btn-primary:hover {
+    background-color: #E76F51; /* Darker Orange for button hover effect */
+}
+
+
     </style>
 </head>
 
@@ -769,50 +801,50 @@ a {
   </div>
 
   <!-- Modal for Enquiry Form -->
-  <div class="modal fade" id="enquiryModal{{ $package->id }}" tabindex="-1" aria-labelledby="enquiryModalLabel{{ $package->id }}" aria-hidden="true">
+<div class="modal fade" id="enquiryModal{{ $package->id }}" tabindex="-1" aria-labelledby="enquiryModalLabel{{ $package->id }}" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="enquiryModalLabel{{ $package->id }}">Enquiry for {{ $package->name }}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="enquiryModalLabel{{ $package->id }}" style="color: white;">Enquiry for {{ $package->name }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('send.enquiry') }}" method="POST">
+                    @csrf <!-- CSRF Token -->
+                    <input type="hidden" name="package_id" value="{{ $package->id }}">
+
+                    <div class="mb-3">
+                        <label for="name{{ $package->id }}" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name{{ $package->id }}" name="name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email{{ $package->id }}" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email{{ $package->id }}" name="email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="subject{{ $package->id }}" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject{{ $package->id }}" name="subject" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="message{{ $package->id }}" class="form-label">Message</label>
+                        <textarea class="form-control" id="message{{ $package->id }}" name="package_details" rows="3" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phone{{ $package->id }}" class="form-label">Phone (Optional)</label>
+                        <input type="tel" class="form-control" id="phone{{ $package->id }}" name="phone">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+            </div>
         </div>
-        <div class="modal-body">
-        <form action="{{ route('send.enquiry') }}" method="POST">
-    @csrf <!-- CSRF Token -->
-    <input type="hidden" name="package_id" value="{{ $package->id }}">
-
-    <div class="mb-3">
-        <label for="name{{ $package->id }}" class="form-label">Name</label>
-        <input type="text" class="form-control" id="name{{ $package->id }}" name="name" required>
     </div>
+</div>
 
-    <div class="mb-3">
-        <label for="email{{ $package->id }}" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email{{ $package->id }}" name="email" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="subject{{ $package->id }}" class="form-label">Subject</label>
-        <input type="text" class="form-control" id="subject{{ $package->id }}" name="subject" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="message{{ $package->id }}" class="form-label">Message</label>
-        <textarea class="form-control" id="message{{ $package->id }}" name="package_details" rows="3" required></textarea>
-    </div>
-
-    <div class="mb-3">
-        <label for="phone{{ $package->id }}" class="form-label">Phone (Optional)</label>
-        <input type="tel" class="form-control" id="phone{{ $package->id }}" name="phone">
-    </div>
-
-    <button type="submit" class="btn btn-primary">Send</button>
-</form>
-
-        </div>
-      </div>
-    </div>
-  </div>
 @endforeach
 
 
