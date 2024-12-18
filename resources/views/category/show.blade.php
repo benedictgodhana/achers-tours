@@ -173,9 +173,9 @@ s0.parentNode.insertBefore(s1,s0);
           <span class="mr-2">
             <a href="index.html">Home <i class="fa fa-chevron-right"></i></a>
           </span>
-          <span>{{ $blog->category?->name ?? 'Category' }} <i class="fa fa-chevron-right"></i></span>
+          <span>{{ $blog->title }} <i class="fa fa-chevron-right"></i></span>
         </p>
-        <h1 class="mb-0 bread">{{ $blog->category?->name ?? 'Category' }}</h1>
+        <h1 class="mb-0 bread">{{ $blog->title }}</h1>
         <p class="text-center" style="font-size:12px;font-weight:800">
           By {{ $blog->author }} on {{ $blog->created_at->format('M d, Y') }}
         </p>
@@ -189,6 +189,7 @@ s0.parentNode.insertBefore(s1,s0);
   <div class="row justify-content-center">
     <!-- Blog Content -->
     <div class="col-md-8">
+        <h1>{{ $blog->title }}</h1>
       <div class="blog-content" style="color:black">
         {!! $blog->content !!}
       </div>
