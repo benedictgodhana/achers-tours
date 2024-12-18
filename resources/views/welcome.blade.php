@@ -348,7 +348,7 @@ p{
             <div class="col-md-7 ftco-animate">
                 <span class="subheading" style="font-size:34px">Welcome to Archers Tours & Travel</span>
                 <h1 class="mb-4">Share the magic of Africa with us</h1>
-                <p class="caps" style="text-transform:none">Experience seamless travel to breathtaking destinations around the globe.</p>
+                <p class="caps" style="text-transform:none">From majestic safaris to stunning landscapes, Africa is a world of wonder waiting to be explored</p>
             </div>
         </div>
     </div>
