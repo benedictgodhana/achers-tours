@@ -205,6 +205,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <i class="fa fa-gift"></i> <span>Packages</span>
                 </a>
             </li>
+
+            <li class="{{ request()->is('information_categories') ? 'active' : '' }}">
+                <a href="{{ route('information_categories.index') }}">
+                    <i class="fa fa-folder"></i> <span>Information Categories</span>
+                </a>
+            </li>
             <li class="{{ request()->is('blogs') ? 'active' : '' }}">
                 <a href="/blogs">
                     <i class="fa fa-info-circle"></i> <span>Manage General Info</span>
@@ -225,11 +231,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <i class="fa fa-comments"></i> <span>Comments</span>
                 </a>
             </li>
-            <li class="{{ request()->is('information_categories') ? 'active' : '' }}">
-                <a href="{{ route('information_categories.index') }}">
-                    <i class="fa fa-folder"></i> <span>Information Categories</span>
-                </a>
-            </li>
+
             <li class="{{ request()->is('logs') ? 'active' : '' }}">
                 <a href="/logs">
                     <i class="fa fa-file-text"></i> <span>Logs</span>
