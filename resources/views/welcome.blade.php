@@ -581,7 +581,6 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
     </div>
 </section>
 
-
 <section class="ftco-section">
     <div class="container">
         <div class="row justify-content-center pb-4">
@@ -592,46 +591,47 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
         </div>
         <div class="row d-flex">
             @foreach ($blogs as $blog)
-                <div class="col-md-6 col-lg-4 d-flex ftco-animate">
-                    <div class="blog-entry justify-content-end w-100">
-                        <!-- Display the blog image -->
-                        <a href="{{ route('blog.show', $blog->id) }}" class="block-20"
-                           style="background-image: url('{{ asset('storage/' . $blog->image) }}');
-                                  height: 350px;
-                                  background-size: cover;
-                                  background-position: center;
-                                  border-radius:30px">
-                        </a>
-                        <div class="text p-4">
-                            <div class="d-flex align-items-center mb-4 topp" style="background:orange;color:white">
-                                <div class="one">
-                                    <span class="day" style="background:orange;color:white">{{ $blog->created_at->format('d') }}</span>
+                @if($blog && $blog->category) <!-- Check if blog and its category exist -->
+                    <div class="col-md-6 col-lg-4 d-flex ftco-animate">
+                        <div class="blog-entry justify-content-end w-100">
+                            <!-- Display the blog image -->
+                            <a href="{{ route('blog.show', $blog->id) }}" class="block-20"
+                               style="background-image: url('{{ asset('storage/' . $blog->image) }}');
+                                      height: 350px;
+                                      background-size: cover;
+                                      background-position: center;
+                                      border-radius:30px">
+                            </a>
+                            <div class="text p-4">
+                                <div class="d-flex align-items-center mb-4 topp" style="background:orange;color:white">
+                                    <div class="one">
+                                        <span class="day" style="background:orange;color:white">{{ $blog->created_at->format('d') }}</span>
+                                    </div>
+                                    <div class="two" style="background:orange;color:white">
+                                        <span class="yr">{{ $blog->created_at->format('Y') }}</span>
+                                        <span class="mos">{{ $blog->created_at->format('F') }}</span>
+                                    </div>
                                 </div>
-                                <div class="two" style="background:orange;color:white">
-                                    <span class="yr">{{ $blog->created_at->format('Y') }}</span>
-                                    <span class="mos">{{ $blog->created_at->format('F') }}</span>
-                                </div>
+                                <!-- Display the blog title -->
+                                <h3 class="heading" style="font-size: 1.5rem; line-height: 1.5; font-weight: bold;">
+                                    <a href="{{ route('blog.show', $blog->id) }}">{{ $blog->title }}</a>
+                                </h3>
+                                <!-- Display the "Read more" button -->
+                                <p>
+                                    <a href="{{ route('category.show', $blog->category->id) }}"
+                                       class="btn"
+                                       style="background:orange;color:white; font-size: 1rem; padding: 10px 20px;">
+                                       Read more
+                                    </a>
+                                </p>
                             </div>
-                            <!-- Display the blog title -->
-                            <h3 class="heading" style="font-size: 1.5rem; line-height: 1.5; font-weight: bold;">
-                                <a href="{{ route('blog.show', $blog->id) }}">{{ $blog->title }}</a>
-                            </h3>
-                            <!-- Display the "Read more" button -->
-                            <p>
-                                <a href="{{ route('category.show', $blog->category->id) }}"
-                                   class="btn"
-                                   style="background:orange;color:white; font-size: 1rem; padding: 10px 20px;">
-                                   Read more
-                                </a>
-                            </p>
                         </div>
                     </div>
-                </div>
+                @endif
             @endforeach
         </div>
     </div>
 </section>
-
 
 
 		<!-- Intro Section -->
