@@ -162,9 +162,6 @@ s0.parentNode.insertBefore(s1,s0);
         @endforeach
     </ul>
 </li>
-                    <li class="nav-item">
-               <div id="google_translate_element" class="nav-link"></div>
-            </li>
 
 				</ul>
      </div>
