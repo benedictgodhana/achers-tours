@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Destination;
+use App\Models\InformationCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -149,5 +150,18 @@ class DestinationController extends Controller
 
         return redirect()->route('destinations.index')->with('success', 'Destination deleted successfully.');
     }
+
+
+    public function showDestinations($id)
+{
+    // Fetch the destination by ID
+    $destination = Destination::with('tours')->findOrFail($id);
+
+    $categories =InformationCategory::all();
+
+    // Pass the destination and its tours to the view
+    return view('Destination.show', compact('destination','categories'));
+}
+
 
 }

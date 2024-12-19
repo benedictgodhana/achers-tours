@@ -506,7 +506,7 @@
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
-       
+
      </div>
    </div>
  </div>
@@ -526,14 +526,14 @@
                 <p class="user-follow-info">Destination</p>
               </div>
               <!-- Truncate the description -->
-              <p class="description">{!! Str::limit($destination->description, 100) !!}</p>
+              <p class="description">{!! Str::limit($destination->description, 200) !!}</p>
 
-              <a href="/destination/{{ $destination->id }}" class="text-orange-500 font-semibold text-sm hover:underline flex items-center">
-                Read More
-              </a>
             </div>
             <!-- "View Tours" button -->
-            <a href="/tour/{{ $destination->id }}" class="button">View Tours</a>
+
+            <a href="/destination/{{ $destination->id }}"  class="button"> Read More and Explore our Tours
+</a>
+
           </div>
         </div>
       @endforeach

@@ -720,8 +720,7 @@ a {
 }
 
 .modal-body {
-    background-color:orange; /* Orange */
-    color: #333; /* Dark text color */
+    color:black; /* Dark text color */
 }
 
 
@@ -743,14 +742,53 @@ a {
 <body>
 
 
+
+
+<section class="container my-5">
+
+</section>
+
  <!-- Package List with Swiper -->
  <section class="container mt-4">
 
+
+
  <a class="button" href="/destination">back to all destination</a>
  <br>
+
+
+ <div class="">
+        <h1 class="text-center" style="font-size:23px;font-weight:900">Packages for {{ $tour->name }}</h1>
+
+
+
+  <div class="row justify-content-center">
+
+    <!-- Blog Content -->
+    <div class="">
+      <div class="" style="color:black">
+      {!! $tour->description  !!}
+      </div>
+
+
+
+<!-- Link to view tours for this destination -->
+    </div>
+  </div>
+    </div>
+    <br>
+
   <div class="swiper mySwiper">
     <div class="swiper-wrapper">
-      @foreach ($packages as $package)
+    @if ($tour->packages->isEmpty())
+    <div class="swiper-slide">
+  <div class="box">
+    <p class="text-center text-2xl font-bold">No Packages Found</p>
+  </div>
+</div>
+
+      @else
+      @foreach ($tour->packages as $package)
         <div class="swiper-slide">
           <div class="box transition duration-500 ease-in-out hover:scale-105 hover:shadow-lg opacity-0 animate-fade-in">
             <div class="box-top">
@@ -776,6 +814,7 @@ a {
           </div>
         </div>
       @endforeach
+      @endif
     </div>
     <!-- Slider navigation buttons -->
     <div class="swiper-button-next"></div>
@@ -784,7 +823,7 @@ a {
 </section>
 
 <!-- Modal Dialogs Outside the Loop -->
-@foreach ($packages as $package)
+@foreach ($tour->packages as $package)
   <!-- Modal for Full Description -->
   <div class="modal fade" id="packageModal{{ $package->id }}" tabindex="-1" aria-labelledby="packageModalLabel{{ $package->id }}" aria-hidden="true">
     <div class="modal-dialog">
@@ -794,7 +833,7 @@ a {
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p style="color:white">{!! $package->description !!}</p>
+          <p style="color:white" style="color:white">{!! $package->description !!}</p>
         </div>
       </div>
     </div>

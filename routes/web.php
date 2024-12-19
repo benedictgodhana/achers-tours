@@ -61,6 +61,11 @@ Route::get('/', function () {
     ]);
 });
 
+
+
+
+Route::get('/tour/{id}', [TourController::class, 'tourMore'])->name('Tour.show');
+
 Route::get('/about', function () {
     $blogs = Blog::latest()->take(3)->get();
     $categories = InformationCategory::all(); // Fetch all categories from the categories table
@@ -136,6 +141,9 @@ Route::get('/destination/{id}', function ($id) {
     return view('Destination.show', compact('destination', 'tours'));
 });
 
+
+
+
 // Tour Routes
 Route::get('/tour', function () {
     $tours = Tour::all();
@@ -152,14 +160,13 @@ Route::get('/tour/{id}', function ($id) {
     return view('tour', compact('destination', 'tours', 'blogs','categories'));
 });
 
+Route::get('/destination/{id}', [DestinationController::class, 'showDestinations'])->name('destinationsAll.show');
 
 Route::get('/package/{id}', function ($id) {
-    $tours = Tour::findOrFail($id); // Ensure you get the destination
-    $packages = Package::where('tour_id', $id)->get();
-    $blogs = Blog::all();
+    $tour = Tour::with('packages')->findOrFail($id); // Eager load packages
+    $blogs = Blog::all(); // Optionally fetch blogs if needed
 
-
-    return view('package', compact('tours', 'packages', 'blogs'));
+    return view('package', compact('tour', 'blogs'));
 });
 
 // Authenticated Routes

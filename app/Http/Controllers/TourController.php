@@ -110,4 +110,20 @@ class TourController extends Controller
     return view('tour', compact('tour')); // Pass the tour data to the view
 }
 
+
+public function tourMore($id)
+{
+    // Fetch the tour by ID
+    $tour = Tour::findOrFail($id);
+
+    // Pass the tour data to the view
+    return view('Tours.show', compact('tour'));
+}
+
+
+
+
+
+
+
 }

@@ -377,10 +377,12 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
             <div class="services services-1 color-1 d-block" style="border-radius: 30px; overflow: hidden;">
 
                 <div class="media-body">
-                    <h3 class="heading mb-3">Travel Management & Advisory</h3>
+                    <h3 class="heading mb-3">Our Travel/Ticketing services</h3>
                     <ul class="text-white">
-                        <li>Business, tours, and leisure travels management and ticketing</li>
-                        <li>Personalized advisory services on travel and tours organization</li>
+                        <li>Flight Ticket Bookings</li>
+                        <li>Train and Rail Passes</li>
+                        <li>Events and Attraction Tickets</li>
+                        <li>Cruise Reservations</li>
                     </ul>
                 </div>
             </div>
@@ -390,10 +392,19 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
             <div class="services services-1 color-2 d-block" style="border-radius: 30px; overflow: hidden;">
 
                 <div class="media-body">
-                    <h3 class="heading mb-3">Event & Tour Organization</h3>
+                    <h3 class="heading mb-3">Tour Organization</h3>
                     <ul class="text-white">
-                        <li>Organizing meetings and conferences</li>
-                        <li>Organizing pilgrimages and special interest groups</li>
+                        <li>Guided Tours</li>
+                        <li>Customized or Tailor-Made Tours</li>
+                        <li>Adventure Tours</li>
+                        <li>City Tours</li>
+                        <li>Pilgrimages Tours</li>
+                        <li>Cultural and Heritage Tours</li>
+                        <li>Eco and Sustainable Tours</li>
+                        <li>Cruise and Expedition Tours</li>
+                        <li>Corporate and Incentive Travel</li>
+                        <li>Transportation and Airport Transfers</li>
+                        <li>Travel Insurance and Safety Services</li>
                     </ul>
                 </div>
             </div>
@@ -402,9 +413,15 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
     <div class="services services-1 color-3 d-block" style="border-radius: 30px; overflow: hidden;">
 
         <div class="media-body">
-            <h3 class="heading mb-3">Ground Handling & Emergency Services</h3>
+            <h3 class="heading mb-3">Ground Handling</h3>
             <ul class="text-white">
-                <li>Medical evacuation/repatriation on commercial airlines and air ambulance charters</li>
+                <li>Airport Transfers and Transportation</li>
+                <li>Luggage Handling</li>
+                <li>Ticketing and Check-in Assistance</li>
+                <li>Travel Documentation Assistance</li>
+                <li>Tour Escort and Local Guide Services</li>
+                <li>Hotel and Accommodation Arrangements</li>
+                <li>Event and Conference Handling</li>
             </ul>
         </div>
     </div>
@@ -414,11 +431,16 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
             <div class="services services-1 color-4 d-block" style="border-radius: 30px; overflow: hidden;">
 
                 <div class="media-body">
-                    <h3 class="heading mb-3">Travel Consultancy & Transport Services</h3>
+                    <h3 class="heading mb-3">Transport Services</h3>
                     <ul class="text-white">
-                        <li>Travel policy consultancy and travel insurances</li>
-                        <li>Airport transfers (locally and internationally)</li>
-                        <li>Car-hire (locally and internationally)</li>
+                        <li>Transport Services</li>
+                        <li>VIP Meet &amp; Greet</li>
+                        <li>Car rentals</li>
+                        <li>Private Coach hires</li>
+                        <li>4x4 Vehicles transport</li>
+                        <li>Charter flights</li>
+                        <li>Helicopter Rides</li>
+
                     </ul>
                 </div>
             </div>
@@ -560,8 +582,7 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
 </section>
 
 
-
-        <section class="ftco-section">
+<section class="ftco-section">
     <div class="container">
         <div class="row justify-content-center pb-4">
             <div class="col-md-12 heading-section text-center ftco-animate">
@@ -574,7 +595,13 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
                 <div class="col-md-6 col-lg-4 d-flex ftco-animate">
                     <div class="blog-entry justify-content-end w-100">
                         <!-- Display the blog image -->
-                        <a href="{{ route('blog.show', $blog->id) }}" class="block-20" style="background-image: url('{{ asset('storage/' . $blog->image) }}'); height: 350px; background-size: cover; background-position: center;border-radius:30px"></a>
+                        <a href="{{ route('blog.show', $blog->id) }}" class="block-20"
+                           style="background-image: url('{{ asset('storage/' . $blog->image) }}');
+                                  height: 350px;
+                                  background-size: cover;
+                                  background-position: center;
+                                  border-radius:30px">
+                        </a>
                         <div class="text p-4">
                             <div class="d-flex align-items-center mb-4 topp" style="background:orange;color:white">
                                 <div class="one">
@@ -590,7 +617,13 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
                                 <a href="{{ route('blog.show', $blog->id) }}">{{ $blog->title }}</a>
                             </h3>
                             <!-- Display the "Read more" button -->
-                            <p><a href="{{ route('blog.show', $blog->id) }}" class="btn" style="background:orange;color:white; font-size: 1rem; padding: 10px 20px;">Read more</a></p>
+                            <p>
+                                <a href="{{ route('category.show', $blog->category->id) }}"
+                                   class="btn"
+                                   style="background:orange;color:white; font-size: 1rem; padding: 10px 20px;">
+                                   Read more
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -598,6 +631,7 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
         </div>
     </div>
 </section>
+
 
 
 		<!-- Intro Section -->

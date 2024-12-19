@@ -484,38 +484,37 @@
  </div>
 </section>
 
-
 <section class="container mt-4">
   <div class="swiper mySwiper" style="background:white">
-  <h1 class="text-center">Explore our various Tours</h1>
-    <div class="swiper-wrapper">
-      @foreach ($tours as $tour)
-      <div class="swiper-slide">
-        <div class="box transition duration-500 ease-in-out hover:scale-105 hover:shadow-lg opacity-0 animate-fade-in">
-          <div class="box-top">
-            <img class="box-image" src="{{ asset('storage/' . $tour->image) }}" alt="{{ $tour->name }}" style="border-radius:30px">
-            <div class="title-flex">
-              <h3 class="box-title">{{ $tour->name }}</h3>
-              <p class="user-follow-info">Tour</p>
+    <h1 class="text-center">Explore our various Tours</h1>
+    @if ($tours->isEmpty())
+    <h1 class="text-center">No Tours Found</h1>
+    @else
+      <div class="swiper-wrapper">
+        @foreach ($tours as $tour)
+          <div class="swiper-slide">
+            <div class="box transition duration-500 ease-in-out hover:scale-105 hover:shadow-lg opacity-0 animate-fade-in">
+              <div class="box-top">
+                <img class="box-image" src="{{ asset('storage/' . $tour->image) }}" alt="{{ $tour->name }}" style="border-radius:30px">
+                <div class="title-flex">
+                  <h3 class="box-title">{{ $tour->name }}</h3>
+                  <p class="user-follow-info">Tour</p>
+                </div>
+                <!-- Truncate the description -->
+                <p class="description">{!! Str::limit($tour->description, 100) !!}</p>
+
+
+              </div>
+              <!-- "View Available Packages" button -->
+              <a href="/package/{{ $tour->id }}" class="button">  Read More and View Available Packages</a>
             </div>
-            <!-- Truncate the description -->
-            <p class="description">{!! Str::limit($tour->description, 0)  !!}</p>
-
-          <a href="/tour/{{ $tour->id }}" class="text-orange-500 font-semibold text-sm hover:underline flex items-center">
-                Read More
-
-            </a>
           </div>
-
-          <!-- "Read More" button -->
-          <!-- "View Tours" button -->
-          <a href="/package/{{ $tour->id }}" class="button">View Available Packages</a>        </div>
+        @endforeach
       </div>
-      @endforeach
-    </div>
-    <!-- Slider navigation buttons -->
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
+      <!-- Slider navigation buttons -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    @endif
   </div>
 </section>
 

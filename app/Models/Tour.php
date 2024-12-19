@@ -31,4 +31,12 @@ class Tour extends Model
     {
         return $this->belongsTo(Destination::class);
     }
+
+
+
+    public function packages()
+{
+    return $this->hasMany(Package::class);
+}
+
 }
