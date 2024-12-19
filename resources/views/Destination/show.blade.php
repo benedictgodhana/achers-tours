@@ -143,7 +143,6 @@ s0.parentNode.insertBefore(s1,s0);
 					<li class="nav-item"><a href="/" class="nav-link">Home</a></li>
 					<li  class="nav-item"><a href="/about" class="nav-link">About</a></li>
 					<li class="nav-item active"><a href="/destination" class="nav-link">Destination</a></li>
-					<li class="nav-item"><a href="/tour" class="nav-link">Tours</a></li>
 					<li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
 
                     <li class="nav-item"><a href="/login" class="nav-link">Account</a></li>
