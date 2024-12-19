@@ -581,7 +581,6 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
     </div>
 </section>
 
-
 <section class="ftco-section">
     <div class="container">
         <div class="row justify-content-center pb-4">
@@ -616,13 +615,15 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
                             <h3 class="heading" style="font-size: 1.5rem; line-height: 1.5; font-weight: bold;">
                                 <a href="{{ route('blog.show', $blog->id) }}">{{ $blog->title }}</a>
                             </h3>
-                            <!-- Display the "Read more" button -->
+                            <!-- Display the "Read more" button with a check for category existence -->
                             <p>
-                                <a href="{{ route('category.show', $blog->category->id) }}"
-                                   class="btn"
-                                   style="background:orange;color:white; font-size: 1rem; padding: 10px 20px;">
-                                   Read more
-                                </a>
+                                @if($blog->category && $blog->category->id)
+                                    <a href="{{ route('category.show', $blog->category->id) }}"
+                                       class="btn"
+                                       style="background:orange;color:white; font-size: 1rem; padding: 10px 20px;">
+                                       Read more
+                                    </a>
+                                @endif
                             </p>
                         </div>
                     </div>
@@ -631,6 +632,7 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
         </div>
     </div>
 </section>
+
 
 
 
