@@ -749,10 +749,17 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
     <div class="ftco-footer-widget pt-md-5 mb-4 ml-md-5">
         <h2 class="ftco-heading-2" style="color:white">Information</h2>
         <ul class="list-unstyled" style="color:white">
-            @foreach ($categories as $category)
-                <li><a href="{{ route('category.show', $category->id) }}" class="py-2 d-block" style="color:white">{{ $category->name }}</a></li>
-            @endforeach
-        </ul>
+    @foreach ($categories as $category)
+        @if($category)
+            <li>
+                <a href="{{ route('category.show', $category->id) }}" class="py-2 d-block" style="color:white">
+                    {{ $category->name }}
+                </a>
+            </li>
+        @endif
+    @endforeach
+</ul>
+
     </div>
 </div>
 <div class="col-md pt-5 border-left">
