@@ -164,13 +164,12 @@ s0.parentNode.insertBefore(s1,s0);
      </div>
    </div>
  </nav>
- <section class="hero-wrap hero-wrap-2" style="background-image: url('{{ asset('storage/' . $blog->image) }}');">
+ <section class="hero-wrap hero-wrap-2 " style="background-image: url('{{ asset('storage/' . $blog->image) }}');">
   <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text align-items-center justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
-
-        <h1 class="mb-0 bread" style="font-size:16px">{{ $blog->title }}</h1>
+        <h1 class="mb-0 bread">{{ $blog->title }}</h1>
         <p class="text-center" style="font-size:12px;font-weight:800">
           By {{ $blog->author }} on {{ $blog->created_at->format('M d, Y') }}
         </p>
