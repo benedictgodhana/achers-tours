@@ -507,76 +507,88 @@ efficient in our travel programmes.</p>
 		</div>
 	</div>
 </section>
-    <section class="ftco-section img ftco-select-destination" style="background-image: url('pacific-main/images/bg_3.jpg');">
+<section class="ftco-section">
+
+
+<div class="row justify-content-center pb-4">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <span class="subheading" style="color:orange">Archers Tours and Travel Provide Places</span>
+                <h2 class="mb-4">Select Your Destination</h2>
+            </div>
+        </div>
+   <div class="container">
+    <div class="row">
+       @foreach ($destinations as $destination)
+       <div class="col-md-4 ftco-animate">
+          <div class="project-wrap">
+             <a href="#" class="img" style="background-image: url({{ asset('storage/' . $destination->image) }});border-radius:30px">
+            </a>
+            <div class="text p-4">
+                <h3><a href="#">{{ $destination->name }}</a></h3>
+                <span style="background:orange" class="btn">{{ $destination->tours_count }} Tours</span>
+                <a href="/destination/{{ $destination->id }}" class="btn" >View</a>
+
+           </div>
+       </div>
+   </div>
+   @endforeach
+</div>
+<div class="row mt-5">
+  <div class="col text-center">
+    <div class="block-27">
+      <ul>
+        <li><a href="{{ $destinations->previousPageUrl() }}">&lt;</a></li>
+        @for ($i = 1; $i <= $destinations->lastPage(); $i++)
+          <li class="{{ ($i == $destinations->currentPage()) ? 'active' : '' }}">
+            <a href="{{ $destinations->url($i) }}">{{ $i }}</a>
+          </li>
+        @endfor
+        <li><a href="{{ $destinations->nextPageUrl() }}">&gt;</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div>
+</section>
+
+
+    <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center pb-4">
                 <div class="col-md-12 heading-section text-center ftco-animate">
-                    <span class="subheading" style="color:orange">Archers Tours and Travel Provide Places</span>
-                    <h2 class="mb-4">Select Your Destination</h2>
+                    <span class="subheading" style="color:orange">Destination</span>
+                    <h2 class="mb-4">Tour Destination</h2>
                 </div>
             </div>
-        </div>
-        <div class="container ">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="carousel-destination owl-carousel ftco-animate">
-                    @foreach ($destinations as $destination)
-        <div class="item">
-            <div class="project-destination">
-                <a href="/destination/{{ $destination->id }}" class="img"
-                style="background-image: url({{ asset('storage/' . $destination->image) }});border-radius:30px">
-                    <div class="text">
-                        <h3 style="background:orange">{{ $destination->name }}</h3>
-                        <span style="background:orange">{{ $destination->tours_count }} Tours</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-    @endforeach
-
-                    </div>
-                </div>
+                @foreach ($tours as $tour)
+                    @if($tour->destination && $tour->destination->image) <!-- Ensure destination and image exist -->
+                        <div class="col-md-4 ftco-animate">
+                            <div class="project-wrap">
+                                <a href="#" class="img"
+                                style="background-image: url('{{ asset('storage/' . $tour->destination->image) }}'); border-radius:30px">
+                                </a>
+                                <div class="text p-4">
+                                    <h3><a href="#">{{ $tour->name }}</a></h3>
+                                    <p class="location" style="color:orange">
+                                        <span class="fa fa-map-marker" style="color:orange"></span> {{ $tour->destination->name }}
+                                    </p>
+                                    <ul>
+                                        <li><span class="flaticon-shower" style="color:orange"></span></li>
+                                        <li><span class="flaticon-king-size" style="color:orange"></span></li>
+                                        <li><span class="flaticon-sun-umbrella" style="color:orange"></span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <!-- Optional: Display a placeholder or skip this tour -->
+                    @endif
+                @endforeach
             </div>
         </div>
     </section>
-
-<section class="ftco-section">
-    <div class="container">
-        <div class="row justify-content-center pb-4">
-            <div class="col-md-12 heading-section text-center ftco-animate">
-                <span class="subheading" style="color:orange">Destination</span>
-                <h2 class="mb-4">Tour Destination</h2>
-            </div>
-        </div>
-        <div class="row">
-            @foreach ($tours as $tour)
-                @if($tour->destination && $tour->destination->image) <!-- Ensure destination and image exist -->
-                    <div class="col-md-4 ftco-animate">
-                        <div class="project-wrap">
-                            <a href="#" class="img"
-                               style="background-image: url('{{ asset('storage/' . $tour->destination->image) }}'); border-radius:30px">
-                            </a>
-                            <div class="text p-4">
-                                <span class="days" style="color:orange">{{ $tour->duration }} Days Tour</span>
-                                <h3><a href="#">{{ $tour->name }}</a></h3>
-                                <p class="location" style="color:orange">
-                                    <span class="fa fa-map-marker" style="color:orange"></span> {{ $tour->destination->name }}
-                                </p>
-                                <ul>
-                                    <li><span class="flaticon-shower" style="color:orange"></span></li>
-                                    <li><span class="flaticon-king-size" style="color:orange"></span></li>
-                                    <li><span class="flaticon-sun-umbrella" style="color:orange"></span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                @else
-                    <!-- Optional: Display a placeholder or skip this tour -->
-                @endif
-            @endforeach
-        </div>
-    </div>
-</section>
 
 
 		<section class="ftco-section ftco-about img"style="background-image: url('/images/Property Overview.jpg');">
@@ -694,6 +706,24 @@ efficient in our travel programmes.</p>
                 </div>
             @endforeach
         </div>
+
+        <div class="row mt-5">
+  <div class="col text-center">
+    <div class="block-27">
+      <ul>
+        <li><a href="{{ $blogs->previousPageUrl() }}">&lt;</a></li>
+        @for ($i = 1; $i <= $blogs->lastPage(); $i++)
+          <li class="{{ ($i == $blogs->currentPage()) ? 'active' : '' }}">
+            <a href="{{ $blogs->url($i) }}">{{ $i }}</a>
+          </li>
+        @endfor
+        <li><a href="{{ $blogs->nextPageUrl() }}">&gt;</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
     </div>
 </section>
 

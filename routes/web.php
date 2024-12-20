@@ -45,10 +45,10 @@ Route::get('/', function () {
     $destinations = Destination::select('id', 'name', 'image')
     ->withCount('tours') // Ensure tour counts are included
     ->distinct() // Prevent duplicate rows
-    ->get();
+    ->paginate(3); // Paginate with 3 items per page
 
     $tours = Tour::with('destination')->get();
-    $blogs = Blog::with('category')->get(); // Fetch blogs along with their categories
+    $blogs = Blog::with('category')->paginate(3); // Fetch blogs with pagination, 3 blogs per page
     $testimonials = Testimonial::where('is_approved', 1)  // Fetch approved testimonials only
     ->distinct('id')  // Select only unique entries based on the ID
     ->get();
