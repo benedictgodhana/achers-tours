@@ -303,7 +303,7 @@ s0.parentNode.insertBefore(s1,s0);
       </div> <!-- .col-md-8 -->
       <div class="col-lg-4 sidebar ftco-animate bg-light py-md-5">
     <!-- Search Form -->
-   
+
     <!-- Categories -->
     <div class="sidebar-box ftco-animate">
         <div class="categories">
@@ -371,69 +371,74 @@ s0.parentNode.insertBefore(s1,s0);
 >
   <div class="container">
     <div class="row mb-5">
-      <div class="col-md pt-5">
-        <div class="ftco-footer-widget pt-md-5 mb-4">
-          <h2 class="ftco-heading-2" style="color:white">About Archers Tours & Travel</h2>
-          <p style="color:white">Discover unparalleled travel experiences with Archers Tours & Travel. From adventure-packed excursions to serene beach getaways, we bring you closer to your dream destinations.</p>
-          <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
+    <div class="col-md pt-5">
+    <div class="ftco-footer-widget pt-md-5 mb-4">
+
+        <div class="d-flex align-items-center mb-4">
+            <h2 class="ftco-heading-2" style="color:white">About Archers Tours & Travel</h2>
+        </div>
+        <img src="/images/logo_medium_3-removebg-preview.png" alt="Archers Tours & Travel Logo" class="mr-3" style="width: 250px; height: 50px;">
+        <br>
+        <br>
+
+        <p style="color:white">Discover unparalleled travel experiences with Archers Tours & Travel. From adventure-packed excursions to serene beach getaways, we bring you closer to your dream destinations.</p>
+        <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
             <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
-            <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
-            <li class="ftco-animate"><a href="#"><span class="fa fa-instagram"></span></a></li>
-          </ul>
-        </div>
-      </div>
+            <li class="ftco-animate"><a href="https://www.facebook.com/ArchersToursandTravel"><span class="fa fa-facebook"></span></a></li>
+            <li class="ftco-animate"><a href="https://www.instagram.com/archerstourstravel/"><span class="fa fa-instagram"></span></a></li>
+        </ul>
+    </div>
+</div>
+
       <div class="col-md pt-5 border-left">
-        <div class="ftco-footer-widget pt-md-5 mb-4 ml-md-5">
-          <h2 class="ftco-heading-2" style="color:white">Information</h2>
-          <ul class="list-unstyled" style="color:white">
-            <li><a href="#" class="py-2 d-block" style="color:white">Online Enquiry</a></li>
-            <li><a href="#" class="py-2 d-block" style="color:white">General Enquiries</a></li>
-            <li><a href="#" class="py-2 d-block" style="color:white">Booking Conditions</a></li>
-            <li><a href="#" class="py-2 d-block" style="color:white">Privacy Policy</a></li>
-            <li><a href="#" class="py-2 d-block" style="color:white">Refund Policy</a></li>
-            <li><a href="/contact" class="py-2 d-block" style="color:white">Contact Us</a></li>
-          </ul>
+    <div class="ftco-footer-widget pt-md-5 mb-4 ml-md-5">
+        <h2 class="ftco-heading-2" style="color:white">Information</h2>
+        <ul class="list-unstyled" style="color:white">
+            @foreach ($categories as $category)
+                <li><a href="{{ route('category.show', $category->id) }}" class="py-2 d-block" style="color:white">{{ $category->name }}</a></li>
+            @endforeach
+        </ul>
+    </div>
+</div>
+<div class="col-md pt-5 border-left">
+    <div class="ftco-footer-widget pt-md-5 mb-4">
+        <h2 class="ftco-heading-2" style="color:white">Have Questions?</h2>
+        <div class="block-23 mb-3">
+            <ul class="list-unstyled">
+                <li style="color:white;">Peponi Plaza, Mwanzi Road - Westlands</li>
+                <li style="color:white;">P.O. Box 437, 00606 Nairobi - Kenya - East Africa</li>
+                <li><a href="#" style="color:white;">+254-20-3752472 / 0722394892</a></li>
+                <li><a href="#" style="color:white;">archers@archerstours.com</a></li>
+            </ul>
         </div>
-      </div>
-      <div class="col-md pt-5 border-left">
-       <div class="ftco-footer-widget pt-md-5 mb-4">
+    </div>
+</div>
+
+
+   <div class="col-md pt-5 border-left">
+    <div class="ftco-footer-widget pt-md-5 mb-4">
         <h2 class="ftco-heading-2" style="color:white">Experiences</h2>
         <ul class="list-unstyled">
-          <li><a href="#" class="py-2 d-block" style="color:white">Adventure Tours</a></li>
-          <li><a href="#" class="py-2 d-block" style="color:white">Luxury Resorts</a></li>
-          <li><a href="#" class="py-2 d-block" style="color:white">Beach Escapes</a></li>
-          <li><a href="#" class="py-2 d-block" style="color:white">Nature Trails</a></li>
-          <li><a href="#" class="py-2 d-block"  style="color:white">Camping Trips</a></li>
-          <li><a href="#" class="py-2 d-block" style="color:white">Event Planning</a></li>
+            <li><p class="py-2 d-block" style="color:white">Adventure Tours</p></li>
+            <li><p class="py-2 d-block" style="color:white">Luxury Resorts</p></li>
+            <li><p class="py-2 d-block" style="color:white">Beach Escapes</p></li>
+            <li><p class="py-2 d-block" style="color:white">Nature Trails</p></li>
+            <li><p class="py-2 d-block" style="color:white">Camping Trips</p></li>
+            <li><p class="py-2 d-block" style="color:white">Event Planning</p></li>
         </ul>
-      </div>
     </div>
-    <div class="col-md pt-5 border-left">
-      <div class="ftco-footer-widget pt-md-5 mb-4">
-       <h2 class="ftco-heading-2" style="color:white">Have Questions?</h2>
-       <div class="block-23 mb-3">
-         <ul>
-           <li><span class=" fa fa-map-marker mr-4" style="color:orange;"></span><span style="color:white" class="mr-4">Peponi Plaza, Peponi Road - Westlands</span></li>
-           <li><span class=" fa fa-map-marker mr-4" style="color:orange"></span><span style="color:white"> P.O. Box 437, 00606 Nairobi - Kenya - East Africa</span></li>
-
-           <li><a href="#" ><span class=" fa fa-phone mr-4" style="color:orange"></span><span  style="color:white">+254-20-3752472 /3 /4</span></a></li>
-           <li><a href="#"><span class=" fa fa-paper-plane mr-4" style="color:orange"></span><span style="color:white">info@archerstours.com</span></a></li>
-         </ul>
-       </div>
-     </div>
-   </div>
- </div>
+</div>
+    </div>
  <div class="row">
   <div class="col-md-12 text-center">
 
-    <p style="color:white">
-      &copy; <script>document.write(new Date().getFullYear());</script> Archers Tours & Travel | All rights reserved | Designed  by <a href="https://colorlib.com" target="_blank" style="color:white"  >DONKRAFT IT SOLUTIONS LTD</a>
+  <p style="color:white">
+      &copy; <script>document.write(new Date().getFullYear());</script> Archers Tours & Travel | All rights reserved | Powered  by <a href="https://donkraft.co.ke/" target="_blank" style="color:white"  >DONKRAFT IT SOLUTIONS LTD</a>
     </p>
   </div>
  </div>
 </div>
 </footer>
-
 
 
 
