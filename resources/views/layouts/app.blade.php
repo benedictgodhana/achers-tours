@@ -5,6 +5,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html>
 <head>
+<link rel="icon" href="{{ asset('images/logo_medium_3-removebg-preview.png') }}" type="image/x-icon">
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Archers Tours and Trabel</title>

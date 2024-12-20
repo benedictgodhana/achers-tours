@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" href="{{ asset('images/logo_medium_3-removebg-preview.png') }}" type="image/x-icon">
 
 @foreach($blogs as $blog)
     <title>{{ $blog->title }} - Archer's Tours and Travel</title>

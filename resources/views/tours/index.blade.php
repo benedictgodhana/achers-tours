@@ -50,7 +50,7 @@
 
                                 </td>
                                 <td>{{ $tour->name }}</td>
-                                <td>{{ $tour->destination->name }}</td>
+                                <td>{{ $tour->destination?->name ?? 'N/A' }}</td>
                                 <td>{!! \Illuminate\Support\Str::limit($tour->description, 100) !!}</td>
                                 <td>{{ $tour->user->name }}</td>
                                 <td>

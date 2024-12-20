@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" href="{{ asset('images/logo_medium_3-removebg-preview.png') }}" type="image/x-icon">
+
 	<title>Archers Tours and Travel</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -290,6 +292,62 @@ p{
     flex: 1 1 calc(33.333% - 20px); /* Adjust width and spacing */
     margin: 10px; /* Space between items */
 }
+
+.blog-entry {
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.blog-entry:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.block-20 {
+    height: 200px; /* Reduced image height */
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px 15px 0 0;
+}
+
+.text {
+    padding: 15px;
+    background: #fff;
+    border-radius: 0 0 15px 15px;
+    color: #333;
+}
+
+.text h3 {
+    font-size: 1.25rem; /* Smaller font size for titles */
+    margin-bottom: 10px;
+}
+
+.text p {
+    font-size: 0.875rem; /* Smaller font size for descriptions */
+    color: #666;
+}
+
+.btn {
+    font-size: 0.875rem; /* Smaller button size */
+    padding: 8px 16px;
+    background: orange;
+    color: white;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    margin-top: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn:hover {
+    background-color: darkorange;
+}
+
 
 </style>
 
@@ -594,7 +652,7 @@ efficient in our travel programmes.</p>
         <div class="row justify-content-center pb-4">
             <div class="col-md-12 heading-section text-center ftco-animate">
                 <span class="subheading" style="color:orange">General Information</span>
-                <h2 class="mb-4">Recent Post</h2>
+                <h2 class="mb-4">Recent Posts</h2>
             </div>
         </div>
         <div class="row d-flex">
@@ -602,12 +660,11 @@ efficient in our travel programmes.</p>
                 <div class="col-md-6 col-lg-4 d-flex ftco-animate">
                     <div class="blog-entry justify-content-end w-100">
                         <!-- Display the blog image -->
-                        <a href="{{ route('blog.show', $blog->id) }}" class="block-20"
+                        <a href="#" class="block-20"
                            style="background-image: url('{{ asset('storage/' . $blog->image) }}');
-                                  height: 350px;
+                                  height: 200px;
                                   background-size: cover;
-                                  background-position: center;
-                                  border-radius:30px">
+                                  background-position: center;">
                         </a>
                         <div class="text p-4">
                             <div class="d-flex align-items-center mb-4 topp" style="background:orange;color:white">
@@ -620,15 +677,14 @@ efficient in our travel programmes.</p>
                                 </div>
                             </div>
                             <!-- Display the blog title -->
-                            <h3 class="heading" style="font-size: 1.5rem; line-height: 1.5; font-weight: bold;">
-                                <a href="{{ route('blog.show', $blog->id) }}">{{ $blog->title }}</a>
-                            </h3>
-                            <!-- Display the "Read more" button with a check for category existence -->
+                            <h3>{{ $blog->title }}</h3>
+
+                            <!-- Display the "Read more" button linking to the category page -->
                             <p>
                                 @if($blog->category && $blog->category->id)
                                     <a href="{{ route('category.show', $blog->category->id) }}"
                                        class="btn"
-                                       style="background:orange;color:white; font-size: 1rem; padding: 10px 20px;">
+                                       style="background:orange;color:white; font-size: 0.875rem; padding: 8px 16px;">
                                        Read more
                                     </a>
                                 @endif
@@ -640,6 +696,7 @@ efficient in our travel programmes.</p>
         </div>
     </div>
 </section>
+
 
 
 

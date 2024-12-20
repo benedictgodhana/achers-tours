@@ -48,7 +48,7 @@ Route::get('/', function () {
     ->get();
 
     $tours = Tour::with('destination')->get();
-    $blogs = Blog::latest()->take(3)->get();
+    $blogs = Blog::with('category')->get(); // Fetch blogs along with their categories
     $testimonials = Testimonial::where('is_approved', 1)  // Fetch approved testimonials only
     ->distinct('id')  // Select only unique entries based on the ID
     ->get();
@@ -169,8 +169,10 @@ Route::get('/destination/{id}', [DestinationController::class, 'showDestinations
 Route::get('/package/{id}', function ($id) {
     $tour = Tour::with('packages')->findOrFail($id); // Eager load packages
     $blogs = Blog::all(); // Optionally fetch blogs if needed
+    $categories = InformationCategory::all(); // Fetch all categories from the categories table
 
-    return view('package', compact('tour', 'blogs'));
+
+    return view('package', compact('tour', 'blogs','categories'));
 });
 
 // Authenticated Routes
