@@ -22,9 +22,13 @@ class InformationCategory extends Model
     {
         return $this->belongsTo(User::class);
     }
+// InformationCategory Model
+public function blogs()
+{
+    return $this->hasMany(Blog::class, 'category_id'); // Change 'information_category_id' to 'category_id'
+}
 
-    public function blogs()
-    {
-        return $this->hasMany(Blog::class);
-    }
+
+
+
 }

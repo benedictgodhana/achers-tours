@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 @foreach($blogs as $blog)
     <title>{{ $blog->title }} - Archer's Tours and Travel</title>
 @endforeach
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- Link CSS files in Laravel Blade template -->
-<link rel="stylesheet" href="{{ asset('pacific-main/css/animate.css') }}">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('pacific-main/css/animate.css') }}">
 <link rel="stylesheet" href="{{ asset('pacific-main/css/owl.carousel.min.css') }}">
 <link rel="stylesheet" href="{{ asset('pacific-main/css/owl.theme.default.min.css') }}">
 <link rel="stylesheet" href="{{ asset('pacific-main/css/magnific-popup.css') }}">
@@ -21,7 +20,10 @@
 <link rel="stylesheet" href="{{ asset('pacific-main/css/jquery.timepicker.css') }}">
 <link rel="stylesheet" href="{{ asset('pacific-main/css/flaticon.css') }}">
 <link rel="stylesheet" href="{{ asset('pacific-main/css/style.css') }}">
-<script src="https://cdn.userway.org/widget.js" data-account="gER1tSTnfp"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
@@ -135,85 +137,151 @@ s0.parentNode.insertBefore(s1,s0);
 }
 
 
+.sidebar-box h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.sidebar-box .categories a {
+    color: #007bff; /* Bootstrap primary color */
+    transition: color 0.3s ease;
+}
+
+.sidebar-box .categories a:hover {
+    color: #0056b3; /* Darker shade of primary */
+    text-decoration: underline;
+}
+
+
+/* Blog Content */
+.blog-content p {
+    color: #000;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+/* Categories Row */
+.scrollable-row {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 1rem;
+}
+
+/* Category Button */
+.scrollable-row .btn-outline-primary {
+    min-width: 120px;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-right: 10px;
+}
+
+/* Optional Styling for Scrollbar */
+.scrollable-row::-webkit-scrollbar {
+    height: 8px;
+}
+
+.scrollable-row::-webkit-scrollbar-thumb {
+    background: #007bff; /* Primary color */
+    border-radius: 4px;
+}
+
+
 </style>
+
 
 </head>
 <body>
- <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-   <div class="container">
-   <a class="navbar-brand" href="{{ url('/') }}">
-    <img src="{{ asset('/images/logo_medium_3-removebg-preview.png') }}" alt="Pacific Travel Agency" style="height: 40px;">
-</a>
-     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-       <span class="oi oi-menu"></span> Menu
-     </button>
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	   <div class="container">
+	   <a class="navbar-brand" href="{{ url('/') }}">
+	    <img src="{{ asset('/images/logo_medium_3-removebg-preview.png') }}" alt="Pacific Travel Agency" style="height: 40px;">
+	</a>
+	     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	       <span class="oi oi-menu"></span> Menu
+	     </button>
 
-     <div class="collapse navbar-collapse" id="ftco-nav">
-     <ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a href="/" class="nav-link">Home</a></li>
-					<li  class="nav-item "><a href="/about" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="/destination" class="nav-link">Destination</a></li>
-					<li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
-
-
-
-                    <li class="nav-item"><a href="/login" class="nav-link">Account</a></li>
+	     <div class="collapse navbar-collapse" id="ftco-nav">
+	     <ul class="navbar-nav ml-auto">
+						<li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+						<li  class="nav-item "><a href="/about" class="nav-link">About</a></li>
+						<li class="nav-item"><a href="/destination" class="nav-link">Destination</a></li>
+						<li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
 
 
-				</ul>
-     </div>
-   </div>
- </nav>
- <section class="hero-wrap hero-wrap-2 " style="background-image: url('{{ asset('storage/' . $blog->image) }}');">
-  <div class="overlay"></div>
+
+		            <li class="nav-item"><a href="/login" class="nav-link">Account</a></li>
+
+
+					</ul>
+	     </div>
+	   </div>
+	 </nav>
+	 <section class="hero-wrap hero-wrap-2 " style="background-image: url('{{ asset('storage/' . $blog->image) }}');">
+	  <div class="overlay"></div>
+	  <div class="container">
+	    <div class="row no-gutters slider-text align-items-center justify-content-center">
+	      <div class="col-md-9 ftco-animate pb-5 text-center">
+		<h1 class="mb-0 bread">{{ $blog->title }}</h1>
+
+	      </div>
+	    </div>
+	  </div>
+	</section>
+
+
+<section class="ftco-section ftco-no-pt ftco-no-pb">
   <div class="container">
-    <div class="row no-gutters slider-text align-items-center justify-content-center">
-      <div class="col-md-9 ftco-animate pb-5 text-center">
-        <h1 class="mb-0 bread">{{ $blog->title }}</h1>
-        <p class="text-center" style="font-size:12px;font-weight:800">
-          By {{ $blog->author }} on {{ $blog->created_at->format('M d, Y') }}
+    <div class="row">
+      <div class="col-lg-8 ftco-animate py-md-5 mt-md-5">
+        <h2 class="mb-3" style="font-weight:900">{{ $blog->title }}</h2>
+        <p style="color: #000; font-size: 1rem; line-height: 1.8;">
+                {!! $blog->content !!}
+            </p>
+        <p>
+          <img src="images/bg_5.jpg" alt="" class="img-fluid">
         </p>
-      </div>
-    </div>
-  </div>
-</section>
+
+        <div class="row">
+    @foreach ($categories as $category)
+        <div class="col-md-auto mb-3">
+            <a href="{{ route('category.show', $category->id) }}" class="btn btn-outline-primary">
+                {{ $category->name }}
+            </a>
+        </div>
+    @endforeach
+</div>
 
 
-<section class="container my-5">
-  <div class="row justify-content-center">
-    <!-- Blog Content -->
-    <div class="col-md-8">
-        <h1>{{ $blog->title }}</h1>
-      <div class="blog-content" style="color:black">
-        {!! $blog->content !!}
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="container my-5">
-  <div class="row justify-content-center">
-    <!-- Comment Section -->
-    <div class="col-md-8">
-      <h3>Comments</h3>
-
-      <!-- Displaying existing comments -->
-      <div class="existing-comments mb-4">
-        @foreach ($blog->comments as $comment)
-          <div class="comment mb-3">
-            <p style="color:black"><strong>{{ $comment->author }}</strong> - <small>{{ $comment->created_at->format('M d, Y') }}</small></p>
-            <p style="color:black">{{ $comment->content }}</p>
-          </div>
-        @endforeach
-      </div>
 
 
-      @if(session('success'))
+
+        <div class="pt-5 mt-5">
+        <h3 class="mb-5" style="font-size: 20px; font-weight: bold;">{{ $blog->comments_count }} Comment(s)</h3>
+          <ul class="comment-list">
+          @foreach ($blog->comments as $comment)
+            <li class="comment">
+
+              <div class="comment-body">
+                <h3>{{ $comment->author }}</h3>
+                <div class="meta">{{ $comment->created_at->format('M d, Y') }}</div>
+                <p>{{ $comment->content }}</p>
+              </div>
+            </li>
+            @endforeach
+          </ul>
+          <!-- END comment-list -->
+
+
+
+<div class="comment-form-wrap pt-5">
+
+@if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
 @endif
-
+            <h3 class="mb-5" style="font-size: 20px; font-weight: bold;">Leave a comment</h3>
       <!-- Add Comment Form -->
       <form action="{{ route('blog.comments.store', $blog->id) }}" method="POST">
     @csrf
@@ -228,10 +296,39 @@ s0.parentNode.insertBefore(s1,s0);
     </div>
     <button type="submit" class="btn btn-primary">Submit Comment</button>
 </form>
+</div>
+        </div>
+
+
+      </div> <!-- .col-md-8 -->
+      <div class="col-lg-4 sidebar ftco-animate bg-light py-md-5">
+    <!-- Search Form -->
+   
+    <!-- Categories -->
+    <div class="sidebar-box ftco-animate">
+        <div class="categories">
+            <h3>Categories</h3>
+            <ul class="list-unstyled pl-3">
+                @foreach ($categories as $category)
+                    <li class="mb-2">
+                        <a href="{{ route('category.show', $category->id) }}" class="dropdown-item text-primary" style="text-decoration: none;">
+                            {{ $category->name }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 
     </div>
   </div>
-</section>
+</section> <!-- .section -->
 
 <section class="ftco-section logo-section bg-bottom" style="background-image: url(images/bg_1.jpg);">
     <div class="overlay"></div>
@@ -340,23 +437,11 @@ s0.parentNode.insertBefore(s1,s0);
 
 
 
-<script type="text/javascript">
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement(
-            {
-                pageLanguage: 'en',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            },
-            'google_translate_element'
-        );
-    }
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 
 <!-- loader -->
 <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-<!-- Link JavaScript files in Laravel Blade template -->
+
 <script src="{{ asset('pacific-main/js/jquery.min.js') }}"></script>
 <script src="{{ asset('pacific-main/js/jquery-migrate-3.0.1.min.js') }}"></script>
 <script src="{{ asset('pacific-main/js/popper.min.js') }}"></script>
@@ -369,7 +454,6 @@ s0.parentNode.insertBefore(s1,s0);
 <script src="{{ asset('pacific-main/js/jquery.animateNumber.min.js') }}"></script>
 <script src="{{ asset('pacific-main/js/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('pacific-main/js/scrollax.min.js') }}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="{{ asset('pacific-main/js/google-map.js') }}"></script>
 <script src="{{ asset('pacific-main/js/main.js') }}"></script>
 

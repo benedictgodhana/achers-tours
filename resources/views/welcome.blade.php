@@ -363,12 +363,12 @@ p{
 				<div class="w-100">
 					<span class="subheading" style="color:orange">Welcome to Archers Tours & Travel</span>
 					<h2 class="mb-4">Embark on Your Next Adventure with Us</h2>
-                    <p>We are a Tours and Travel company based in Nairobi, Kenya, with over 70 years experience in
-organizing safaris, beach holidays and travel requirements for visitors from all over the world.
-Our talent is a result of an accumulation of past experience, our aim to tailor travels to individual
-requests and personas, and an ability to be both flexible and efficient in our travel programmes.
-Our team is equipped to satisfy the travel needs of visitors from all over the world.</p>
-					<p><a href="/destination" class="btn  py-3 px-4" style="background:navy;color:white;border-radius:30px">Explore Destinations</a></p>
+                    <p>We are an IATA certified Travel and Tours company, based in Nairobi, Kenya, with over 70 years
+experience in flight bookings, organizing safaris, beach holidays, corporate events and travel
+requirements for visitors from all over the world. Our talent is a result of an accumulation of past
+experiences, our aim to tailor travels to individual requests, and an ability to be both flexible and
+efficient in our travel programmes.</p>
+                   <a href="/destination" class="btn  py-3 px-4" style="background:navy;color:white;border-radius:30px">Explore Destinations</a></p>
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -449,37 +449,38 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
 		</div>
 	</div>
 </section>
-<section class="ftco-section img ftco-select-destination" style="background-image: url('pacific-main/images/bg_3.jpg');">
-    <div class="container">
-        <div class="row justify-content-center pb-4">
-            <div class="col-md-12 heading-section text-center ftco-animate">
-                <span class="subheading" style="color:orange">Archers Tours and Travel Provide Places</span>
-                <h2 class="mb-4">Select Your Destination</h2>
-            </div>
-        </div>
-    </div>
-    <div class="container ">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="carousel-destination owl-carousel ftco-animate">
-                    @foreach ($destinations as $destination)
-                        <div class="item">
-                            <div class="project-destination">
-                                <a href="/destination/{{ $destination->id }}" class="img" style="background-image: url({{ asset('storage/' . $destination->image) }});border-radius:30px">
-                                    <div class="text">
-                                        <h3 style="background:orange">{{ $destination->name }}</h3>
-                                        <span style="background:orange">{{ $destination->tours_count }} Tours</span> <!-- Display the tour count -->
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    @endforeach
+    <section class="ftco-section img ftco-select-destination" style="background-image: url('pacific-main/images/bg_3.jpg');">
+        <div class="container">
+            <div class="row justify-content-center pb-4">
+                <div class="col-md-12 heading-section text-center ftco-animate">
+                    <span class="subheading" style="color:orange">Archers Tours and Travel Provide Places</span>
+                    <h2 class="mb-4">Select Your Destination</h2>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+        <div class="container ">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="carousel-destination owl-carousel ftco-animate">
+                    @foreach ($destinations as $destination)
+        <div class="item">
+            <div class="project-destination">
+                <a href="/destination/{{ $destination->id }}" class="img"
+                style="background-image: url({{ asset('storage/' . $destination->image) }});border-radius:30px">
+                    <div class="text">
+                        <h3 style="background:orange">{{ $destination->name }}</h3>
+                        <span style="background:orange">{{ $destination->tours_count }} Tours</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    @endforeach
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 <section class="ftco-section">
     <div class="container">
@@ -491,26 +492,34 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
         </div>
         <div class="row">
             @foreach ($tours as $tour)
-                <div class="col-md-4 ftco-animate">
-                    <div class="project-wrap" >
-                        <a href="#" class="img" style="background-image: url({{ asset('storage/' . $tour->destination->image) }});border-radius:30px">
-                        </a>
-                        <div class="text p-4">
-                            <span class="days" style="color:orange">{{ $tour->duration }} Days Tour</span>
-                            <h3><a href="#">{{ $tour->name }}</a></h3>
-                            <p class="location" style="color:orange"><span class="fa fa-map-marker" style="color:orange"></span> {{ $tour->destination->name }}</p>
-                            <ul>
-                                <li><span class="flaticon-shower" style="color:orange"></span></li>
-                                <li><span class="flaticon-king-size" style="color:orange"></span></li>
-                                <li><span class="flaticon-sun-umbrella" style="color:orange"></span></li>
-                            </ul>
+                @if($tour->destination && $tour->destination->image) <!-- Ensure destination and image exist -->
+                    <div class="col-md-4 ftco-animate">
+                        <div class="project-wrap">
+                            <a href="#" class="img"
+                               style="background-image: url('{{ asset('storage/' . $tour->destination->image) }}'); border-radius:30px">
+                            </a>
+                            <div class="text p-4">
+                                <span class="days" style="color:orange">{{ $tour->duration }} Days Tour</span>
+                                <h3><a href="#">{{ $tour->name }}</a></h3>
+                                <p class="location" style="color:orange">
+                                    <span class="fa fa-map-marker" style="color:orange"></span> {{ $tour->destination->name }}
+                                </p>
+                                <ul>
+                                    <li><span class="flaticon-shower" style="color:orange"></span></li>
+                                    <li><span class="flaticon-king-size" style="color:orange"></span></li>
+                                    <li><span class="flaticon-sun-umbrella" style="color:orange"></span></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @else
+                    <!-- Optional: Display a placeholder or skip this tour -->
+                @endif
             @endforeach
         </div>
     </div>
 </section>
+
 
 		<section class="ftco-section ftco-about img"style="background-image: url('/images/Property Overview.jpg');">
 			<div class="overlay"></div>

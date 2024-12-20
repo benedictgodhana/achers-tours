@@ -42,7 +42,11 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name
 // Public Routes
 Route::get('/', function () {
     $categories = InformationCategory::all(); // Fetch all categories from the categories table
-    $destinations = Destination::withCount('tours')->get();
+    $destinations = Destination::select('id', 'name', 'image')
+    ->withCount('tours') // Ensure tour counts are included
+    ->distinct() // Prevent duplicate rows
+    ->get();
+
     $tours = Tour::with('destination')->get();
     $blogs = Blog::latest()->take(3)->get();
     $testimonials = Testimonial::where('is_approved', 1)  // Fetch approved testimonials only

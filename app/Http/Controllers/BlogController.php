@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Comment;
 use App\Models\InformationCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -247,16 +248,27 @@ class BlogController extends Controller
      */
     public function categoryPage($id)
     {
-        $categories = InformationCategory::findOrFail($id);
-        $blogs = Blog::where('category_id', $id)->get();
+        // Fetch the category
+
+        $categories = InformationCategory::all(); // Fetch all categories from the categories table
+
+
+        // Fetch blogs for the category with comment counts
+        $blogs = Blog::where('category_id', $id)
+            ->withCount('comments') // Count comments for each blog
+            ->get();
 
         if ($blogs->isEmpty()) {
             abort(404, 'No blogs found for this category.');
         }
 
+        // Total comment count across all blogs in the category
+        $totalCommentCount = $blogs->sum('comments_count');
+
         // Log action: View category page
-        $this->logAction('viewed category page', ['category' => $categories->name, 'category_id' => $id]);
+        
 
         return view('category.show', compact('categories', 'blogs'));
     }
+
 }
