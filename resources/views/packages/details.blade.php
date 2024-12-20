@@ -3,7 +3,7 @@
 <head>
 <link rel="icon" href="{{ asset('images/logo_medium_3-removebg-preview.png') }}" type="image/x-icon">
 
-<title>{{ $destination->name }} - Archer's Tours and Travel</title>
+<title>{{ $package->name }} - Archer's Tours and Travel</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -144,14 +144,12 @@ s0.parentNode.insertBefore(s1,s0);
      <ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a href="/" class="nav-link">Home</a></li>
 					<li  class="nav-item"><a href="/about" class="nav-link">About</a></li>
-					<li class="nav-item active"><a href="/destination" class="nav-link">Destination</a></li>
+					<li class="nav-item active"><a href="/package" class="nav-link">package</a></li>
+					<li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
                     <li class="nav-item "><a href="/faqs" class="nav-link">FAQs</a></li>
 
-					<li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
 
-
-
-                    <li class="nav-item dropdown">
+  <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle mr-4" id="informationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         Information
     </a>
@@ -169,75 +167,75 @@ s0.parentNode.insertBefore(s1,s0);
                     <li class="nav-item"><a href="/login" class="nav-link">Account</a></li>
 
 
-
 				</ul>
      </div>
    </div>
  </nav>
  <!-- END nav -->
- <section class="hero-wrap hero-wrap-2 " style="background-image: url('{{ asset('storage/' . $destination->image) }}');">
+ <section class="hero-wrap hero-wrap-2 " style="background-image: url('{{ asset('storage/' . $package->image) }}');">
   <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text align-items-center justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
 
+      <h1 style="font-size:28px">{{$package->name}}</h1>
+
       </div>
     </div>
   </div>
 </section>
-
-<section class="container my-5">
-<h1 class="toolbar-title text-center">{{ $destination->name }}</h1>
-  <div class="row justify-content-center">
-
-    <!-- Blog Content -->
-    <div class="col-md-8">
-      <div class="blog-content" style="color:black">
-      {!! $destination->description  !!}
-      </div>
-
-
-    <a href="/destination" class="btn btn-primary mt-4">View All Destinations</a>
-
-<!-- Link to view tours for this destination -->
-<a href="/tour/{{ $destination->id }}" class="btn btn-primary mt-4">View Tours for {{$destination->name}}</a>
-    </div>
-  </div>
-</section>
-
-<section class="ftco-section logo-section bg-bottom" style="background-image: url(images/bg_1.jpg);">
-    <div class="overlay"></div>
+<section class="ftco-section">
     <div class="container">
-        <div class="row justify-content-center pb-4">
-            <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-                <span class="subheading" style="color:orange">In partnership with</span>
+        <div class="row">
+            <!-- Package Details Section -->
+            <div class="col-md-6">
+                <h1>{{ $package->name }}</h1>
+                <p>{!! $package->description !!}</p>
             </div>
+
+           <!-- Inquiry Form Section -->
+<div class="col-md-6">
+    <h3>Inquire About This Package</h3>
+
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+    <form action="{{ route('send.enquiry') }}" method="POST">
+        @csrf
+        <input type="hidden" name="package_id" value="{{ $package->id }}">
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
         </div>
 
-        <div class="row ftco-animate">
-            <div class="col-md-12">
-                <!-- Add marquee effect using CSS animation -->
-                <div class="marquee-wrapper">
-                    <div class="carousel-logos">
-                        <!-- Repeat for each company logo -->
-                        <div class="item">
-                            <img src="/images/logo_kata.png" alt="Company 1 Logo" class="logo-img">
-                        </div>
-                        <div class="item">
-                            <img src="/images/png-transparent-iata-hd-logo.png" alt="Company 2 Logo" class="logo-img">
-                        </div>
-                        <div class="item">
-                            <a href="https://payments.pesapal.com/archersafrica" target="_blank" rel="noopener noreferrer">
-                                <img src="/images/imag4.png" alt="Company 3 Logo" class="logo-img">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <img src="/images/Untitled.jpeg" alt="Company 5 Logo" class="logo-img">
-                        </div>
-                        <!-- Add more logos as needed -->
-                    </div>
-                </div>
-            </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="subject" class="form-label">Subject</label>
+            <input type="text" class="form-control" id="subject" name="subject" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="package_details" class="form-label">Message</label>
+            <textarea class="form-control" id="package_details" name="package_details" rows="3" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone (Optional)</label>
+            <input type="tel" class="form-control" id="phone" name="phone">
+        </div>
+
+        <button type="submit" class="btn " style="background:orange">Send Inquiry</button>
+    </form>
+</div>
+
         </div>
     </div>
 </section>
@@ -314,6 +312,10 @@ s0.parentNode.insertBefore(s1,s0);
  </div>
 </div>
 </footer>
+
+
+
+
 
 
 

@@ -101,7 +101,6 @@ Route::get('/faqs', function () {
 
 Route::post('/send-email', [ContactController::class, 'sendEmail']);
 Route::post('/send-quote-request', [QuoteController::class, 'sendQuoteRequest']);
-Route::post('/send-enquiry', [EnquiryController::class, 'sendEnquiry'])->name('send.enquiry');
 
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
 Route::post('/blog/{blog}/comments', [BlogController::class, 'storeComment'])->name('blog.comments.store');
@@ -145,7 +144,10 @@ Route::get('/destination/{id}', function ($id) {
     return view('Destination.show', compact('destination', 'tours'));
 });
 
+// web.php (or appropriate routes file)
+Route::post('/send-enquiry', [EnquiryController::class, 'sendEnquiry'])->name('send.enquiry');
 
+Route::get('/packages/details/{id}', [PackageController::class, 'details'])->name('package.details');
 
 
 // Tour Routes
@@ -166,6 +168,8 @@ Route::get('/tour/{id}', function ($id) {
 
 Route::get('/destination/{id}', [DestinationController::class, 'showDestinations'])->name('destinationsAll.show');
 
+
+Route::post('/send-enquiry', [EnquiryController::class, 'sendEnquiry'])->name('send.enquiry');
 Route::get('/package/{id}', function ($id) {
     $tour = Tour::with('packages')->findOrFail($id); // Eager load packages
     $blogs = Blog::all(); // Optionally fetch blogs if needed

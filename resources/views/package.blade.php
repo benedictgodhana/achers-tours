@@ -183,7 +183,6 @@
       </div>
    </div>
 </section>
-
 <section class="ftco-section">
    <div class="container">
       <div class="row">
@@ -206,16 +205,25 @@
                      <div class="text p-3">
                         <h3><a href="#">{{ $package->name ?? 'No Title' }}</a></h3>
                         <p class="description">{!! Str::limit($package->description, 100, '...') !!}</p>
+                        <div class="d-flex justify-content-between">
+                        <a href="{{ route('package.details', $package->id) }}" class="btn "  style="background:orange">Read More</a>
+
+
+                        </div>
                      </div>
                   </div>
                </div>
+
+
+
+
+
                @endforeach
             </div>
          </div>
       </div>
    </div>
 </section>
-
 
 
 <footer class="ftco-footer bg-bottom ftco-no-pt" style="background:navy;color:white"
@@ -312,7 +320,42 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="{{ asset('pacific-main/js/google-map.js') }}"></script>
 <script src="{{ asset('pacific-main/js/main.js') }}"></script>
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.inquire-btn').forEach(function(button) {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const packageId = this.getAttribute('data-package-id');
+            document.getElementById('package_id').value = packageId;
+            $('#inquiryModal').modal('show');
+        });
+    });
+});
 
+    // Handle form submission
+    document.getElementById('inquiryForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
 
+        fetch('{{ route('send.enquiry') }}', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Inquiry submitted successfully!');
+                $('#inquiryModal').modal('hide');
+            } else {
+                alert('An error occurred. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+});
+
+</script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InformationCategory;
 use App\Models\Package;
 use App\Models\Tour;
 use Illuminate\Http\Request;
@@ -117,4 +118,13 @@ class PackageController extends Controller
 
         return redirect()->route('packages.index')->with('success', 'Package deleted successfully!');
     }
+
+
+    public function details($id)
+{
+    $package = Package::findOrFail($id);
+    $categories =InformationCategory::all();
+    return view('packages.details', compact('package','categories'));
+}
+
 }
