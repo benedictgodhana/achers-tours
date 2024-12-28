@@ -3,9 +3,6 @@
 <head>
 <link rel="icon" href="{{ asset('images/logo_medium_3-removebg-preview.png') }}" type="image/x-icon">
 
-@foreach($blogs as $blog)
-    <title>{{ $blog->title }} - Archer's Tours and Travel</title>
-@endforeach
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
@@ -232,118 +229,31 @@ s0.parentNode.insertBefore(s1,s0);
 			</div>
 		</div>
 	</nav>
-	 <section class="hero-wrap hero-wrap-2 " style="background-image: url('{{ asset('storage/' . $blog->image) }}');">
+	 <section class="hero-wrap hero-wrap-2 " style="background-image: url('/images/bg.jpg');">
 	  <div class="overlay"></div>
 	  <div class="container">
 	    <div class="row no-gutters slider-text align-items-center justify-content-center">
 	      <div class="col-md-9 ftco-animate pb-5 text-center">
-		<h1 class="mb-0 bread">{{ $blog->title }}</h1>
+		<h1 class="mb-0 bread">{{ $category->name }}</h1>
 
 	      </div>
 	    </div>
 	  </div>
 	</section>
 
-
-<section class="ftco-section ftco-no-pt ftco-no-pb">
+    <section class="ftco-section ftco-no-pt ftco-no-pb">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 ftco-animate py-md-5 mt-md-5">
-        <h2 class="mb-3" style="font-weight:900">{{ $blog->title }}</h2>
+      <div class="col-lg-12 ftco-animate py-md-5 mt-md-5 text-center">
+        <h2 class="mb-3" style="font-weight:900;">No Information Found</h2>
         <p style="color: #000; font-size: 1rem; line-height: 1.8;">
-                {!! $blog->content !!}
-            </p>
-        <p>
-          <img src="images/bg_5.jpg" alt="" class="img-fluid">
+          {{ session('message') ?? 'Unfortunately, there are no information available for this category.' }}
         </p>
-
-        <div class="row">
-    @foreach ($categories as $category)
-        <div class="col-md-auto mb-3">
-            <a href="{{ route('category.show', $category->id) }}" class="btn btn-outline-primary">
-                {{ $category->name }}
-            </a>
-        </div>
-    @endforeach
-</div>
-
-
-
-
-
-        <div class="pt-5 mt-5">
-        <h3 class="mb-5" style="font-size: 20px; font-weight: bold;">{{ $blog->comments_count }} Comment(s)</h3>
-          <ul class="comment-list">
-          @foreach ($blog->comments as $comment)
-            <li class="comment">
-
-              <div class="comment-body">
-                <h3>{{ $comment->author }}</h3>
-                <div class="meta">{{ $comment->created_at->format('M d, Y') }}</div>
-                <p>{{ $comment->content }}</p>
-              </div>
-            </li>
-            @endforeach
-          </ul>
-          <!-- END comment-list -->
-
-
-
-<div class="comment-form-wrap pt-5">
-
-@if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-            <h3 class="mb-5" style="font-size: 20px; font-weight: bold;">Leave a comment</h3>
-      <!-- Add Comment Form -->
-      <form action="{{ route('blog.comments.store', $blog->id) }}" method="POST">
-    @csrf
-    <div class="form-group">
-        <input type="text" name="author" class="form-control" placeholder="Your Name" required>
-    </div>
-    <div class="form-group">
-        <input type="email" name="email" class="form-control" placeholder="Your Email" required>
-    </div>
-    <div class="form-group">
-        <textarea name="content" class="form-control" placeholder="Write your comment here..." required></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit Comment</button>
-</form>
-</div>
-        </div>
-
-
-      </div> <!-- .col-md-8 -->
-      <div class="col-lg-4 sidebar ftco-animate bg-light py-md-5">
-    <!-- Search Form -->
-
-    <!-- Categories -->
-    <div class="sidebar-box ftco-animate">
-        <div class="categories">
-            <h3>Categories</h3>
-            <ul class="list-unstyled pl-3">
-                @foreach ($categories as $category)
-                    <li class="mb-2">
-                        <a href="{{ route('category.show', $category->id) }}" class="dropdown-item text-primary" style="text-decoration: none;">
-                            {{ $category->name }}
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
+        <a href="{{ url('/') }}" class="btn btn-primary">Go Back Home</a>
+      </div>
     </div>
   </div>
-</section> <!-- .section -->
+</section>
 
 <section class="ftco-section logo-section bg-bottom" style="background-image: url(images/bg_1.jpg);">
     <div class="overlay"></div>

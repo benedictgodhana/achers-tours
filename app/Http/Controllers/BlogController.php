@@ -249,9 +249,7 @@ class BlogController extends Controller
     public function categoryPage($id)
     {
         // Fetch the category
-
         $categories = InformationCategory::all(); // Fetch all categories from the categories table
-
 
         // Fetch blogs for the category with comment counts
         $blogs = Blog::where('category_id', $id)
@@ -259,16 +257,15 @@ class BlogController extends Controller
             ->get();
 
         if ($blogs->isEmpty()) {
-            abort(404, 'No blogs found for this category.');
+            // Redirect to a 'no content' page or an informative page
+            return redirect()->route('noBlogsPage')->with('message', 'No blogs found for this category.');
         }
 
         // Total comment count across all blogs in the category
         $totalCommentCount = $blogs->sum('comments_count');
 
-        // Log action: View category page
-        
-
-        return view('category.show', compact('categories', 'blogs'));
+        // Return the category view with data
+        return view('category.show', compact('categories', 'blogs', 'totalCommentCount'));
     }
 
 }

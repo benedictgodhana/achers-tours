@@ -657,6 +657,22 @@ efficient in our travel programmes.</p>
             </div>
             @endforeach
         </div>
+
+        <div class="row mt-5">
+  <div class="col text-center">
+    <div class="block-27">
+      <ul>
+        <li><a href="{{ $testimonials->previousPageUrl() }}">&lt;</a></li>
+        @for ($i = 1; $i <= $testimonials->lastPage(); $i++)
+          <li class="{{ ($i == $testimonials->currentPage()) ? 'active' : '' }}">
+            <a href="{{ $testimonials->url($i) }}">{{ $i }}</a>
+          </li>
+        @endfor
+        <li><a href="{{ $testimonials->nextPageUrl() }}">&gt;</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
     </div>
 </section>
 <section class="ftco-section">

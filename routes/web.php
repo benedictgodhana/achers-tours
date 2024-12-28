@@ -49,9 +49,9 @@ Route::get('/', function () {
 
     $tours = Tour::with('destination')->get();
     $blogs = Blog::with('category')->paginate(3); // Fetch blogs with pagination, 3 blogs per page
-    $testimonials = Testimonial::where('is_approved', 1)  // Fetch approved testimonials only
-    ->distinct('id')  // Select only unique entries based on the ID
-    ->get();
+    $testimonials = Testimonial::where('is_approved', 1) // Fetch approved testimonials only
+    ->distinct('id') // Select only unique entries based on the ID
+    ->paginate(3); // Paginate with 10 testimonials per page
 
 
 
@@ -65,6 +65,12 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/no-blogs', function () {
+
+    $categories = InformationCategory::all(); // Fetch all categories from the categories table
+
+    return view('no-blogs',compact('categories'));
+})->name('noBlogsPage');
 
 
 

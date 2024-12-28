@@ -92,6 +92,26 @@
     font-size: 14px;
     margin-bottom: 10px;
 }
+
+.pagination-controls {
+  margin-top: 20px;
+}
+
+.pagination-controls button {
+  padding: 10px 15px;
+  margin: 0 5px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination-controls button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
   </style>
 
 </head>
@@ -231,6 +251,12 @@
       <p>We understand that travel disruptions can happen. If you miss a tour activity or transfer, please inform us as soon as possible, and we will do our best to accommodate you on the next available option. Additional fees may apply in some cases, depending on the nature of the disruption.</p>
     </div>
   </div>
+
+  <div class="pagination-controls text-center">
+      <button id="prev-page" disabled>Previous</button>
+      <span id="page-info"></span>
+      <button id="next-page">Next</button>
+    </div>
 </section>
 
 <footer class="ftco-footer bg-bottom ftco-no-pt" style="background:navy;color:white"
@@ -326,5 +352,51 @@
 
   <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const itemsPerPage = 3; // Number of FAQs per page
+    const faqItems = document.querySelectorAll(".faq-item");
+    const totalItems = faqItems.length;
+    let currentPage = 1;
+
+    // Calculate total pages
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    // Display FAQs for the current page
+    function showPage(page) {
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+
+      faqItems.forEach((item, index) => {
+        item.style.display = index >= start && index < end ? "block" : "none";
+      });
+
+      // Update pagination controls
+      document.getElementById("prev-page").disabled = page === 1;
+      document.getElementById("next-page").disabled = page === totalPages;
+      document.getElementById("page-info").textContent = `Page ${page} of ${totalPages}`;
+    }
+
+    // Event listeners for pagination buttons
+    document.getElementById("prev-page").addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        showPage(currentPage);
+      }
+    });
+
+    document.getElementById("next-page").addEventListener("click", () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        showPage(currentPage);
+      }
+    });
+
+    // Initialize
+    showPage(currentPage);
+  });
+</script>
+
 </body>
 </html>
