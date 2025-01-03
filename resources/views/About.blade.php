@@ -213,24 +213,34 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
                 <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
             <div class="services services-1 color-1 d-block" style="border-radius: 30px; overflow: hidden;">
 
-                <div class="media-body">
-                    <h3 class="heading mb-3">Travel Management & Advisory</h3>
+            <div class="media-body">
+                    <h3 class="heading mb-3">Our Travel/Ticketing services</h3>
                     <ul class="text-white">
-                        <li>Business, tours, and leisure travels management and ticketing</li>
-                        <li>Personalized advisory services on travel and tours organization</li>
+                        <li>Flight Ticket Bookings</li>
+                        <li>Train and Rail Passes</li>
+                        <li>Events and Attraction Tickets</li>
+                        <li>Cruise Reservations</li>
                     </ul>
                 </div>
             </div>
         </div>
-
         <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
             <div class="services services-1 color-2 d-block" style="border-radius: 30px; overflow: hidden;">
 
                 <div class="media-body">
-                    <h3 class="heading mb-3">Event & Tour Organization</h3>
+                    <h3 class="heading mb-3">Tour Organization</h3>
                     <ul class="text-white">
-                        <li>Organizing meetings and conferences</li>
-                        <li>Organizing pilgrimages and special interest groups</li>
+                        <li>Guided Tours</li>
+                        <li>Customized or Tailor-Made Tours</li>
+                        <li>Adventure Tours</li>
+                        <li>City Tours</li>
+                        <li>Pilgrimages Tours</li>
+                        <li>Cultural and Heritage Tours</li>
+                        <li>Eco and Sustainable Tours</li>
+                        <li>Cruise and Expedition Tours</li>
+                        <li>Corporate and Incentive Travel</li>
+                        <li>Transportation and Airport Transfers</li>
+                        <li>Travel Insurance and Safety Services</li>
                     </ul>
                 </div>
             </div>
@@ -239,27 +249,39 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
     <div class="services services-1 color-3 d-block" style="border-radius: 30px; overflow: hidden;">
 
         <div class="media-body">
-            <h3 class="heading mb-3">Ground Handling & Emergency Services</h3>
+            <h3 class="heading mb-3">Ground Handling</h3>
             <ul class="text-white">
-                <li>Medical evacuation/repatriation on commercial airlines and air ambulance charters</li>
+                <li>Airport Transfers and Transportation</li>
+                <li>Luggage Handling</li>
+                <li>Ticketing and Check-in Assistance</li>
+                <li>Travel Documentation Assistance</li>
+                <li>Tour Escort and Local Guide Services</li>
+                <li>Hotel and Accommodation Arrangements</li>
+                <li>Event and Conference Handling</li>
             </ul>
         </div>
     </div>
 </div>
 
-        <div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
+
+<div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
             <div class="services services-1 color-4 d-block" style="border-radius: 30px; overflow: hidden;">
 
                 <div class="media-body">
-                    <h3 class="heading mb-3">Travel Consultancy & Transport Services</h3>
+                    <h3 class="heading mb-3">Transport Services</h3>
                     <ul class="text-white">
-                        <li>Travel policy consultancy and travel insurances</li>
-                        <li>Airport transfers (locally and internationally)</li>
-                        <li>Car-hire (locally and internationally)</li>
+                        <li>Transport Services</li>
+                        <li>VIP Meet &amp; Greet</li>
+                        <li>Car rentals</li>
+                        <li>Private Coach hires</li>
+                        <li>4x4 Vehicles transport</li>
+                        <li>Charter flights</li>
+                        <li>Helicopter Rides</li>
+
                     </ul>
                 </div>
             </div>
-        </div>				</div>
+        </div>						</div>
 			</div>
 		</div>
 	</div>
@@ -297,7 +319,8 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
 </div>
 </div>
 </section>
-<<section class="ftco-section testimony-section bg-bottom" style="background-image: url(pacific-main/images/bg_1.jpg);">
+
+<section class="ftco-section testimony-section bg-bottom" style="background-image: url(pacific-main/images/bg_1.jpg);">
     <div class="overlay"></div>
     <div class="container">
         <div class="row justify-content-center pb-4">
@@ -330,6 +353,22 @@ Our team is equipped to satisfy the travel needs of visitors from all over the w
             </div>
             @endforeach
         </div>
+
+        <div class="row mt-5">
+  <div class="col text-center">
+    <div class="block-27">
+      <ul>
+        <li><a href="{{ $testimonials->previousPageUrl() }}">&lt;</a></li>
+        @for ($i = 1; $i <= $testimonials->lastPage(); $i++)
+          <li class="{{ ($i == $testimonials->currentPage()) ? 'active' : '' }}">
+            <a href="{{ $testimonials->url($i) }}">{{ $i }}</a>
+          </li>
+        @endfor
+        <li><a href="{{ $testimonials->nextPageUrl() }}">&gt;</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
     </div>
 </section>
 

@@ -80,7 +80,9 @@ Route::get('/about', function () {
     $blogs = Blog::latest()->take(3)->get();
     $categories = InformationCategory::all(); // Fetch all categories from the categories table
 
-    $testimonials = Testimonial::where('is_approved', 1)->get(); // Filter approved testimonials
+    $testimonials = Testimonial::where('is_approved', 1) // Fetch approved testimonials only
+    ->distinct('id') // Select only unique entries based on the ID
+    ->paginate(3); // Paginate with 10 testimonials per page
 
     return view('About', compact('blogs','categories','testimonials'));
 });
